@@ -1,0 +1,38 @@
+﻿@using MedsNotifier.Data.Models.ViewModels
+@using MedsNotifier.Services
+@inject AccountService AccountService
+@inject NavigationManager NavigationManager
+@page "/register"
+
+<div class="auth-form-body">
+    <div class="login-form-box">
+        <h3>Register</h3>
+        <EditForm Model="registerModel" OnValidSubmit="@HandleSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="input-fields">
+                <label for="email">Email</label><InputText class="text-field" id="email" placeholder="Email" @bind-Value="registerModel.Email" />
+                <label for="username">Username</label><InputText class="text-field" id="username" placeholder="Username" @bind-Value="registerModel.Username" />
+                <label for="age">Age</label> <InputNumber class="text-field" id="age" placeholder="Age" @bind-Value="registerModel.Age" />
+                <label for="weight">Weight</label><InputNumber class="text-field" id="weight" placeholder="Weight" @bind-Value="registerModel.Weight" />
+                <label for="height">Height</label><InputNumber class="text-field" id="height" placeholder="Height" @bind-Value="registerModel.Height" />
+                <label for="password">Password</label><InputText class="text-field" id="password" type="password" placeholder="Password" @bind-Value="registerModel.Password" />
+            </div>
+
+            <button class="submit-button" type="submit">Register now</button>
+        </EditForm>
+    </div>
+</div>
+
+
+@code {
+    private RegisterViewModel registerModel = new();
+
+    private async Task HandleSubmit()
+    {
+        //result = await AccountService.Register(registerModel);
+
+        NavigationManager.NavigateTo("/home", true);
+    }
+
+}

@@ -1,0 +1,21 @@
+﻿@inherits LayoutComponentBase
+
+<section id="app-header">Medicine Notifier</section>
+<main>
+    <aside class="main-nav-wrapper">
+        <NavMenu />
+    </aside>
+    <div>
+        @Body
+        <AuthorizeView>
+            <NotAuthorized>
+                Huy Tebe
+            </NotAuthorized>
+        </AuthorizeView>
+    </div>
+</main>
+<Footer />
+
+@code {
+
+}
