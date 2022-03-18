@@ -51,6 +51,7 @@ namespace MedsNotifier
             services.AddSingleton<ITokenOptions, JwtOptions.TokenOptions>();
             services.AddScoped<IdentityService>();
             services.AddScoped<JWTService>();
+            services.AddScoped<IMongoRepository, MongoRepository>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
@@ -58,6 +59,7 @@ namespace MedsNotifier
                 options.SaveToken = true;
             });
             services.AddAuthorization();
+            services.AddLogging();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
