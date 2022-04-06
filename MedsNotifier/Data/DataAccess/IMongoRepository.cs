@@ -1,4 +1,5 @@
 ﻿using MedsNotifier.Data.Models;
+using MedsNotifier.Data.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -20,5 +21,6 @@ namespace MedsNotifier.Data.DataAccess
         Task UpdateUserDataAsync(User user);
         Task DeleteRefreshTokenAsync(RefreshToken refreshToken);
         Task<User> FindUserByIdAsync(Guid Id);
+        Task<User> AuthenticateAsync(LoginViewModel model);
     }
 }

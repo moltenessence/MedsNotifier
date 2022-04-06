@@ -15,15 +15,15 @@ using MedsNotifier.Data.DataAccess;
 
 namespace MedsNotifier.Services
 {
-    public class JWTService
+    public class JWTService : IJWTService
     {
-		private readonly ITokenOptions tokenOptions;
-        private readonly IdentityService identityService;
+        private readonly ITokenOptions tokenOptions;
+        private readonly IIdentityService identityService;
         private readonly ILogger<JWTService> logger;
         private readonly IMongoRepository mongoRepository;
-        public JWTService(ITokenOptions TokenOptions, IdentityService IdentityService, ILogger<JWTService> Logger, IMongoRepository MongoRepostitory)
+        public JWTService(ITokenOptions TokenOptions, IIdentityService IdentityService, ILogger<JWTService> Logger, IMongoRepository MongoRepostitory)
         {
-			tokenOptions = TokenOptions;
+            tokenOptions = TokenOptions;
             identityService = IdentityService;
             logger = Logger;
             mongoRepository = MongoRepostitory;
@@ -42,6 +42,7 @@ namespace MedsNotifier.Services
 
             return new JwtSecurityTokenHandler().WriteToken(jwt);
         }
+
 
         public RefreshToken GenerateRefreshJWTToken(User user)
         {
@@ -69,14 +70,14 @@ namespace MedsNotifier.Services
                     SecurityToken = validatedToken,
                     TokenType = "Bearer"
                 };
-                return new TokenValidationResult { IsValid = false};
+                return new TokenValidationResult { IsValid = false };
             }
 
             catch (Exception ex)
             {
                 logger.LogInformation($"Something went wrong : {ex.Message}");
 
-                return new TokenValidationResult { IsValid = false, Exception = ex};
+                return new TokenValidationResult { IsValid = false, Exception = ex };
             }
         }
         public bool CheckIfTokenExpired(string token)
@@ -95,13 +96,13 @@ namespace MedsNotifier.Services
 
                 return false;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 logger.LogInformation($"Something went wrong : {ex.Message}");
                 return false;
             }
         }
-        public async Task<UpdateTokenResult> GetNewTokenPairAsync(UpdateTokenRequest updateTokenRequest)
+        public async Task<UpdateTokenResult> GenerateNewTokenPairAsync(UpdateTokenRequest updateTokenRequest)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
 
@@ -111,16 +112,21 @@ namespace MedsNotifier.Services
 
                 var storedToken = await mongoRepository.GetRefreshTokenAsync(updateTokenRequest.RefreshToken.Token);
 
-                if (storedToken == null) return new UpdateTokenResult { Succeed = false };
+                if (storedToken == null)
+                {
+                    logger.LogInformation($"The refresh token {storedToken.UserId}:{storedToken.Token} doesn't exist");
+                    return new UpdateTokenResult { Succeed = false };
+                }
 
                 if (storedToken.ExpiryDate < DateTime.Now || storedToken.IsUsed)
                 {
-                    await mongoRepository.DeleteRefreshTokenAsync(updateTokenRequest.RefreshToken);
+                    logger.LogInformation($"The refresh token {storedToken.UserId}:{storedToken.Token} has already been used. It will be deleted");
+                    await mongoRepository.DeleteRefreshTokenAsync(storedToken);
                     return new UpdateTokenResult { Succeed = false };
                 }
 
                 storedToken.IsUsed = true;
-                await mongoRepository.ChangeRefreshTokenStateAsync(updateTokenRequest.RefreshToken);
+                await mongoRepository.ChangeRefreshTokenStateAsync(storedToken);
 
                 var user = await mongoRepository.FindUserByIdAsync(storedToken.UserId);
                 var token = GenerateJWTToken(user);
@@ -135,7 +141,9 @@ namespace MedsNotifier.Services
             }
             catch (Exception ex)
             {
+                logger.LogInformation($"Something went wrong:{ex.Message}");
                 return new UpdateTokenResult { Succeed = false };
+
             }
         }
         private ClaimsIdentity GetIdentity(User user) => identityService.GetIdentity(user);

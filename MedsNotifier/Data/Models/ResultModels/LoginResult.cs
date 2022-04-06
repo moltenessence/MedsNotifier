@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace MedsNotifier.Data.Models.ResultModels
 {
-    public class LoginResult
+    public class LoginResult : RegistrationResult
     {
-        public string Message { get; set; }
         public string Email { get; set; }
         public string Token { get; set; }
-        public bool Succeeded { get; set; }
+        public RefreshToken RefreshToken { get; set; }
     }
 }

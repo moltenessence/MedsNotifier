@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Pages\Shared\" />
+    <Folder Include="Middlewares\" />
   </ItemGroup>
 
 </Project>

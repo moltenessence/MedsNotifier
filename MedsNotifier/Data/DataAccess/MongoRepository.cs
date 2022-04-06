@@ -1,10 +1,12 @@
 ﻿using MedsNotifier.Data.CustomModelAttributes;
 using MedsNotifier.Data.Models;
+using MedsNotifier.Data.Models.ViewModels;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MedsNotifier.Data.DataAccess
@@ -29,29 +31,35 @@ namespace MedsNotifier.Data.DataAccess
             return client.GetDatabase(mongoDbSettings.DatabaseName).GetCollection<T>(GetCollectionName(typeof(T)));
         }
 
+        public async Task<User> AuthenticateAsync(LoginViewModel model)
+        {
+            var collection = ConnectToMongo<User>();
+            //var userFromQuery = await collection.FindAsync(u => u.Email == model.Email && u.PasswordHash == BCrypt.Net.BCrypt.HashPassword(model.Password));
+            var userFromQuery = await collection.FindAsync(u => u.Email == model.Email && u.PasswordHash == model.Password);
+            return userFromQuery?.FirstOrDefault();
+        }
+
         public async Task<User> FindUserByEmailAsync(string email)
         {
             var collection = ConnectToMongo<User>();
-
-            var user = await collection.FindAsync(u => u.Email == email);
-
-            return (User)user;
+            var userFromQuery = await collection.FindAsync(u => u.Email == email);
+          
+            return userFromQuery?.FirstOrDefault();
         }
         public async Task<User> FindUserByIdAsync(Guid Id)
         {
             var collection = ConnectToMongo<User>();
 
-            var user = await collection.FindAsync(u => u.Id == Id);
+            var userFromQuery = await collection.FindAsync(u => u.Id == Id);
 
-            return (User)user;
+            return userFromQuery?.FirstOrDefault();
         }
         public async Task<RefreshToken> GetRefreshTokenAsync(string token)
         {
             var collection = ConnectToMongo<RefreshToken>();
-
             var refreshToken = await collection.FindAsync(t => t.Token == token);
 
-            return (RefreshToken)refreshToken;
+            return await refreshToken?.FirstOrDefaultAsync<RefreshToken>();
         }
 
         public async Task DeleteRefreshTokenAsync(RefreshToken refreshToken)

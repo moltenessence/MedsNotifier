@@ -16,11 +16,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace MedsNotifier
@@ -37,6 +39,7 @@ namespace MedsNotifier
         private JwtOptions.TokenOptions tokenOptions { get; } = new JwtOptions.TokenOptions();
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; });
             services.Configure<MongoDbSettings>(MongoDbConfiguration.GetSection("MongoDbSettings"));
 
             services.AddSingleton<IMongoDbSettings>(serviceProvider =>
@@ -47,13 +50,21 @@ namespace MedsNotifier
 
             services.AddSingleton<MongoRepository>();
             services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
-            services.AddScoped<AccountService>();
             services.AddSingleton<ITokenOptions, JwtOptions.TokenOptions>();
-            services.AddScoped<IdentityService>();
-            services.AddScoped<JWTService>();
+            services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<IJWTService, JWTService>();
             services.AddScoped<IMongoRepository, MongoRepository>();
+            services.AddHttpContextAccessor();
+            services.AddScoped<MedsNotifier.Services.IAuthorizationService, AuthorizationService >();
+            services.AddScoped<LocalStorageService>();
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }
+            ).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters= tokenOptions.TokenValidationParameters;
                 options.SaveToken = true;
@@ -65,10 +76,10 @@ namespace MedsNotifier
         {
             app.UseDeveloperExceptionPage();
             app.UseExceptionHandler("/Error");
-
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
-
+            //app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
 

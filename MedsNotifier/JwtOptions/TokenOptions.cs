@@ -17,8 +17,8 @@ namespace MedsNotifier.JwtOptions
         {
            tokenValidationParameters = new TokenValidationParameters
            {
-               ValidateAudience = true,
-               ValidateIssuer = true,
+               ValidateAudience = false,
+               ValidateIssuer = false,
                ValidIssuer = "MedsNotifiier",
                ValidateLifetime = true,
                ValidateIssuerSigningKey = true,

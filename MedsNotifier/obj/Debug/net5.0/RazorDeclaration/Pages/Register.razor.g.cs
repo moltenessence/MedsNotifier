@@ -96,6 +96,13 @@ using MedsNotifier.Services;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Register.razor"
+using Microsoft.AspNetCore.Http;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/register")]
     public partial class Register : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -105,15 +112,20 @@ using MedsNotifier.Services;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 28 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Register.razor"
+#line 29 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Register.razor"
        
     private RegisterViewModel registerModel = new();
-
+    private string message;
     private async Task HandleSubmit()
     {
-        //result = await AccountService.Register(registerModel);
+        var result = await AuthorizationService.Register(registerModel);
 
-        NavigationManager.NavigateTo("/home", true);
+        if (result.Succeeded)
+        {
+            NavigationManager.NavigateTo("/home", true);
+        }
+        else message = result.Message;
+
     }
 
 
@@ -121,7 +133,7 @@ using MedsNotifier.Services;
 #line hidden
 #nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private AccountService AccountService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private MedsNotifier.Services.IAuthorizationService AuthorizationService { get; set; }
     }
 }
 #pragma warning restore 1591

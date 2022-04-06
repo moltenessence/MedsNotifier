@@ -7,6 +7,7 @@ namespace MedsNotifier.Data.Models.ResultModels
 {
     public class RegistrationResult
     {
-
+        public bool Succeeded { get; set; }
+        public string Message { get; set; }
     }
 }

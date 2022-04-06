@@ -37,6 +37,12 @@ C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\AspNetCore.I
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\BCrypt.Net-Next.dll
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\DnsClient.dll
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\Microsoft.AspNet.Identity.Core.dll
+C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\MongoDB.Bson.dll
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\MongoDB.Driver.dll
@@ -46,6 +52,7 @@ C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\MongoDbGener
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\SharpCompress.dll
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\System.Drawing.Common.dll
+C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\System.Security.AccessControl.dll
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\System.Security.Permissions.dll
@@ -100,10 +107,3 @@ C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\ref\MedsNoti
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.pdb
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.genruntimeconfig.cache
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.csprojAssemblyReference.cache
-C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
-C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
-C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
-C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
-C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
-C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll

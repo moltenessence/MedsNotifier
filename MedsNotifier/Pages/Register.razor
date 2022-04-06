@@ -1,6 +1,7 @@
 ﻿@using MedsNotifier.Data.Models.ViewModels
 @using MedsNotifier.Services
-@inject AccountService AccountService
+@inject MedsNotifier.Services.IAuthorizationService AuthorizationService
+@using Microsoft.AspNetCore.Http;
 @inject NavigationManager NavigationManager
 @page "/register"
 
@@ -27,12 +28,17 @@
 
 @code {
     private RegisterViewModel registerModel = new();
-
+    private string message;
     private async Task HandleSubmit()
     {
-        //result = await AccountService.Register(registerModel);
+        var result = await AuthorizationService.Register(registerModel);
 
-        NavigationManager.NavigateTo("/home", true);
+        if (result.Succeeded)
+        {
+            NavigationManager.NavigateTo("/home", true);
+        }
+        else message = result.Message;
+
     }
 
 }

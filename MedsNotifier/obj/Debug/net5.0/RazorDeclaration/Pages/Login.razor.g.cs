@@ -96,6 +96,13 @@ using MedsNotifier.Services;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Login.razor"
+using Microsoft.AspNetCore.Http;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/")]
     public partial class Login : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -105,34 +112,33 @@ using MedsNotifier.Services;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 28 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Login.razor"
-       
-    private LoginViewModel loginModel = new();
-    private string message { get; set; }
+#line 29 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Login.razor"
+           
+        private LoginViewModel loginModel = new();
+        private string message;
 
-    [CascadingParameter]
-    private Task<AuthenticationState> authenticationStateTask { get; set; }
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+        [Inject]
+        public LocalStorageService LocalStorageService { get; set; }
 
+        private async Task HandleSubmit()
+        {
+            var result = await AuthorizationService.Authenticate(loginModel);
 
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
-    private async Task HandleSubmit()
-    {
-        //var result = await AccountService.Login(loginModel);
-        //if (result.Succeeded) message = "The login or password is incorrect";
-        NavigationManager.NavigateTo("home", true);
-    }
-
-    protected override void OnInitialized()
-    {
-
-    }
+            if (!result.Succeeded) { message = result.Message; }
+            else
+            {
+                await LocalStorageService.SetItem<string>("Authorization",$"Bearer {result.Token}");
+                NavigationManager.NavigateTo("home", true);
+            }
+        }
+    
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private AccountService AccountService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private MedsNotifier.Services.IAuthorizationService AuthorizationService { get; set; }
     }
 }
 #pragma warning restore 1591
