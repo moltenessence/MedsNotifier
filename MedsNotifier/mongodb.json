@@ -1,6 +1,6 @@
 {
   "MongoDbSettings": {
-    //"ConnectionString": "mongodb://localhost:27017",
+   // "ConnectionString": "mongodb://localhost:27017",
     "ConnectionString": "mongodb+srv://moltenessence:AC7ynfAE8q3uVr5@cluster0.twptc.mongodb.net/test",
     "DatabaseName": "medicine_db"
   }

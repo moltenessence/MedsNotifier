@@ -116,6 +116,7 @@ using Microsoft.AspNetCore.Http;
            
         private LoginViewModel loginModel = new();
         private string message;
+        private string token = "Bearer ";
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }
@@ -129,10 +130,12 @@ using Microsoft.AspNetCore.Http;
             if (!result.Succeeded) { message = result.Message; }
             else
             {
-                await LocalStorageService.SetItem<string>("Authorization",$"Bearer {result.Token}");
+                token += result.Token;
+                await LocalStorageService.SetItem<string>("Authorization",token);
                 NavigationManager.NavigateTo("home", true);
             }
         }
+        //public override
     
 
 #line default

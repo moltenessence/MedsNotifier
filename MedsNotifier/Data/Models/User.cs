@@ -23,7 +23,6 @@ namespace MedsNotifier.Data
         public int? Height { get; set; }
         public Gender Gender { get; set; }
         public MedicineChest MedicineChest{get; set;}
-        public IEnumerable<Claim> Claims { get; set; }
 
         public User()
         {

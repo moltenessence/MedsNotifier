@@ -1,6 +1,16 @@
 ﻿@page "/logout"
-<h3>Logout</h3>
+@using MedsNotifier.Services
+@inject NavigationManager nav
 
 @code {
+    [Inject]
+    public LocalStorageService LocalStorageService { get; set; }
 
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        await LocalStorageService.RemoveItem("Authorization");
+        nav.NavigateTo("/");
+    }
 }
+

@@ -2,11 +2,16 @@
 @layout MainLayout
 @attribute [Authorize]
 @using MedsNotifier.Data.DataAccess
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 @inject MongoRepository rep
-
 <h3>Home</h3>
 
+
+
 @code {
+
 
 }

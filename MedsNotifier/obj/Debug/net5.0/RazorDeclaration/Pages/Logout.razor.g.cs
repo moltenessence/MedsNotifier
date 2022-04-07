@@ -82,6 +82,13 @@ using MedsNotifier.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 2 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Logout.razor"
+using MedsNotifier.Services;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/logout")]
     public partial class Logout : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -90,6 +97,23 @@ using MedsNotifier.Shared;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 5 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Logout.razor"
+       
+    [Inject]
+    public LocalStorageService LocalStorageService { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        await LocalStorageService.RemoveItem("Authorization");
+        nav.NavigateTo("/");
+    }
+
+#line default
+#line hidden
+#nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager nav { get; set; }
     }
 }
 #pragma warning restore 1591

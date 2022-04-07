@@ -55,8 +55,11 @@ namespace MedsNotifier
             services.AddScoped<IJWTService, JWTService>();
             services.AddScoped<IMongoRepository, MongoRepository>();
             services.AddHttpContextAccessor();
-            services.AddScoped<MedsNotifier.Services.IAuthorizationService, AuthorizationService >();
             services.AddScoped<LocalStorageService>();
+            services.AddScoped<MedsNotifier.Services.IAuthorizationService, AuthorizationService >();
+            services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
+            services.AddAuthenticationCore();
+            services.AddAuthorizationCore();
 
             services.AddAuthentication(x =>
             {
@@ -78,9 +81,9 @@ namespace MedsNotifier
             app.UseExceptionHandler("/Error");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseRouting();
             //app.UseSession();
             app.UseAuthentication();
+            app.UseRouting();
             app.UseAuthorization();
 
 

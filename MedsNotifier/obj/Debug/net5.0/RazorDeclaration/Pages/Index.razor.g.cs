@@ -27,13 +27,6 @@ using Microsoft.AspNetCore.Authorization;
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\_Imports.razor"
-using Microsoft.AspNetCore.Components.Authorization;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
 #line 4 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\_Imports.razor"
 using Microsoft.AspNetCore.Components.Forms;
 
@@ -90,6 +83,20 @@ using MedsNotifier.Data.DataAccess;
 #line hidden
 #nullable disable
 #nullable restore
+#line 5 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Index.razor"
+using System.Security.Claims;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Index.razor"
+using Microsoft.AspNetCore.Components.Authorization;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 3 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Index.razor"
            [Authorize]
 
@@ -106,6 +113,7 @@ using MedsNotifier.Data.DataAccess;
         }
         #pragma warning restore 1998
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private MongoRepository rep { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
     }
 }
 #pragma warning restore 1591

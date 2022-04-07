@@ -41,8 +41,6 @@ namespace MedsNotifier.Services
                 if (user != null)
                 {
                     var token = jWTService.GenerateJWTToken(user);
-
-                    //context.HttpContext.Response.Headers.Add("Authorization", $"Bearer +{token}");
                     return new LoginResult
                     {
                         Email = user.Email,
@@ -55,7 +53,6 @@ namespace MedsNotifier.Services
             }
             catch(Exception ex)
             {
-
                 logger.LogInformation($"Something went wrong:{ex.Message}");
             }
 
@@ -85,8 +82,6 @@ namespace MedsNotifier.Services
 
                 await mongoRepository.InsertUserAsync(user);
                 await mongoRepository.InsertRefreshToken(refreshToken);
-
-                context.HttpContext.Response.Headers.Add("Authorization", $"Bearer +{token}");
 
                 return new RegistrationResult
                 {
