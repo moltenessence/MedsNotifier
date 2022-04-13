@@ -115,17 +115,13 @@ using Microsoft.AspNetCore.Components.Authorization;
 #nullable restore
 #line 14 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Index.razor"
         
-    
-    protected override Task OnInitializedAsync()
-    {
-            return base.OnInitializedAsync();
-    }
+    [CascadingParameter] private Task<AuthenticationState> authenticationStateTask { get; set; }
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private MongoRepository rep { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider AuthProvider { get; set; }
     }
 }
 #pragma warning restore 1591

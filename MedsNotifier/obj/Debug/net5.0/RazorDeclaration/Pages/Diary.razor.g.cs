@@ -82,6 +82,13 @@ using MedsNotifier.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Diary.razor"
+           [Authorize]
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.LayoutAttribute(typeof(MainLayout))]
     [Microsoft.AspNetCore.Components.RouteAttribute("/diary")]
     public partial class Diary : Microsoft.AspNetCore.Components.ComponentBase

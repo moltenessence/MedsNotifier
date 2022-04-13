@@ -125,7 +125,6 @@ using Microsoft.AspNetCore.Http;
             NavigationManager.NavigateTo("/home", true);
         }
         else message = result.Message;
-
     }
 
 

@@ -1,6 +1,7 @@
 ﻿@page "/logout"
 @using MedsNotifier.Services
 @inject NavigationManager nav
+@attribute [Authorize]
 
 @code {
     [Inject]
@@ -10,7 +11,12 @@
     {
         await base.OnInitializedAsync();
         await LocalStorageService.RemoveItem("Authorization");
-        nav.NavigateTo("/");
+
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        nav.NavigateTo("/", true);
     }
 }
 

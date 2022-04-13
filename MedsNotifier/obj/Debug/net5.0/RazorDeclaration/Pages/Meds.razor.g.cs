@@ -82,6 +82,13 @@ using MedsNotifier.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Meds.razor"
+           [Authorize]
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.LayoutAttribute(typeof(MainLayout))]
     [Microsoft.AspNetCore.Components.RouteAttribute("/meds")]
     public partial class Meds : Microsoft.AspNetCore.Components.ComponentBase

@@ -4,17 +4,13 @@
 @using MedsNotifier.Data.DataAccess
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Components.Authorization
-@inject AuthenticationStateProvider AuthenticationStateProvider
-@inject MongoRepository rep
+@inject AuthenticationStateProvider AuthProvider
+@inject NavigationManager NavManager
 
 <h3>Home</h3>
 
 
 
 @code { 
-    
-    protected override Task OnInitializedAsync()
-    {
-            return base.OnInitializedAsync();
-    }
+    [CascadingParameter] private Task<AuthenticationState> authenticationStateTask { get; set; }
 }
