@@ -18,7 +18,7 @@ namespace MedsNotifier
         }
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            string token = await localStorageService.GetItem<string>("Authorizaton");
+            string token = await localStorageService.GetItem<string>("Authorization");
             ClaimsIdentity identity;
 
             if (token != null && token != String.Empty)
