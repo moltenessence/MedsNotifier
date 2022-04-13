@@ -112,6 +112,18 @@ using Microsoft.AspNetCore.Components.Authorization;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 14 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Index.razor"
+        
+    
+    protected override Task OnInitializedAsync()
+    {
+            return base.OnInitializedAsync();
+    }
+
+#line default
+#line hidden
+#nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private MongoRepository rep { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
     }

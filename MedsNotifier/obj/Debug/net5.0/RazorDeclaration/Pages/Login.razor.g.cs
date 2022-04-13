@@ -112,31 +112,29 @@ using Microsoft.AspNetCore.Http;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 29 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Login.razor"
-           
-        private LoginViewModel loginModel = new();
-        private string message;
-        private string token = "Bearer ";
+#line 30 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Login.razor"
+       
+    private LoginViewModel loginModel = new();
+    private string message;
+    private string token = "Bearer ";
 
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
-        [Inject]
-        public LocalStorageService LocalStorageService { get; set; }
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+    [Inject]
+    public LocalStorageService LocalStorageService { get; set; }
 
-        private async Task HandleSubmit()
+    private async Task HandleSubmit()
+    {
+        var result = await AuthorizationService.Authenticate(loginModel);
+
+        if (!result.Succeeded) { message = result.Message; }
+        else
         {
-            var result = await AuthorizationService.Authenticate(loginModel);
-
-            if (!result.Succeeded) { message = result.Message; }
-            else
-            {
-                token += result.Token;
-                await LocalStorageService.SetItem<string>("Authorization",token);
-                NavigationManager.NavigateTo("home", true);
-            }
+            token += result.Token;
+            await LocalStorageService.SetItem<string>("Authorization", token);
+            NavigationManager.NavigateTo("home", true);
         }
-        //public override
-    
+    }
 
 #line default
 #line hidden

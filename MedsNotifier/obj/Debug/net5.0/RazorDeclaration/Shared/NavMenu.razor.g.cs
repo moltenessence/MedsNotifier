@@ -82,6 +82,13 @@ using MedsNotifier.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 2 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Shared\NavMenu.razor"
+using System.Security.Claims;
+
+#line default
+#line hidden
+#nullable disable
     public partial class NavMenu : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -89,6 +96,26 @@ using MedsNotifier.Shared;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 39 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Shared\NavMenu.razor"
+ 
+    [CascadingParameter] private Task<AuthenticationState> authenticationStateTask { get; set; }
+    private string username { get; set; } = "Guest";
+
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await AuthProvider.GetAuthenticationStateAsync();
+        var user = state.User;
+
+        if(user.Identity.IsAuthenticated)
+        username = user.Claims.ToList().FirstOrDefault(u => u.Type == ClaimTypes.Name)?.Value;
+    }
+
+
+#line default
+#line hidden
+#nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider AuthProvider { get; set; }
     }
 }
 #pragma warning restore 1591

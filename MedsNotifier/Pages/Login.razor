@@ -4,49 +4,49 @@
 @inject MedsNotifier.Services.IAuthorizationService AuthorizationService
 @page "/"
 
-    <div class="auth-form-body">
-        <div class="login-form-box">
-            <h3>Login</h3>
 
-            <EditForm Model="@loginModel" OnValidSubmit="@HandleSubmit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-                <div class="input-fields">
-                    <InputText id="email" class="text-field" placeholder="Email" @bind-Value="loginModel.Email" />
-                    <InputText id="password" class="text-field" type="password" placeholder="Password" @bind-Value="loginModel.Password" />
-                </div>
-                @if (message != null)
-                {<p>@message</p>}
-                <button class="submit-button" type="submit"> Login</button>
-            </EditForm>
+<div class="auth-form-body">
+    <div class="login-form-box">
+        <h3>Login</h3>
 
-            <NavLink class="crt-acc" href="register" Match="NavLinkMatch.All">Create Account</NavLink>
-        </div>
+        <EditForm Model="@loginModel" OnValidSubmit="@HandleSubmit" ChildContext Context="login">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="input-fields">
+                <InputText id="email" class="text-field" placeholder="Email" @bind-Value="loginModel.Email" />
+                <InputText id="password" class="text-field" type="password" placeholder="Password" @bind-Value="loginModel.Password" />
+            </div>
+            @if (message != null)
+            {<p>@message</p>}
+            <button class="submit-button" type="submit"> Login</button>
+        </EditForm>
+
+        <NavLink class="crt-acc" href="register" Match="NavLinkMatch.All">Create Account</NavLink>
     </div>
+</div>
 
 
 
-    @code {
-        private LoginViewModel loginModel = new();
-        private string message;
-        private string token = "Bearer ";
+@code {
+    private LoginViewModel loginModel = new();
+    private string message;
+    private string token = "Bearer ";
 
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
-        [Inject]
-        public LocalStorageService LocalStorageService { get; set; }
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+    [Inject]
+    public LocalStorageService LocalStorageService { get; set; }
 
-        private async Task HandleSubmit()
+    private async Task HandleSubmit()
+    {
+        var result = await AuthorizationService.Authenticate(loginModel);
+
+        if (!result.Succeeded) { message = result.Message; }
+        else
         {
-            var result = await AuthorizationService.Authenticate(loginModel);
-
-            if (!result.Succeeded) { message = result.Message; }
-            else
-            {
-                token += result.Token;
-                await LocalStorageService.SetItem<string>("Authorization",token);
-                NavigationManager.NavigateTo("home", true);
-            }
+            token += result.Token;
+            await LocalStorageService.SetItem<string>("Authorization", token);
+            NavigationManager.NavigateTo("home", true);
         }
-        //public override
     }
+}

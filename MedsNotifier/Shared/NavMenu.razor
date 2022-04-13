@@ -1,8 +1,10 @@
-﻿<nav id="main-nav">
+﻿@inject AuthenticationStateProvider AuthProvider
+@using System.Security.Claims
+<nav id="main-nav">
     <ul>
         <li id="account-header">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="icon"><ion-icon name="home-outline"></ion-icon></span> Username
+                <span class="icon"><ion-icon name="home-outline"></ion-icon></span> @username
             </NavLink>
         </li>
         <li>
@@ -27,8 +29,24 @@
         </li>
         <li>
             <NavLink class="nav-link" href="logout" Match="NavLinkMatch.All">
-                    <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span><span id="last-nav-link">Logout</span>
+                <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span><span id="last-nav-link">Logout</span>
             </NavLink>
         </li>
     </ul>
 </nav>
+
+@code
+{
+    [CascadingParameter] private Task<AuthenticationState> authenticationStateTask { get; set; }
+    private string username { get; set; } = "Guest";
+
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await AuthProvider.GetAuthenticationStateAsync();
+        var user = state.User;
+
+        if(user.Identity.IsAuthenticated)
+        username = user.Claims.ToList().FirstOrDefault(u => u.Type == ClaimTypes.Name)?.Value;
+    }
+
+}

@@ -5,13 +5,16 @@
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Components.Authorization
 @inject AuthenticationStateProvider AuthenticationStateProvider
-
 @inject MongoRepository rep
+
 <h3>Home</h3>
 
 
 
-@code {
-
-
+@code { 
+    
+    protected override Task OnInitializedAsync()
+    {
+            return base.OnInitializedAsync();
+    }
 }

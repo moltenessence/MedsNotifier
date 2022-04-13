@@ -82,13 +82,6 @@ using MedsNotifier.Shared;
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 2 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Shared\MainLayout.razor"
-using Shared;
-
-#line default
-#line hidden
-#nullable disable
     public partial class MainLayout : LayoutComponentBase
     {
         #pragma warning disable 1998
