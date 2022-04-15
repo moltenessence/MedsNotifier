@@ -137,6 +137,11 @@ using Microsoft.AspNetCore.Http;
         }
     }
 
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (!firstRender) message = "";
+    }
+
 #line default
 #line hidden
 #nullable disable

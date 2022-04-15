@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 namespace MedsNotifier.Data
 {
     [BsonCollectionAttribute("users")]
+    [BsonIgnoreExtraElements]
     public class User
     {
         public Guid Id { get; set; } = new Guid();

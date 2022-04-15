@@ -53,4 +53,9 @@
             NavigationManager.NavigateTo("home", true);
         }
     }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (!firstRender) message = "";
+    }
 }

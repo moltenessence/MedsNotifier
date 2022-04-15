@@ -7,7 +7,7 @@
 
 <div class="auth-form-body">
     <div class="login-form-box">
-        <h3>Register</h3>
+        <h3 class="reg-header">Register</h3>
         <EditForm Model="registerModel" OnValidSubmit="@HandleSubmit">
             <DataAnnotationsValidator />
             <ValidationSummary />
@@ -22,6 +22,7 @@
             </div>
 
             <button class="submit-button" type="submit">Register</button>
+            <p class="warning">Such parameters as Height, Weight and Age are optional, but they can help us to analyze your health better.</p>
         </EditForm>
     </div>
 </div>
@@ -50,4 +51,8 @@
         else message = result.Message;
     }
 
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (!firstRender) message = "";
+    }
 }

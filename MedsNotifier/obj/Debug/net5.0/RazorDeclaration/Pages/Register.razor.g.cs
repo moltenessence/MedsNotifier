@@ -112,7 +112,7 @@ using Microsoft.AspNetCore.Http;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 30 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Register.razor"
+#line 31 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Register.razor"
        
     private RegisterViewModel registerModel = new();
     private string message;
@@ -136,6 +136,10 @@ using Microsoft.AspNetCore.Http;
         else message = result.Message;
     }
 
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (!firstRender) message = "";
+    }
 
 #line default
 #line hidden
