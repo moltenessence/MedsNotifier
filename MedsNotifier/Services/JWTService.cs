@@ -63,7 +63,14 @@ namespace MedsNotifier.Services
 
             try
             {
-                var tokenInVerification = jwtTokenHandler.ValidateToken(token, tokenOptions.TokenValidationParameters, out var validatedToken);
+                var tokenInVerification = jwtTokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = tokenOptions.GetSymmetricSecurityKey(),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = false
+                }, out var validatedToken);
                 if (validatedToken is JwtSecurityToken jwtSecurityToken) return new TokenValidationResult
                 {
                     IsValid = true,
@@ -89,7 +96,6 @@ namespace MedsNotifier.Services
                 var tokenInVerification = jwtTokenHandler.ValidateToken(token, tokenOptions.TokenValidationParameters, out var validatedToken);
 
                 var utcExpiryDate = long.Parse(tokenInVerification.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Exp).Value);
-
                 var expiryDate = UnixTimeStampToDateTime(utcExpiryDate);
 
                 if (expiryDate <= DateTime.UtcNow) return true;
@@ -110,7 +116,7 @@ namespace MedsNotifier.Services
             {
                 var tokenValidationResult = ValidateToken(updateTokenRequest.Token);
 
-                var storedToken = await mongoRepository.GetRefreshTokenAsync(updateTokenRequest.RefreshToken.Token);
+                var storedToken = await mongoRepository.GetRefreshTokenAsync(updateTokenRequest.UserId);
 
                 if (storedToken == null)
                 {

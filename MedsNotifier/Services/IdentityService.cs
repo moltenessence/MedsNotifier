@@ -20,7 +20,8 @@ namespace MedsNotifier.Services
                 new Claim("Age", user.Age?.ToString()),
                 new Claim("Weight", user.Weight?.ToString()),
                 new Claim("Height",user.Height?.ToString()),
-                new Claim(ClaimTypes.Name, user.Username.ToString())
+                new Claim(ClaimTypes.Name, user.Username.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
                 };
 
             return new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);

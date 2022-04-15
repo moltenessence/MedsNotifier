@@ -12,7 +12,7 @@ namespace MedsNotifier.JwtOptions
     {
         private readonly TokenValidationParameters tokenValidationParameters;
         private const string SECURITY_KEY = "74yeuF878Ssf8945";
-        public const int LIFETIME = 5;
+        public const int LIFETIME = 1;
         public TokenOptions()
         {
            tokenValidationParameters = new TokenValidationParameters

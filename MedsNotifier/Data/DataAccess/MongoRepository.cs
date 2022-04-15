@@ -62,10 +62,11 @@ namespace MedsNotifier.Data.DataAccess
 
             return userFromQuery;
         }
-        public async Task<RefreshToken> GetRefreshTokenAsync(string token)
+        public async Task<RefreshToken> GetRefreshTokenAsync(string userId)
         {
+            var id = Guid.Parse(userId);
             var collection = ConnectToMongo<RefreshToken>();
-            var refreshToken = await collection.FindAsync(t => t.Token == token).Result.FirstOrDefaultAsync();
+            var refreshToken = await collection.FindAsync(t => t.UserId == id).Result.FirstOrDefaultAsync();
 
             return refreshToken;
         }

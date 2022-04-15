@@ -1,4 +1,6 @@
-﻿using MedsNotifier.Services;
+﻿using MedsNotifier.Data.DataAccess;
+using MedsNotifier.Data.Models.RequestModels;
+using MedsNotifier.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using System;
 using System.Collections.Generic;
@@ -12,20 +14,34 @@ namespace MedsNotifier
     public class CustomAuthStateProvider : AuthenticationStateProvider
     {
         private readonly LocalStorageService localStorageService;
-        public CustomAuthStateProvider(LocalStorageService LocalStorageService)
+        private readonly IJWTService jWTService;
+        private readonly IMongoRepository mongoRepository; 
+        public CustomAuthStateProvider(LocalStorageService LocalStorageService, IJWTService JWTService, IMongoRepository MongoRepository)
         {
             localStorageService = LocalStorageService;
+            jWTService = JWTService;
+            mongoRepository = MongoRepository;
         }
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            string token = await localStorageService.GetItem<string>("Authorization");
-            ClaimsIdentity identity;
+            string header = await localStorageService.GetItem<string>("Authorization");
 
-            if (token != null && token != String.Empty)
+            ClaimsIdentity identity = new ClaimsIdentity();
+
+            if (header != null && header != String.Empty)
             {
-                identity = new ClaimsIdentity(ParseClaimsFromJwt(token), "jwt");
+                var token = header.Replace("Bearer ", String.Empty);
+
+                if (!jWTService.CheckIfTokenExpired(token)) identity = new ClaimsIdentity(ParseClaimsFromJwt(header), "jwt");
+                else 
+                {
+                   var newPairResult = await jWTService.GenerateNewTokenPairAsync(new UpdateTokenRequest
+                    {
+                        Token = token,
+                        UserId = new ClaimsIdentity(ParseClaimsFromJwt(header), "jwt").Claims.Select(c => c.Type == ClaimTypes.NameIdentifier).ToString()
+                    });
+                } 
             }
-            else identity = new ClaimsIdentity();
 
             var user = new ClaimsPrincipal(identity);
             var state = new AuthenticationState(user);

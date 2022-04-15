@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace MedsNotifier.Data.Models.ResultModels
 {
-    public class UpdateTokenResult : UpdateTokenRequest
+    public class UpdateTokenResult
     {
         public bool Succeed { get; set; }
+        public string Token { get; set; }
+        public RefreshToken RefreshToken { get; set; }
     }
 }

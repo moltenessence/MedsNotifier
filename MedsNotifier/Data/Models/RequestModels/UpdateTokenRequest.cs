@@ -7,7 +7,7 @@ namespace MedsNotifier.Data.Models.RequestModels
 {
     public class UpdateTokenRequest
     {
+        public string UserId { get; set; }
         public string Token { get; set; }
-        public RefreshToken RefreshToken { get; set; }
     }
 }
