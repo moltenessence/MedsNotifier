@@ -11,6 +11,7 @@
         <EditForm Model="registerModel" OnValidSubmit="@HandleSubmit">
             <DataAnnotationsValidator />
             <ValidationSummary />
+            <p>@message</p>
             <div class="input-fields">
                 <label for="email">Email</label><InputText class="text-field" id="email" placeholder="Email" @bind-Value="registerModel.Email" />
                 <label for="username">Username</label><InputText class="text-field" id="username" placeholder="Username" @bind-Value="registerModel.Username" />
@@ -20,7 +21,7 @@
                 <label for="password">Password</label><InputText class="text-field" id="password" type="password" placeholder="Password" @bind-Value="registerModel.Password" />
             </div>
 
-            <button class="submit-button" type="submit">Register now</button>
+            <button class="submit-button" type="submit">Register</button>
         </EditForm>
     </div>
 </div>
@@ -29,13 +30,22 @@
 @code {
     private RegisterViewModel registerModel = new();
     private string message;
+    private string token = "Bearer ";
+
+    [Inject]
+    public LocalStorageService LocalStorageService { get; set; }
+
     private async Task HandleSubmit()
     {
         var result = await AuthorizationService.Register(registerModel);
 
         if (result.Succeeded)
         {
+            token += result.Token;
+
+            await LocalStorageService.SetItem<string>("Authorization", token);
             NavigationManager.NavigateTo("/home", true);
+
         }
         else message = result.Message;
     }

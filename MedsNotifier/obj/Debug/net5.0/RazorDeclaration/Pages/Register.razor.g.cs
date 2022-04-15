@@ -112,17 +112,26 @@ using Microsoft.AspNetCore.Http;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 29 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Register.razor"
+#line 30 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Register.razor"
        
     private RegisterViewModel registerModel = new();
     private string message;
+    private string token = "Bearer ";
+
+    [Inject]
+    public LocalStorageService LocalStorageService { get; set; }
+
     private async Task HandleSubmit()
     {
         var result = await AuthorizationService.Register(registerModel);
 
         if (result.Succeeded)
         {
+            token += result.Token;
+
+            await LocalStorageService.SetItem<string>("Authorization", token);
             NavigationManager.NavigateTo("/home", true);
+
         }
         else message = result.Message;
     }

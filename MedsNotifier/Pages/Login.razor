@@ -2,28 +2,31 @@
 @using MedsNotifier.Services
 @using Microsoft.AspNetCore.Http;
 @inject MedsNotifier.Services.IAuthorizationService AuthorizationService
+
 @page "/"
 
-
-<div class="auth-form-body">
-    <div class="login-form-box">
-        <h3>Login</h3>
-
-        <EditForm Model="@loginModel" OnValidSubmit="@HandleSubmit" ChildContext Context="login">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
-            <div class="input-fields">
-                <InputText id="email" class="text-field" placeholder="Email" @bind-Value="loginModel.Email" />
-                <InputText id="password" class="text-field" type="password" placeholder="Password" @bind-Value="loginModel.Password" />
+<AuthorizeView>
+    <NotAuthorized>
+        <div class="auth-form-body">
+            <div class="login-form-box">
+                <h3>Login</h3>
+                <EditForm Model="@loginModel" OnValidSubmit="@HandleSubmit" ChildContext Context="login">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <div class="input-fields">
+                        <InputText id="email" class="text-field" placeholder="Email" @bind-Value="loginModel.Email" />
+                        <InputText id="password" class="text-field" type="password" placeholder="Password" @bind-Value="loginModel.Password" />
+                    </div>
+                    @if (message != null)
+                    {<p>@message</p>}
+                    <button class="submit-button" type="submit"> Login</button>
+                </EditForm>
+                <NavLink class="crt-acc" href="register" Match="NavLinkMatch.All">Create Account</NavLink>
             </div>
-            @if (message != null)
-            {<p>@message</p>}
-            <button class="submit-button" type="submit"> Login</button>
-        </EditForm>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
 
-        <NavLink class="crt-acc" href="register" Match="NavLinkMatch.All">Create Account</NavLink>
-    </div>
-</div>
 
 
 
@@ -45,6 +48,7 @@
         else
         {
             token += result.Token;
+
             await LocalStorageService.SetItem<string>("Authorization", token);
             NavigationManager.NavigateTo("home", true);
         }

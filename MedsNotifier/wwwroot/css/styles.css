@@ -188,7 +188,8 @@ ul #account-header {
         text-align: center !important;
         padding-left: 40%;
         letter-spacing: 1px;
+        cursor: pointer;
     }
-.crt-acc{
+    .crt-acc{
     text-align:center;
 }

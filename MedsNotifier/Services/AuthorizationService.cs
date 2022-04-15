@@ -66,11 +66,17 @@ namespace MedsNotifier.Services
         {
             try
             {
+                var userWithTheSameEmail = await mongoRepository.FindUserByEmailAsync(registerViewModel.Email);
+                if (userWithTheSameEmail != null) return new RegistrationResult
+                {
+                    Succeeded = false,
+                    Message = "The user with this email already exists"
+                };
+
                 var user = new User
                 {
                     Age = registerViewModel.Age,
-                    //PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerViewModel.Password),
-                    PasswordHash = registerViewModel.Password,
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerViewModel.Password, 10),
                     Email = registerViewModel.Email,
                     Weight = registerViewModel.Weight,
                     Height = registerViewModel.Height,
@@ -85,6 +91,8 @@ namespace MedsNotifier.Services
 
                 return new RegistrationResult
                 {
+                    Token = token,
+                    RefreshToken = refreshToken,
                     Succeeded = true,
                     Message = $"Thank you, {user.Username}. You have created account!"
                 };

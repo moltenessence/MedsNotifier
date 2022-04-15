@@ -34,32 +34,40 @@ namespace MedsNotifier.Data.DataAccess
         public async Task<User> AuthenticateAsync(LoginViewModel model)
         {
             var collection = ConnectToMongo<User>();
-            //var userFromQuery = await collection.FindAsync(u => u.Email == model.Email && u.PasswordHash == BCrypt.Net.BCrypt.HashPassword(model.Password));
-            var userFromQuery = await collection.FindAsync(u => u.Email == model.Email && u.PasswordHash == model.Password);
-            return userFromQuery?.FirstOrDefault();
+
+            var userFromQuery = await FindUserByEmailAsync(model.Email);
+
+            bool checkPassword = false;
+
+            if (userFromQuery != null)
+            checkPassword = BCrypt.Net.BCrypt.Verify(model.Password, userFromQuery.PasswordHash);
+
+            if (checkPassword) return userFromQuery;
+
+            return null;
         }
 
         public async Task<User> FindUserByEmailAsync(string email)
         {
             var collection = ConnectToMongo<User>();
-            var userFromQuery = await collection.FindAsync(u => u.Email == email);
-          
-            return userFromQuery?.FirstOrDefault();
+            var userFromQuery = await collection.FindAsync(u => u.Email == email).Result.FirstOrDefaultAsync();
+
+            return userFromQuery;
         }
         public async Task<User> FindUserByIdAsync(Guid Id)
         {
             var collection = ConnectToMongo<User>();
 
-            var userFromQuery = await collection.FindAsync(u => u.Id == Id);
+            var userFromQuery = await collection.FindAsync(u => u.Id == Id).Result.FirstOrDefaultAsync();
 
-            return userFromQuery?.FirstOrDefault();
+            return userFromQuery;
         }
         public async Task<RefreshToken> GetRefreshTokenAsync(string token)
         {
             var collection = ConnectToMongo<RefreshToken>();
-            var refreshToken = await collection.FindAsync(t => t.Token == token);
+            var refreshToken = await collection.FindAsync(t => t.Token == token).Result.FirstOrDefaultAsync();
 
-            return await refreshToken?.FirstOrDefaultAsync<RefreshToken>();
+            return refreshToken;
         }
 
         public async Task DeleteRefreshTokenAsync(RefreshToken refreshToken)
@@ -83,8 +91,9 @@ namespace MedsNotifier.Data.DataAccess
         {
             var collection = ConnectToMongo<User>();
 
-            var result = await collection.FindAsync(_ => true);
-            return result.ToList();
+            var result = await collection.FindAsync(_ => true).Result.ToListAsync();
+
+            return result;
         }
 
         public Task InsertUserAsync(User user)

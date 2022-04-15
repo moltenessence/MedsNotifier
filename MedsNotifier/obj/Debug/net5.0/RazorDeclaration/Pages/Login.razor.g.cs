@@ -112,7 +112,7 @@ using Microsoft.AspNetCore.Http;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 30 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Login.razor"
+#line 33 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Login.razor"
        
     private LoginViewModel loginModel = new();
     private string message;
@@ -131,6 +131,7 @@ using Microsoft.AspNetCore.Http;
         else
         {
             token += result.Token;
+
             await LocalStorageService.SetItem<string>("Authorization", token);
             NavigationManager.NavigateTo("home", true);
         }
