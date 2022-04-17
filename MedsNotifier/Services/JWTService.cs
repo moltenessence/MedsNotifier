@@ -57,29 +57,6 @@ namespace MedsNotifier.Services
 
             return refreshToken;
         }
-        private TokenValidationResult ValidateToken(string token)
-        {
-            var jwtTokenHandler = new JwtSecurityTokenHandler();
-
-            try
-            {
-                var tokenInVerification = jwtTokenHandler.ValidateToken(token, tokenOptions.TokenValidationParameters, out var validatedToken);
-                if (validatedToken is JwtSecurityToken jwtSecurityToken) return new TokenValidationResult
-                {
-                    IsValid = true,
-                    SecurityToken = validatedToken,
-                    TokenType = "Bearer"
-                };
-                return new TokenValidationResult { IsValid = false };
-            }
-
-            catch (Exception ex)
-            {
-                logger.LogInformation($"Token isn't valid : {ex.Message}");
-
-                return new TokenValidationResult { IsValid = false, Exception = ex };
-            }
-        }
         public bool CheckIfTokenExpired(string token)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
@@ -111,11 +88,19 @@ namespace MedsNotifier.Services
                 var tokenValidationResult = ValidateToken(updateTokenRequest.Token);
 
                 var storedToken = await mongoRepository.GetRefreshTokenAsync(updateTokenRequest.UserId);
+                if(storedToken.ExpiryDate < DateTime.UtcNow)
+                {
+                    logger.LogInformation($"The refresh token {storedToken.UserId}:{storedToken.Token} is expired. It will be deleted");
+                    await mongoRepository.DeleteRefreshTokenAsync(storedToken);
+
+                    return new UpdateTokenResult { Succeed = false };
+                }
 
                 if (storedToken.IsUsed)
                 {
                     logger.LogInformation($"The refresh token {storedToken.UserId}:{storedToken.Token} has already been used. It will be deleted");
                     await mongoRepository.DeleteRefreshTokenAsync(storedToken);
+
                     return new UpdateTokenResult { Succeed = false };
                 }
 
@@ -135,7 +120,7 @@ namespace MedsNotifier.Services
                 };
 
             }
-            catch(NullReferenceException ex)
+            catch(NullReferenceException)
             {
 
                 logger.LogInformation($"The refresh token doesn't exist");
@@ -145,6 +130,29 @@ namespace MedsNotifier.Services
             {
                 logger.LogInformation($"Something went wrong:{ex.Message}");
                 return new UpdateTokenResult { Succeed = false };
+            }
+        }
+        private TokenValidationResult ValidateToken(string token)
+        {
+            var jwtTokenHandler = new JwtSecurityTokenHandler();
+
+            try
+            {
+                var tokenInVerification = jwtTokenHandler.ValidateToken(token, tokenOptions.TokenValidationParameters, out var validatedToken);
+                if (validatedToken is JwtSecurityToken jwtSecurityToken) return new TokenValidationResult
+                {
+                    IsValid = true,
+                    SecurityToken = validatedToken,
+                    TokenType = "Bearer"
+                };
+                return new TokenValidationResult { IsValid = false };
+            }
+
+            catch (Exception ex)
+            {
+                logger.LogInformation($"Token isn't valid : {ex.Message}");
+
+                return new TokenValidationResult { IsValid = false, Exception = ex };
             }
         }
         private ClaimsIdentity GetIdentity(User user) => identityService.GetIdentity(user);
