@@ -82,6 +82,13 @@ using MedsNotifier.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 11 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\App.razor"
+using MedsNotifier.Services;
+
+#line default
+#line hidden
+#nullable disable
     public partial class App : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -89,6 +96,26 @@ using MedsNotifier.Shared;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 35 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\App.razor"
+      
+
+    [Inject]
+    public LocalStorageService localStorageService{ get; set; }
+
+    //protected async override Task OnParametersSetAsync()
+    //{
+    //    await localStorageService.RemoveItem("Authorization");
+    //}
+
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //   if(firstRender) await localStorageService.RemoveItem("Authorization");
+    //}
+
+#line default
+#line hidden
+#nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider stateProvider { get; set; }
     }
 }

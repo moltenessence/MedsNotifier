@@ -8,6 +8,7 @@
 @using Microsoft.JSInterop
 @using MedsNotifier
 @using MedsNotifier.Shared
+@using MedsNotifier.Services
 
 @inject AuthenticationStateProvider stateProvider
 
@@ -30,3 +31,19 @@
         </NotFound>
     </Router>
 </CascadingAuthenticationState>
+
+@code{
+
+    [Inject]
+    public LocalStorageService localStorageService{ get; set; }
+
+    //protected async override Task OnParametersSetAsync()
+    //{
+    //    await localStorageService.RemoveItem("Authorization");
+    //}
+
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //   if(firstRender) await localStorageService.RemoveItem("Authorization");
+    //}
+}

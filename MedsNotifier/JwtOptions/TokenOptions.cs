@@ -20,7 +20,7 @@ namespace MedsNotifier.JwtOptions
                ValidateAudience = false,
                ValidateIssuer = false,
                ValidIssuer = "MedsNotifiier",
-               ValidateLifetime = true,
+               ValidateLifetime = false,
                ValidateIssuerSigningKey = true,
                IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(SECURITY_KEY)),
                ClockSkew = TimeSpan.Zero,

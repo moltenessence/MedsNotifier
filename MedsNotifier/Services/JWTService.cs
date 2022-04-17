@@ -48,7 +48,7 @@ namespace MedsNotifier.Services
         {
             var refreshToken = new RefreshToken()
             {
-                UserId = user.Id,
+                UserId = user.Id.ToString(),
                 AddedDate = DateTime.Now,
                 IsUsed = false,
                 ExpiryDate = DateTime.UtcNow.AddMonths(6),
@@ -63,14 +63,7 @@ namespace MedsNotifier.Services
 
             try
             {
-                var tokenInVerification = jwtTokenHandler.ValidateToken(token, new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = tokenOptions.GetSymmetricSecurityKey(),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ValidateLifetime = false
-                }, out var validatedToken);
+                var tokenInVerification = jwtTokenHandler.ValidateToken(token, tokenOptions.TokenValidationParameters, out var validatedToken);
                 if (validatedToken is JwtSecurityToken jwtSecurityToken) return new TokenValidationResult
                 {
                     IsValid = true,
@@ -82,7 +75,7 @@ namespace MedsNotifier.Services
 
             catch (Exception ex)
             {
-                logger.LogInformation($"Something went wrong : {ex.Message}");
+                logger.LogInformation($"Token isn't valid : {ex.Message}");
 
                 return new TokenValidationResult { IsValid = false, Exception = ex };
             }
@@ -104,9 +97,10 @@ namespace MedsNotifier.Services
             }
             catch (Exception ex)
             {
-                logger.LogInformation($"Something went wrong : {ex.Message}");
-                return false;
+                logger.LogInformation($"{ex.Message}");
+                return true;
             }
+
         }
         public async Task<UpdateTokenResult> GenerateNewTokenPairAsync(UpdateTokenRequest updateTokenRequest)
         {
@@ -118,13 +112,7 @@ namespace MedsNotifier.Services
 
                 var storedToken = await mongoRepository.GetRefreshTokenAsync(updateTokenRequest.UserId);
 
-                if (storedToken == null)
-                {
-                    logger.LogInformation($"The refresh token {storedToken.UserId}:{storedToken.Token} doesn't exist");
-                    return new UpdateTokenResult { Succeed = false };
-                }
-
-                if (storedToken.ExpiryDate < DateTime.Now || storedToken.IsUsed)
+                if (storedToken.IsUsed)
                 {
                     logger.LogInformation($"The refresh token {storedToken.UserId}:{storedToken.Token} has already been used. It will be deleted");
                     await mongoRepository.DeleteRefreshTokenAsync(storedToken);
@@ -134,22 +122,29 @@ namespace MedsNotifier.Services
                 storedToken.IsUsed = true;
                 await mongoRepository.ChangeRefreshTokenStateAsync(storedToken);
 
-                var user = await mongoRepository.FindUserByIdAsync(storedToken.UserId);
+                var user = await mongoRepository.FindUserByIdAsync(Guid.Parse(storedToken.UserId));
+
                 var token = GenerateJWTToken(user);
+                var refreshToken = GenerateRefreshJWTToken(user);
 
                 return new UpdateTokenResult
                 {
                     Succeed = true,
                     Token = token,
-                    RefreshToken = GenerateRefreshJWTToken(user)
+                    RefreshToken = refreshToken
                 };
 
+            }
+            catch(NullReferenceException ex)
+            {
+
+                logger.LogInformation($"The refresh token doesn't exist");
+                return new UpdateTokenResult { Succeed = false };
             }
             catch (Exception ex)
             {
                 logger.LogInformation($"Something went wrong:{ex.Message}");
                 return new UpdateTokenResult { Succeed = false };
-
             }
         }
         private ClaimsIdentity GetIdentity(User user) => identityService.GetIdentity(user);

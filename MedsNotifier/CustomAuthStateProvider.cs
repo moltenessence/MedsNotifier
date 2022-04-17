@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Principal;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -31,15 +32,25 @@ namespace MedsNotifier
             if (header != null && header != String.Empty)
             {
                 var token = header.Replace("Bearer ", String.Empty);
-
+               
                 if (!jWTService.CheckIfTokenExpired(token)) identity = new ClaimsIdentity(ParseClaimsFromJwt(header), "jwt");
                 else 
                 {
-                   var newPairResult = await jWTService.GenerateNewTokenPairAsync(new UpdateTokenRequest
+                    var newPairResult = await jWTService.GenerateNewTokenPairAsync(new UpdateTokenRequest
                     {
                         Token = token,
-                        UserId = new ClaimsIdentity(ParseClaimsFromJwt(header), "jwt").Claims.Select(c => c.Type == ClaimTypes.NameIdentifier).ToString()
+                        UserId = GetUserid(new ClaimsIdentity(ParseClaimsFromJwt(header), "jwt"))
                     });
+
+                    if(newPairResult.Succeed)
+                    {
+                        await mongoRepository.InsertRefreshToken(newPairResult.RefreshToken);
+                        var newHeader = "Bearer " + newPairResult.Token;
+                        await localStorageService.SetItem<string>("Authorization", newHeader);
+
+                        identity = new ClaimsIdentity(ParseClaimsFromJwt(newHeader), "jwt");
+                    }
+                   
                 } 
             }
 
@@ -51,6 +62,12 @@ namespace MedsNotifier
             return state;
         }
 
+       private string GetUserid(ClaimsIdentity claimsIdentity)
+        {
+            Claim claim = claimsIdentity?.FindFirst(ClaimTypes.NameIdentifier);
+
+            return claim?.Value;
+        }
         private IEnumerable<Claim> ParseClaimsFromJwt(string token)
         {
             var payload = token.Split('.')[1];

@@ -41,11 +41,12 @@ namespace MedsNotifier.Services
                 if (user != null)
                 {
                     var token = jWTService.GenerateJWTToken(user);
+                    var refreshToken = jWTService.GenerateRefreshJWTToken(user);
                     return new LoginResult
                     {
                         Email = user.Email,
                         Token = token,
-                        RefreshToken = jWTService.GenerateRefreshJWTToken(user),
+                        RefreshToken = refreshToken,
                         Succeeded = true,
                         Message = "The user signed in!"
                     };

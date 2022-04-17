@@ -16,12 +16,12 @@ namespace MedsNotifier.Services
         {
             var claims = new List<Claim>
                 {
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim("Age", user.Age?.ToString()),
-                new Claim("Weight", user.Weight?.ToString()),
-                new Claim("Height",user.Height?.ToString()),
-                new Claim(ClaimTypes.Name, user.Username.ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+                new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.String),
+                new Claim("Age", user.Age?.ToString(), ClaimValueTypes.String),
+                new Claim("Weight", user.Weight?.ToString(), ClaimValueTypes.String),
+                new Claim("Height",user.Height?.ToString(), ClaimValueTypes.String),
+                new Claim(ClaimTypes.Name, user.Username.ToString(), ClaimValueTypes.String),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(), ClaimValueTypes.String)
                 };
 
             return new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);

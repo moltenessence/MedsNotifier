@@ -2,6 +2,7 @@
 @using MedsNotifier.Services
 @inject MedsNotifier.Services.IAuthorizationService AuthorizationService
 @using Microsoft.AspNetCore.Http;
+@using MedsNotifier.Data.DataAccess
 @inject NavigationManager NavigationManager
 @page "/register"
 
@@ -35,6 +36,8 @@
 
     [Inject]
     public LocalStorageService LocalStorageService { get; set; }
+    [Inject]
+    public IMongoRepository MongoRepository { get; set; }
 
     private async Task HandleSubmit()
     {
@@ -45,6 +48,8 @@
             token += result.Token;
 
             await LocalStorageService.SetItem<string>("Authorization", token);
+            await MongoRepository.InsertRefreshToken(result.RefreshToken);
+
             NavigationManager.NavigateTo("/home", true);
 
         }

@@ -103,6 +103,13 @@ using Microsoft.AspNetCore.Http;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Register.razor"
+using MedsNotifier.Data.DataAccess;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/register")]
     public partial class Register : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -112,7 +119,7 @@ using Microsoft.AspNetCore.Http;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 31 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Register.razor"
+#line 32 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Register.razor"
        
     private RegisterViewModel registerModel = new();
     private string message;
@@ -120,6 +127,8 @@ using Microsoft.AspNetCore.Http;
 
     [Inject]
     public LocalStorageService LocalStorageService { get; set; }
+    [Inject]
+    public IMongoRepository MongoRepository { get; set; }
 
     private async Task HandleSubmit()
     {
@@ -130,6 +139,8 @@ using Microsoft.AspNetCore.Http;
             token += result.Token;
 
             await LocalStorageService.SetItem<string>("Authorization", token);
+            await MongoRepository.InsertRefreshToken(result.RefreshToken);
+
             NavigationManager.NavigateTo("/home", true);
 
         }
