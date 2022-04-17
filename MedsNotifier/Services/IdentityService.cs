@@ -14,7 +14,9 @@ namespace MedsNotifier.Services
     {
         public ClaimsIdentity GetIdentity(User user)
         {
-            var claims = new List<Claim>
+            if (user != null)
+            {
+                var claims = new List<Claim>
                 {
                 new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.String),
                 new Claim("Age", user.Age?.ToString(), ClaimValueTypes.String),
@@ -24,7 +26,10 @@ namespace MedsNotifier.Services
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(), ClaimValueTypes.String)
                 };
 
-            return new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+                return new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            }
+
+            return new ClaimsIdentity();
         }
     }
 }
