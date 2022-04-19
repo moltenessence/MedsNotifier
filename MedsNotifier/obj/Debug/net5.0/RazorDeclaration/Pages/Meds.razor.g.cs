@@ -83,7 +83,21 @@ using MedsNotifier.Shared;
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Meds.razor"
+#line 1 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Meds.razor"
+using MedsNotifier.Services;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 2 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Meds.razor"
+using MedsNotifier.Data.Models;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Meds.razor"
            [Authorize]
 
 #line default
@@ -98,6 +112,27 @@ using MedsNotifier.Shared;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 15 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Meds.razor"
+       
+    [Inject]
+    public IMedsService MedsService { get; set; }
+    [Inject]
+    public AuthenticationStateProvider AuthProvider { get; set; }
+
+    protected IEnumerable<MedsModel> MedsList { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await AuthProvider.GetAuthenticationStateAsync();
+        var user = state.User;
+
+        if (user.Identity.IsAuthenticated) MedsList = await MedsService.GetUserMedicineChest(user);
+    }
+
+#line default
+#line hidden
+#nullable disable
     }
 }
 #pragma warning restore 1591

@@ -52,6 +52,8 @@ namespace MedsNotifier
             services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
             services.AddSingleton<ITokenOptions, JwtOptions.TokenOptions>();
             services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IMedsService, MedsService>();
             services.AddScoped<IJWTService, JWTService>();
             services.AddScoped<IMongoRepository, MongoRepository>();
             services.AddHttpContextAccessor();

@@ -216,3 +216,9 @@ ul #account-header {
     max-width: 70%;
     display: flex;
 }
+
+.empty-list {
+    display: flex;
+    opacity: 0.4;
+    justify-content: center;
+}

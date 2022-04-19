@@ -3,6 +3,7 @@
 @inject MedsNotifier.Services.IAuthorizationService AuthorizationService
 @using Microsoft.AspNetCore.Http;
 @using MedsNotifier.Data.DataAccess
+@using MedsNotifier.Data.Models
 @inject NavigationManager NavigationManager
 @page "/register"
 
@@ -19,11 +20,17 @@
                 <label for="age">Age</label> <InputNumber class="text-field" id="age" placeholder="Age" @bind-Value="registerModel.Age" />
                 <label for="weight">Weight</label><InputNumber class="text-field" id="weight" placeholder="Weight" @bind-Value="registerModel.Weight" />
                 <label for="height">Height</label><InputNumber class="text-field" id="height" placeholder="Height" @bind-Value="registerModel.Height" />
+                <label for="gender">Gender</label><InputSelect class="text-field" @bind-Value="registerModel.Gender">
+                    @foreach (var gender in Enum.GetValues(typeof(Gender)))
+                    {
+                        <option value="@gender">@gender</option>
+                    }
+                </InputSelect>
                 <label for="password">Password</label><InputText class="text-field" id="password" type="password" placeholder="Password" @bind-Value="registerModel.Password" />
             </div>
 
             <button class="submit-button" type="submit">Register</button>
-            <p class="warning">Such parameters as Height, Weight and Age are optional, but they can help us to analyze your health better.</p>
+            <p class="warning">Such parameters as Height, Weight, Gender and Age are optional, but they can help us to analyze your health better.</p>
         </EditForm>
     </div>
 </div>

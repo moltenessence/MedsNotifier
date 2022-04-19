@@ -81,7 +81,7 @@ namespace MedsNotifier.Services
                     Email = registerViewModel.Email,
                     Weight = registerViewModel.Weight,
                     Height = registerViewModel.Height,
-                    Username = registerViewModel.Username
+                    Username = registerViewModel.Username,
                 };
 
                 var token = jWTService.GenerateJWTToken(user);

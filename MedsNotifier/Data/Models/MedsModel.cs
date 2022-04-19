@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace MedsNotifier.Data.Models
 {
     [BsonCollectionAttribute("meds")]
+    [BsonIgnoreExtraElements]
     public class MedsModel
     {
         [BsonId]

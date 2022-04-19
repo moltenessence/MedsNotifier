@@ -1,5 +1,7 @@
 ﻿using MedsNotifier.Data;
 using MedsNotifier.JwtOptions;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -23,13 +25,19 @@ namespace MedsNotifier.Services
                 new Claim("Weight", user.Weight?.ToString(), ClaimValueTypes.String),
                 new Claim("Height",user.Height?.ToString(), ClaimValueTypes.String),
                 new Claim(ClaimTypes.Name, user.Username.ToString(), ClaimValueTypes.String),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(), ClaimValueTypes.String)
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(), ClaimValueTypes.String),
+                new Claim(ClaimTypes.Gender, user.Gender.ToString(), ClaimValueTypes.String)
                 };
 
                 return new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             }
 
             return new ClaimsIdentity();
+        }
+
+        public string GetClaimValue(ClaimsPrincipal user, string claimType)
+        {
+           return user.Claims.ToList().FirstOrDefault(u => u.Type == claimType)?.Value;
         }
     }
 }

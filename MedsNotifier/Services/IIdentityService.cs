@@ -10,5 +10,6 @@ namespace MedsNotifier.Services
     public interface IIdentityService
     {
         ClaimsIdentity GetIdentity(User user);
+        public string GetClaimValue(ClaimsPrincipal user, string claimType);
     }
 }

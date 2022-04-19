@@ -40,7 +40,7 @@ namespace MedsNotifier.Data.DataAccess
             bool checkPassword = false;
 
             if (userFromQuery != null)
-            checkPassword = BCrypt.Net.BCrypt.Verify(model.Password, userFromQuery.PasswordHash);
+                checkPassword = BCrypt.Net.BCrypt.Verify(model.Password, userFromQuery.PasswordHash);
 
             if (checkPassword) return userFromQuery;
 
@@ -103,17 +103,17 @@ namespace MedsNotifier.Data.DataAccess
             return Task.Run(() => collection.InsertOneAsync(user));
         }
 
-        
-        public async Task InsertMedsToChestAsync(MedicineChest medicineChest, MedsModel meds)
+        public async Task<Task> InsertMedsToUserChestAsync(User user, MedsModel meds)
         {
-            var medicineChestCollection = ConnectToMongo<MedicineChest>();
+            var userCollection = ConnectToMongo<User>();
             var medsCollection = ConnectToMongo<MedsModel>();
 
             await medsCollection.InsertOneAsync(meds);
-            medicineChest.Meds.Add(meds);
+            var userMedsCollection = user.Meds.ToList();
 
-            var filter = Builders<MedicineChest>.Filter.Eq("Id", medicineChest.Id);
-            await medicineChestCollection.ReplaceOneAsync(filter, medicineChest, new ReplaceOptions { IsUpsert = true });
+            userMedsCollection.Add(meds);
+
+            return Task.Run(() => UpdateUserMedsCollectionState(user, userMedsCollection, userCollection));
         }
         public Task UpdateUserDataAsync(User user)
         {
@@ -122,23 +122,43 @@ namespace MedsNotifier.Data.DataAccess
 
             return Task.Run(() => collection.ReplaceOneAsync(filter, user, new ReplaceOptions { IsUpsert = true }));
         }
-        public async Task DeleteMedsAsync(MedicineChest medicineChest, MedsModel meds)
+        public async Task<Task> DeleteMedsFromUserChestAsync(User user, MedsModel meds)
         {
-            var medsCollection = ConnectToMongo<MedicineChest>();
-            if (!medicineChest.Meds.Contains(meds)) return;
+            var userCollection = ConnectToMongo<User>();
+            var collection = ConnectToMongo<MedsModel>();
 
-            await medsCollection.DeleteOneAsync(m => m.Id == meds.Id);
+            var userMedsCollection = user.Meds.ToList();
+            userMedsCollection.Remove(meds);
+
+            await collection.DeleteOneAsync(m => m.Id == meds.Id);
+
+            return Task.Run(() => UpdateUserMedsCollectionState(user, userMedsCollection, userCollection));
         }
 
-        public Task UpdateMedsDataAsync(MedicineChest medicineChest, MedsModel meds)
+        public Task UpdateMedsDataAsync(User user, MedsModel meds)
         {
-            var collection = ConnectToMongo<MedicineChest>();
-            var medsFromChest = medicineChest.Meds.FirstOrDefault(m => m.Id == meds.Id);
+            var medsCollection = ConnectToMongo<MedsModel>();
+            var userCollection = ConnectToMongo<User>();
+            var userMedsCollection = user.Meds.ToList();
 
-            var filter = Builders<MedicineChest>.Filter.Eq("Id", medsFromChest.Id == meds.Id);
+            int index = userMedsCollection.FindIndex(m => m.Id == meds.Id);
+            userMedsCollection[index] = meds;
 
-            return Task.Run(() => collection.ReplaceOneAsync(filter, medicineChest, new ReplaceOptions { IsUpsert = true }));
+            var medsFilter = Builders<MedsModel>.Filter.Eq("Id", meds.Id);
+            medsCollection.ReplaceOneAsync(medsFilter, meds, new ReplaceOptions { IsUpsert = true });
+
+            return Task.Run(() => UpdateUserMedsCollectionState(user, userMedsCollection, userCollection));
         }
+
+        private Task UpdateUserMedsCollectionState(User user, List<MedsModel> userMedsCollection, IMongoCollection<User> userCollection)
+        {
+            var filter = Builders<User>.Filter.Where(u => u.Id == user.Id);
+            var update = Builders<User>.Update.Set(u => u.Meds, userMedsCollection);
+            var options = new FindOneAndUpdateOptions<User>();
+
+            return Task.Run(() => userCollection.FindOneAndUpdate(filter, update, options));
+        }
+
         public Task InsertMedsAsync(MedsModel meds)
         {
             var collection = ConnectToMongo<MedsModel>();

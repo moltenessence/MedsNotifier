@@ -110,6 +110,13 @@ using MedsNotifier.Data.DataAccess;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 6 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Register.razor"
+using MedsNotifier.Data.Models;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/register")]
     public partial class Register : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -119,7 +126,7 @@ using MedsNotifier.Data.DataAccess;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 32 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Register.razor"
+#line 39 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Register.razor"
        
     private RegisterViewModel registerModel = new();
     private string message;

@@ -23,12 +23,7 @@ namespace MedsNotifier.Data
         public double? Weight { get; set; }
         public int? Height { get; set; }
         public Gender Gender { get; set; }
-        public MedicineChest MedicineChest{get; set;}
-
-        public User()
-        {
-            MedicineChest = new MedicineChest { Id = this.Id };
-        }
+        public IEnumerable<MedsModel> Meds { get; set; }
 
     }
 }

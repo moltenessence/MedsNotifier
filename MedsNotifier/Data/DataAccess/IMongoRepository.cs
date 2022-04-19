@@ -8,19 +8,19 @@ namespace MedsNotifier.Data.DataAccess
 {
     public interface IMongoRepository
     {
+        Task<User> AuthenticateAsync(LoginViewModel model);
         Task ChangeRefreshTokenStateAsync(RefreshToken refreshToken);
-        Task DeleteMedsAsync(MedicineChest medicineChest, MedsModel meds);
+        Task<Task> DeleteMedsFromUserChestAsync(User user, MedsModel meds);
+        Task DeleteRefreshTokenAsync(RefreshToken refreshToken);
         Task<User> FindUserByEmailAsync(string email);
+        Task<User> FindUserByIdAsync(Guid Id);
         Task<List<User>> GetAllUsersAsync();
-        Task<RefreshToken> GetRefreshTokenAsync(string token);
+        Task<RefreshToken> GetRefreshTokenAsync(string userId);
         Task InsertMedsAsync(MedsModel meds);
-        Task InsertMedsToChestAsync(MedicineChest medicineChest, MedsModel meds);
+        Task<Task> InsertMedsToUserChestAsync(User user, MedsModel meds);
         Task InsertRefreshToken(RefreshToken refreshToken);
         Task InsertUserAsync(User user);
-        Task UpdateMedsDataAsync(MedicineChest medicineChest, MedsModel meds);
+        Task UpdateMedsDataAsync(User user, MedsModel meds);
         Task UpdateUserDataAsync(User user);
-        Task DeleteRefreshTokenAsync(RefreshToken refreshToken);
-        Task<User> FindUserByIdAsync(Guid Id);
-        Task<User> AuthenticateAsync(LoginViewModel model);
     }
 }

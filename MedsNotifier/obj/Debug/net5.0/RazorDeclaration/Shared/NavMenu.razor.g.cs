@@ -83,7 +83,14 @@ using MedsNotifier.Shared;
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Shared\NavMenu.razor"
+#line 1 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Shared\NavMenu.razor"
+using MedsNotifier.Services;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Shared\NavMenu.razor"
 using System.Security.Claims;
 
 #line default
@@ -97,9 +104,10 @@ using System.Security.Claims;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 39 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Shared\NavMenu.razor"
+#line 42 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Shared\NavMenu.razor"
  
-    [CascadingParameter] private Task<AuthenticationState> authenticationStateTask { get; set; }
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
     private string username { get; set; } = "Guest";
 
     protected override async Task OnInitializedAsync()
@@ -107,14 +115,15 @@ using System.Security.Claims;
         var state = await AuthProvider.GetAuthenticationStateAsync();
         var user = state.User;
 
-        if(user.Identity.IsAuthenticated)
-        username = user.Claims.ToList().FirstOrDefault(u => u.Type == ClaimTypes.Name)?.Value;
+        if (user.Identity.IsAuthenticated)
+        username = IdentityService.GetClaimValue(user, ClaimTypes.Name);
     }
 
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IIdentityService IdentityService { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider AuthProvider { get; set; }
     }
 }

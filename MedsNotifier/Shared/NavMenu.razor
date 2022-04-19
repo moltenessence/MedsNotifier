@@ -1,4 +1,7 @@
-﻿@inject AuthenticationStateProvider AuthProvider
+﻿@using MedsNotifier.Services
+@inject AuthenticationStateProvider AuthProvider
+@inject IIdentityService IdentityService
+
 @using System.Security.Claims
 <nav id="main-nav">
     <ul>
@@ -37,7 +40,8 @@
 
 @code
 {
-    [CascadingParameter] private Task<AuthenticationState> authenticationStateTask { get; set; }
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
     private string username { get; set; } = "Guest";
 
     protected override async Task OnInitializedAsync()
@@ -45,8 +49,8 @@
         var state = await AuthProvider.GetAuthenticationStateAsync();
         var user = state.User;
 
-        if(user.Identity.IsAuthenticated)
-        username = user.Claims.ToList().FirstOrDefault(u => u.Type == ClaimTypes.Name)?.Value;
+        if (user.Identity.IsAuthenticated)
+        username = IdentityService.GetClaimValue(user, ClaimTypes.Name);
     }
 
 }

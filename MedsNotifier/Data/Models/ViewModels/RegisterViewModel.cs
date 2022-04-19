@@ -25,5 +25,6 @@ namespace MedsNotifier.Data.Models.ViewModels
         [Required]
         [MinLength(6, ErrorMessage = "Too short password")]
         public string Password { get; set; }
+        public Gender? Gender { get; set; }
     }
 }

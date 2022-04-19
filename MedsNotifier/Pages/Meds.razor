@@ -1,9 +1,30 @@
-﻿@page "/meds"
+﻿@using MedsNotifier.Services
+@using MedsNotifier.Data.Models
+@page "/meds"
 @layout MainLayout
 @attribute [Authorize]
 
-<h3>Meds</h3>
+<h2>Meds</h2>
+<div class="empty-list"></div>
+@if (MedsList == null)
+{
+    <img src="https://o.remove.bg/downloads/f8e0af0a-9302-4b25-b39b-c68a804d07db/ae8ac2fa217d23aadcc913989fcc34a2-removebg-preview.png" alt="">
+
+}
 
 @code {
+    [Inject]
+    public IMedsService MedsService { get; set; }
+    [Inject]
+    public AuthenticationStateProvider AuthProvider { get; set; }
 
+    protected IEnumerable<MedsModel> MedsList { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await AuthProvider.GetAuthenticationStateAsync();
+        var user = state.User;
+
+        if (user.Identity.IsAuthenticated) MedsList = await MedsService.GetUserMedicineChest(user);
+    }
 }
