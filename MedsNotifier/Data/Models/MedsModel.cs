@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace MedsNotifier.Data.Models
 {
@@ -13,20 +14,23 @@ namespace MedsNotifier.Data.Models
     public class MedsModel
     {
         [BsonId]
-        public Guid Id { get; } = new Guid();
-        [BsonRequired]
+        public Guid Id { get; set; } = new Guid();
+        [Required]
         public string Name { get; set; }
         public string Description { get; set; }
-        [BsonRequired]
+        [Required]
         public string Color { get; set; }
-        [BsonRequired]
+        [Required]
         public int TotalDosage { get; set; }
-        [BsonRequired]
+        [Required]
         public int SingleDosage { get; set; }
-        [BsonRequired]
+        [Required]
         public int DosesPerDayAmount { get; set; }
-        public MedsType? MedsType { get; set; }
+        [Required]
+        public MedsType MedsType { get; set; }
         public DateTime StartMedsDateTime { get; set; }
+        [EnsureFinishCourseDateNotInPast]
+        [Required]
         public DateTime FinishMedsDateTime { get; set; }
     }
 }

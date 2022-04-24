@@ -23,7 +23,7 @@ namespace MedsNotifier.Data
         public double? Weight { get; set; }
         public int? Height { get; set; }
         public Gender Gender { get; set; }
-        public IEnumerable<MedsModel> Meds { get; set; }
+        public IList<MedsModel> Meds { get; set; }
 
     }
 }

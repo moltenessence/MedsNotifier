@@ -1,6 +1,7 @@
 ﻿using MedsNotifier.Data;
 using MedsNotifier.Data.CustomModelAttributes;
 using MedsNotifier.Data.DataAccess;
+using MedsNotifier.Data.Models;
 using MedsNotifier.Data.Models.ResultModels;
 using MedsNotifier.Data.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -82,6 +83,7 @@ namespace MedsNotifier.Services
                     Weight = registerViewModel.Weight,
                     Height = registerViewModel.Height,
                     Username = registerViewModel.Username,
+                    Meds= new List<MedsModel>() { }
                 };
 
                 var token = jWTService.GenerateJWTToken(user);

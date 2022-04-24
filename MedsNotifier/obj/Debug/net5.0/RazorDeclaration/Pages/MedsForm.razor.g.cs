@@ -127,7 +127,7 @@ using Smart.Blazor;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 31 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\MedsForm.razor"
+#line 35 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\MedsForm.razor"
        
     private MedsModel medication = new();
     private string message;
@@ -139,26 +139,39 @@ using Smart.Blazor;
     [Inject]
     public AuthenticationStateProvider AuthProvider { get; set; }
 
-    protected ClaimsPrincipal user;
-
     private async Task HandleSubmit()
     {
+        medication.StartMedsDateTime = DateTime.Now;
+        medication.TotalDosage = MedsService.CountTotalDosage(medication);
+
+        var state = await AuthProvider.GetAuthenticationStateAsync();
+        var user = state.User;
+
         await MedsService.AddMedsToUserChest(user, medication);
+
+        NavigationManager.NavigateTo("meds", true);
     }
 
     protected override void OnAfterRender(bool firstRender)
     {
         if (!firstRender) message = "";
     }
-    protected override async Task OnInitializedAsync()
-    {
-        var state = await AuthProvider.GetAuthenticationStateAsync();
-        var user = state.User;
-    }
-    private void OnChange(Event ev)
+
+    private void OnColorChange(Event ev)
     {
         ColorPickerChangeEventDetail detail = ev["Detail"];
         medication.Color = detail.Value;
+    }
+    private void OnCalendarChange(Event ev)
+    {
+        CalendarChangeEventDetail eventCallback = ev["Detail"];
+        var dates = eventCallback.Value;
+
+        var selectedDate = dates.ToList().FirstOrDefault();
+
+        DateTime finishMedsDayTime;
+        DateTime.TryParse(selectedDate, out finishMedsDayTime);
+        medication.FinishMedsDateTime = finishMedsDayTime;
     }
 
 #line default

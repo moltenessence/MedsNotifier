@@ -1,39 +1,43 @@
 ﻿@using MedsNotifier.Services
 @using MedsNotifier.Data.Models
+@using System.Security.Claims
 @page "/meds"
 @layout MainLayout
 @attribute [Authorize]
 
 <h2>Meds</h2>
-<div class="empty-list"></div>
-@if (MedsList == null)
-{
-    <img src="https://o.remove.bg/downloads/f8e0af0a-9302-4b25-b39b-c68a804d07db/ae8ac2fa217d23aadcc913989fcc34a2-removebg-preview.png" alt="">
 
-}
-else
-{<div class="meds-info">
-        @foreach (var medication in MedsList)
-        {
+<div class="meds-page-wrapper">
+    @if (MedsList == null)
+    {
+        <div class="empty-list">
+            <img height="400" width="380" src="https://sun9-6.userapi.com/s/v1/ig2/Lv_1ccUqPtCfwqFSvYCOLOURQw-pOzUmIZ7kafQGsgu2LScy9ojGuFQjqGvDz1oDUM8W_vAti-dInm0AAnWm74Az.jpg?size=800x600&quality=96&type=album" alt="" >
+        </div>
+    }
 
-            <ul class="meds-info">
-                <li color="@medication.Color" class="meds-name">@medication.Name</li>
-                <li class="meds-type">@medication.MedsType</li>
-                <li class="meds-text-info">@medication.Description</li>
-                <li class="meds-text-info">Start: @medication.StartMedsDateTime</li>
-                <li class="meds-text-info">Finish: @medication.FinishMedsDateTime</li>
-            </ul>
-        }
+    else
+    {<div class="meds-info">
+            @foreach (var medication in MedsList)
+            {
 
-        <div class="meds-percentage">
+                <ul class="meds-info">
+                    <li color="@medication.Color" class="meds-name">@medication.Name</li>
+                    <li class="meds-type">@medication.MedsType</li>
+                    <li class="meds-text-info">@medication.Description</li>
+                    <li class="meds-text-info">Start: @medication.StartMedsDateTime</li>
+                    <li class="meds-text-info">Finish: @medication.FinishMedsDateTime</li>
+                </ul>
+            }
+
+            <div class="meds-percentage">
+
+            </div>
 
         </div>
+    }
 
-    </div>
-}
-
-Press here to <NavLink class="crt-acc" href="meds/add" Match="NavLinkMatch.All">Start new course!</NavLink>
-
+<NavLink class="crt-acc" href="meds/add" Match="NavLinkMatch.All"> Press here to start new course!</NavLink>
+</div>
 @code {
     [Inject]
     public IMedsService MedsService { get; set; }
@@ -41,12 +45,16 @@ Press here to <NavLink class="crt-acc" href="meds/add" Match="NavLinkMatch.All">
     public AuthenticationStateProvider AuthProvider { get; set; }
 
     protected IEnumerable<MedsModel> MedsList { get; set; }
+    protected ClaimsPrincipal user { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         var state = await AuthProvider.GetAuthenticationStateAsync();
-        var user = state.User;
+        user = state.User;
+    }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
         if (user.Identity.IsAuthenticated) MedsList = await MedsService.GetUserMedicineChest(user);
     }
 }

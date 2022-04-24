@@ -38,5 +38,8 @@ namespace MedsNotifier.Services
 
             return ((double)DateTime.Now.Ticks / (double)totalTime) * 100;
         }
+
+        private int CountCourseDaysAmount(MedsModel medication) => medication.FinishMedsDateTime.DayOfYear - medication.StartMedsDateTime.DayOfYear;
+        public int CountTotalDosage(MedsModel medication) => (medication.DosesPerDayAmount * medication.SingleDosage) * CountCourseDaysAmount(medication);
     }
 }

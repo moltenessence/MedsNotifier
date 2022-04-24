@@ -22,7 +22,11 @@
                     <option value="@type">@type</option>
                 }
             </InputSelect>
-            <ColorPicker Editable="true" DisplayMode="ColorDisplayMode.Palette" OnChange="OnChange"></ColorPicker>
+            Single Dosage<InputNumber id="single-dosage" class="text-field" placeholder="Single Dosage" @bind-Value="medication.SingleDosage" />
+            Amount Of Doses Per A Day<InputNumber id="daily-dosage-amount" class="text-field" placeholder="Amount Of Daily Doses" @bind-Value="medication.DosesPerDayAmount" />
+            Choose the date when your course finishes<Smart.Blazor.Calendar OnChange="OnCalendarChange"></Smart.Blazor.Calendar>
+            Medication color<ColorPicker Editable="true" OnChange="OnColorChange"></ColorPicker>
+
         </div>
         <button class="submit-button" type="submit">Start!</button>
     </EditForm>
@@ -39,25 +43,38 @@
     [Inject]
     public AuthenticationStateProvider AuthProvider { get; set; }
 
-    protected ClaimsPrincipal user;
-
     private async Task HandleSubmit()
     {
+        medication.StartMedsDateTime = DateTime.Now;
+        medication.TotalDosage = MedsService.CountTotalDosage(medication);
+
+        var state = await AuthProvider.GetAuthenticationStateAsync();
+        var user = state.User;
+
         await MedsService.AddMedsToUserChest(user, medication);
+
+        NavigationManager.NavigateTo("meds", true);
     }
 
     protected override void OnAfterRender(bool firstRender)
     {
         if (!firstRender) message = "";
     }
-    protected override async Task OnInitializedAsync()
-    {
-        var state = await AuthProvider.GetAuthenticationStateAsync();
-        var user = state.User;
-    }
-    private void OnChange(Event ev)
+
+    private void OnColorChange(Event ev)
     {
         ColorPickerChangeEventDetail detail = ev["Detail"];
         medication.Color = detail.Value;
+    }
+    private void OnCalendarChange(Event ev)
+    {
+        CalendarChangeEventDetail eventCallback = ev["Detail"];
+        var dates = eventCallback.Value;
+
+        var selectedDate = dates.ToList().FirstOrDefault();
+
+        DateTime finishMedsDayTime;
+        DateTime.TryParse(selectedDate, out finishMedsDayTime);
+        medication.FinishMedsDateTime = finishMedsDayTime;
     }
 }

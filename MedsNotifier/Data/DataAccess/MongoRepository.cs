@@ -108,10 +108,9 @@ namespace MedsNotifier.Data.DataAccess
             var userCollection = ConnectToMongo<User>();
             var medsCollection = ConnectToMongo<MedsModel>();
 
-            await medsCollection.InsertOneAsync(meds);
+            user.Meds.Add(meds);
             var userMedsCollection = user.Meds.ToList();
-
-            userMedsCollection.Add(meds);
+            await medsCollection.InsertOneAsync(meds);
 
             return Task.Run(() => UpdateUserMedsCollectionState(user, userMedsCollection, userCollection));
         }

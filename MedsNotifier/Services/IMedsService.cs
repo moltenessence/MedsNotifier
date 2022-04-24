@@ -9,5 +9,7 @@ namespace MedsNotifier.Services
     {
         Task AddMedsToUserChest(ClaimsPrincipal claimsPrincipal, MedsModel meds);
         Task<IEnumerable<MedsModel>> GetUserMedicineChest(ClaimsPrincipal claimsPrincipal);
+        public int CountTotalDosage(MedsModel medication);
+        public double GetCourseProgressProcentage(MedsModel medication);
     }
 }
