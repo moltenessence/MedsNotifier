@@ -1,0 +1,63 @@
+﻿@attribute [Authorize]
+@page "/meds/add"
+@layout MainLayout
+@using MedsNotifier.Services
+@using MedsNotifier.Data.Models
+@using System.Security.Claims
+@using Smart.Blazor
+
+
+<div class="meds-form-box">
+    <h3>New meds course</h3>
+    <EditForm Model="@medication" OnValidSubmit="@HandleSubmit" ChildContext Context="login">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <p>@message</p>
+        <div class="input-fields">
+            Name <InputText id="name" class="text-field" placeholder="Name" @bind-Value="medication.Name" />
+            Description <InputText id="description" class="text-field" placeholder="Description" @bind-Value="medication.Description" />
+            <label for="type">Type</label><InputSelect class="text-field" @bind-Value="medication.MedsType">
+                @foreach (var type in Enum.GetValues(typeof(MedsType)))
+                {
+                    <option value="@type">@type</option>
+                }
+            </InputSelect>
+            <ColorPicker Editable="true" DisplayMode="ColorDisplayMode.Palette" OnChange="OnChange"></ColorPicker>
+        </div>
+        <button class="submit-button" type="submit">Start!</button>
+    </EditForm>
+</div>
+
+@code {
+    private MedsModel medication = new();
+    private string message;
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+    [Inject]
+    public IMedsService MedsService { get; set; }
+    [Inject]
+    public AuthenticationStateProvider AuthProvider { get; set; }
+
+    protected ClaimsPrincipal user;
+
+    private async Task HandleSubmit()
+    {
+        await MedsService.AddMedsToUserChest(user, medication);
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (!firstRender) message = "";
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await AuthProvider.GetAuthenticationStateAsync();
+        var user = state.User;
+    }
+    private void OnChange(Event ev)
+    {
+        ColorPickerChangeEventDetail detail = ev["Detail"];
+        medication.Color = detail.Value;
+    }
+}

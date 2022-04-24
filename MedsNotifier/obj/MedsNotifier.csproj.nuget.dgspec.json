@@ -54,6 +54,10 @@
               "target": "Package",
               "version": "[4.0.3, )"
             },
+            "BlazorColorPicker": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
             "Microsoft.AspNet.Identity.Core": {
               "target": "Package",
               "version": "[2.2.3, )"
@@ -69,6 +73,10 @@
             "MongoDB.Driver": {
               "target": "Package",
               "version": "[2.15.0, )"
+            },
+            "Smart.Blazor": {
+              "target": "Package",
+              "version": "[13.1.29, )"
             },
             "System.Configuration.ConfigurationManager": {
               "target": "Package",

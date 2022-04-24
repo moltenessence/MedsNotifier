@@ -16,8 +16,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-
 using Microsoft.IdentityModel.Tokens;
+using Smart.Blazor;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -32,6 +32,7 @@ namespace MedsNotifier
         public Startup()
         {
             var builder = new ConfigurationBuilder().AddJsonFile("mongodb.json");
+       
             MongoDbConfiguration = builder.Build();
 
         }
@@ -76,6 +77,8 @@ namespace MedsNotifier
             });
             services.AddAuthorization();
             services.AddLogging();
+            services.AddSmart();
+ 
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

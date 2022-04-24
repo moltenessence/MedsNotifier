@@ -1,3 +1,4 @@
+C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.csprojAssemblyReference.cache
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.AssemblyInfoInputs.cache
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.AssemblyInfo.cs
@@ -10,6 +11,7 @@ C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\RazorDeclara
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\RazorDeclaration\Pages\Login.razor.g.cs
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\RazorDeclaration\Pages\Logout.razor.g.cs
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\RazorDeclaration\Pages\Meds.razor.g.cs
+C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\RazorDeclaration\Pages\MedsForm.razor.g.cs
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\RazorDeclaration\Pages\Recommendations.razor.g.cs
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\RazorDeclaration\Pages\Register.razor.g.cs
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\RazorDeclaration\Pages\Settings.razor.g.cs
@@ -24,6 +26,7 @@ C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\web.config
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\appsettings.json
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\mongodb.json
+C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\MedsNotifier.StaticWebAssets.xml
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\MedsNotifier.exe
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\MedsNotifier.deps.json
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\MedsNotifier.runtimeconfig.json
@@ -83,6 +86,7 @@ C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\Razor\Pages\
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\Razor\Pages\Login.razor.g.cs
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\Razor\Pages\Logout.razor.g.cs
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\Razor\Pages\Meds.razor.g.cs
+C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\Razor\Pages\MedsForm.razor.g.cs
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\Razor\Pages\Recommendations.razor.g.cs
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\Razor\Pages\Register.razor.g.cs
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\Razor\Pages\Settings.razor.g.cs
@@ -106,4 +110,5 @@ C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\ref\MedsNotifier.dll
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.pdb
 C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.genruntimeconfig.cache
-C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.csprojAssemblyReference.cache
+C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\bin\Debug\net5.0\Smart.Blazor.dll

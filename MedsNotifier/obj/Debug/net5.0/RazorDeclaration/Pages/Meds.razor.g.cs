@@ -113,7 +113,7 @@ using MedsNotifier.Data.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 15 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Meds.razor"
+#line 37 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Meds.razor"
        
     [Inject]
     public IMedsService MedsService { get; set; }

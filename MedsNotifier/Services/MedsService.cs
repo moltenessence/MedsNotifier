@@ -29,5 +29,14 @@ namespace MedsNotifier.Services
             var user = await accountService.GetUserAsync(claimsPrincipal);
             _ = await mongoRepository.InsertMedsToUserChestAsync(user, meds);
         }
+
+        public double GetCourseProgressProcentage(MedsModel medication)
+        {
+
+            var totalTime = medication.FinishMedsDateTime.Ticks - medication.StartMedsDateTime.Ticks;
+
+
+            return ((double)DateTime.Now.Ticks / (double)totalTime) * 100;
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace MedsNotifier.Data.Models
         public string Name { get; set; }
         public string Description { get; set; }
         [BsonRequired]
-        public Color Color { get; set; }
+        public string Color { get; set; }
         [BsonRequired]
         public int TotalDosage { get; set; }
         [BsonRequired]

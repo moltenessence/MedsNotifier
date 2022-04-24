@@ -11,6 +11,28 @@
     <img src="https://o.remove.bg/downloads/f8e0af0a-9302-4b25-b39b-c68a804d07db/ae8ac2fa217d23aadcc913989fcc34a2-removebg-preview.png" alt="">
 
 }
+else
+{<div class="meds-info">
+        @foreach (var medication in MedsList)
+        {
+
+            <ul class="meds-info">
+                <li color="@medication.Color" class="meds-name">@medication.Name</li>
+                <li class="meds-type">@medication.MedsType</li>
+                <li class="meds-text-info">@medication.Description</li>
+                <li class="meds-text-info">Start: @medication.StartMedsDateTime</li>
+                <li class="meds-text-info">Finish: @medication.FinishMedsDateTime</li>
+            </ul>
+        }
+
+        <div class="meds-percentage">
+
+        </div>
+
+    </div>
+}
+
+Press here to <NavLink class="crt-acc" href="meds/add" Match="NavLinkMatch.All">Start new course!</NavLink>
 
 @code {
     [Inject]

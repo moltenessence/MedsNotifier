@@ -17,4 +17,8 @@
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)smart.blazor\13.1.29\buildTransitive\Smart.Blazor.props" Condition="Exists('$(NuGetPackageRoot)smart.blazor\13.1.29\buildTransitive\Smart.Blazor.props')" />
+    <Import Project="$(NuGetPackageRoot)blazorcolorpicker\2.1.0\buildTransitive\BlazorColorPicker.props" Condition="Exists('$(NuGetPackageRoot)blazorcolorpicker\2.1.0\buildTransitive\BlazorColorPicker.props')" />
+  </ImportGroup>
 </Project>

@@ -1,1 +1,4 @@
-﻿<StaticWebAssets Version="1.0" />
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="_content/BlazorColorPicker" Path="C:\Users\PC\.nuget\packages\blazorcolorpicker\2.1.0\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Smart.Blazor" Path="C:\Users\PC\.nuget\packages\smart.blazor\13.1.29\build\..\staticwebassets\" />
+</StaticWebAssets>
