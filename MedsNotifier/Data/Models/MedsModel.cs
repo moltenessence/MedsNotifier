@@ -17,12 +17,14 @@ namespace MedsNotifier.Data.Models
         public Guid Id { get; set; } = new Guid();
         [Required]
         public string Name { get; set; }
-        public string Description { get; set; }
+        [Required]
+        public string Description { get; set; } = "None";
         [Required]
         public string Color { get; set; }
         [Required]
         public int TotalDosage { get; set; }
         [Required]
+        [DosageAmountValidation]
         public int SingleDosage { get; set; }
         [Required]
         public int DosesPerDayAmount { get; set; }

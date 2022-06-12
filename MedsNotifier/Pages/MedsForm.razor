@@ -9,7 +9,7 @@
 
 <div class="meds-form-box">
     <h3>New meds course</h3>
-    <EditForm Model="@medication" OnValidSubmit="@HandleSubmit" ChildContext Context="login">
+    <EditForm Model="@medication" OnValidSubmit="@HandleSubmit" ChildContext Context="medsform">
         <DataAnnotationsValidator />
         <ValidationSummary />
         <p>@message</p>
