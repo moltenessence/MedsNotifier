@@ -20,27 +20,29 @@
 <div class="meds-info">
     @foreach (var medication in MedsList)
     {
-    <div  class="meds-block-info">
-        <ul>
-            <li color="@medication.Color" class="meds-name"> Title: @medication.Name</li>
-            <li class="meds-type">Type: @medication.MedsType</li>
-            <li class="meds-text-info"> Description: @medication.Description</li>
-            <li class="meds-text-info">Start: @medication.StartMedsDateTime</li>
-            <li class="meds-text-info">Finish: @medication.FinishMedsDateTime</li>
-        </ul>
-        <div class="wrap-circles">
-            <div class="circle per-25">
-                <div class="inner">25%</div>
+        <div class="meds-block-info">
+            <ul>
+                <li color="@medication.Color" class="meds-name"> Title: @medication.Name</li>
+                <li class="meds-type">Type: @medication.MedsType</li>
+                <li class="meds-text-info"> Description: @medication.Description</li>
+                <li class="meds-text-info">Start: @medication.StartMedsDateTime</li>
+                <li class="meds-text-info">Finish: @medication.FinishMedsDateTime</li>
+            </ul>
+            <div class="wrap-circles">
+                <div class="circle per">
+                    <div class="inner">@MedsService.GetCourseProgressProcentage(medication).ToString()%</div>
+                </div>
             </div>
         </div>
-        </div>
+        <button class="submit-button" type="submit" @onclick="() => OnDeleteMeds(medication)">Delete course</button>
     }
 
 </div>
     }
-
 <NavLink class="submit-button" href="meds/add" Match="NavLinkMatch.All"> Press here to start new course!</NavLink>
 </div>
+
+
 @code {
     [Inject]
     public IMedsService MedsService { get; set; }
@@ -58,6 +60,11 @@
 
     protected override async Task OnParametersSetAsync()
     {
-         if (user.Identity.IsAuthenticated) MedsList = await MedsService.GetUserMedicineChest(user);
+        if (user.Identity.IsAuthenticated) MedsList = await MedsService.GetUserMedicineChest(user);
+    }
+
+    protected async Task OnDeleteMeds(MedsModel meds)
+    {
+        await MedsService.DeleteMedsAsync(user, meds);
     }
 }

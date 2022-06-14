@@ -120,7 +120,7 @@ using System.Security.Claims;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 44 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Meds.razor"
+#line 46 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Meds.razor"
        
     [Inject]
     public IMedsService MedsService { get; set; }
@@ -138,7 +138,12 @@ using System.Security.Claims;
 
     protected override async Task OnParametersSetAsync()
     {
-         if (user.Identity.IsAuthenticated) MedsList = await MedsService.GetUserMedicineChest(user);
+        if (user.Identity.IsAuthenticated) MedsList = await MedsService.GetUserMedicineChest(user);
+    }
+
+    protected async Task OnDeleteMeds(MedsModel meds)
+    {
+        await MedsService.DeleteMedsAsync(user, meds);
     }
 
 #line default

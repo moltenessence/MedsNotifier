@@ -25,7 +25,7 @@ namespace MedsNotifier.Services
             var email = identityService.GetClaimValue(claimsPrincipal, ClaimTypes.Email);
 
             var user = await mongoRepository.FindUserByEmailAsync(email);
-
+   
             return user;
         }
     }

@@ -315,7 +315,7 @@ ul #account-header {
     margin-left: 40px;
 }
 
-.circle.per-25 {
+.circle.per {
     background-image: conic-gradient(aquamarine 25%, #b0b0b0 0);
 }
 

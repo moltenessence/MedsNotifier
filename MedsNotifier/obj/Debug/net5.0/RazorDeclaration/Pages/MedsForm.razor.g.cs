@@ -143,6 +143,7 @@ using Smart.Blazor;
     {
         medication.StartMedsDateTime = DateTime.Now;
         medication.TotalDosage = MedsService.CountTotalDosage(medication);
+        medication.AmountOfDosesLeft = MedsService.CountTotalAmountOfDoses(medication);
 
         var state = await AuthProvider.GetAuthenticationStateAsync();
         var user = state.User;

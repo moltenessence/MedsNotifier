@@ -34,5 +34,8 @@ namespace MedsNotifier.Data.Models
         [EnsureFinishCourseDateNotInPast]
         [Required]
         public DateTime FinishMedsDateTime { get; set; }
+
+        [Required]
+        public int AmountOfDosesLeft { get; set; }
     }
 }

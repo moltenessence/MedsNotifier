@@ -18,10 +18,11 @@ namespace MedsNotifier.Services
             mongoRepository = MongoRepository;
             accountService = AccountService;
         }
-        public async Task<IEnumerable<MedsModel>> GetUserMedicineChest(ClaimsPrincipal claimsPrincipal)
+        public async Task<IList<MedsModel>> GetUserMedicineChest(ClaimsPrincipal claimsPrincipal)
         {
             var user = await accountService.GetUserAsync(claimsPrincipal);
-            return user.Meds;
+
+            return  user!=null ? user.Meds : null;
         }
 
         public async Task AddMedsToUserChest(ClaimsPrincipal claimsPrincipal, MedsModel meds)
@@ -30,16 +31,39 @@ namespace MedsNotifier.Services
             _ = await mongoRepository.InsertMedsToUserChestAsync(user, meds);
         }
 
-        public double GetCourseProgressProcentage(MedsModel medication)
+        public async Task DeleteMedsAsync(ClaimsPrincipal claimsPrincipal, MedsModel meds)
         {
+            var user = await accountService.GetUserAsync(claimsPrincipal);
 
-            var totalTime = medication.FinishMedsDateTime.Ticks - medication.StartMedsDateTime.Ticks;
+            _ = await mongoRepository.DeleteMedsFromUserChestAsync(user, meds);
+        }
 
+        public int GetCourseProgressProcentage(MedsModel medication) {
 
-            return ((double)DateTime.Now.Ticks / (double)totalTime) * 100;
+            var totalAmount = (double)CountTotalAmountOfDoses(medication);
+            var amountLeft = (double)CountAmountOfDosesLeft(medication);
+             
+            var result = ((totalAmount - amountLeft) / totalAmount) * 100;
+
+            return (int)result;
+        
+        }
+
+        public async Task TakeMeds(ClaimsPrincipal claimsPrincipal, MedsModel meds)
+        {
+            var user = await accountService.GetUserAsync(claimsPrincipal);
+
+            var currentMeds = user.Meds.FirstOrDefault(m => m.Id == meds.Id);
+
+            if (currentMeds != null) currentMeds.AmountOfDosesLeft -=1;
+
+            await mongoRepository.UpdateMedsDataAsync(user, currentMeds);
         }
 
         private int CountCourseDaysAmount(MedsModel medication) => medication.FinishMedsDateTime.DayOfYear - medication.StartMedsDateTime.DayOfYear;
+        private int CountCourseDaysAmountLeft(MedsModel medication) => medication.FinishMedsDateTime.DayOfYear - DateTime.Now.DayOfYear;
         public int CountTotalDosage(MedsModel medication) => (medication.DosesPerDayAmount * medication.SingleDosage) * CountCourseDaysAmount(medication);
+        public int CountTotalAmountOfDoses(MedsModel medication) => medication.DosesPerDayAmount * CountCourseDaysAmount(medication);
+        public int CountAmountOfDosesLeft(MedsModel medication) => medication.AmountOfDosesLeft;
     }
 }

@@ -8,8 +8,12 @@ namespace MedsNotifier.Services
     public interface IMedsService
     {
         Task AddMedsToUserChest(ClaimsPrincipal claimsPrincipal, MedsModel meds);
-        Task<IEnumerable<MedsModel>> GetUserMedicineChest(ClaimsPrincipal claimsPrincipal);
+        Task<IList<MedsModel>> GetUserMedicineChest(ClaimsPrincipal claimsPrincipal);
         public int CountTotalDosage(MedsModel medication);
-        public double GetCourseProgressProcentage(MedsModel medication);
+        public int GetCourseProgressProcentage(MedsModel medication);
+        public int CountTotalAmountOfDoses(MedsModel medication);
+        public int CountAmountOfDosesLeft(MedsModel medication);
+        public Task TakeMeds(ClaimsPrincipal claimsPrincipal, MedsModel meds);
+        public Task DeleteMedsAsync(ClaimsPrincipal claimsPrincipal, MedsModel meds);
     }
 }
