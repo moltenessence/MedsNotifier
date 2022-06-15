@@ -128,9 +128,9 @@ namespace MedsNotifier.Data.DataAccess
             var collection = ConnectToMongo<MedsModel>();
 
             var userMedsCollection = user.Meds.ToList();
-            userMedsCollection.Remove(meds);
+            var success = userMedsCollection.RemoveAll(m=>m.Id == meds.Id);
 
-            await collection.DeleteOneAsync(m => m.Id == meds.Id);
+            if (success > 0) await collection.DeleteOneAsync(m => m.Id == meds.Id);
 
             return Task.Run(() => UpdateUserMedsCollectionState(user, userMedsCollection, userCollection));
         }

@@ -37,5 +37,8 @@ namespace MedsNotifier.Data.Models
 
         [Required]
         public int AmountOfDosesLeft { get; set; }
+
+        [Required]
+        public int TotalAmountOfDoses { get; set; }
     }
 }

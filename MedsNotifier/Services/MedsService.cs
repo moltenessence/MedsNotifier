@@ -35,12 +35,12 @@ namespace MedsNotifier.Services
         {
             var user = await accountService.GetUserAsync(claimsPrincipal);
 
-            _ = await mongoRepository.DeleteMedsFromUserChestAsync(user, meds);
+            await mongoRepository.DeleteMedsFromUserChestAsync(user, meds);
         }
 
         public int GetCourseProgressProcentage(MedsModel medication) {
 
-            var totalAmount = (double)CountTotalAmountOfDoses(medication);
+            var totalAmount = medication.TotalAmountOfDoses;
             var amountLeft = (double)CountAmountOfDosesLeft(medication);
              
             var result = ((totalAmount - amountLeft) / totalAmount) * 100;
@@ -55,7 +55,7 @@ namespace MedsNotifier.Services
 
             var currentMeds = user.Meds.FirstOrDefault(m => m.Id == meds.Id);
 
-            if (currentMeds != null) currentMeds.AmountOfDosesLeft -=1;
+            if (currentMeds != null && currentMeds.AmountOfDosesLeft > 0) currentMeds.AmountOfDosesLeft -=1;
 
             await mongoRepository.UpdateMedsDataAsync(user, currentMeds);
         }

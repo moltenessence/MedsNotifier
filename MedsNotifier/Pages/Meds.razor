@@ -25,8 +25,10 @@
                 <li color="@medication.Color" class="meds-name"> Title: @medication.Name</li>
                 <li class="meds-type">Type: @medication.MedsType</li>
                 <li class="meds-text-info"> Description: @medication.Description</li>
-                <li class="meds-text-info">Start: @medication.StartMedsDateTime</li>
-                <li class="meds-text-info">Finish: @medication.FinishMedsDateTime</li>
+                <li class="meds-text-info"> Doses Left: @medication.AmountOfDosesLeft</li>
+
+                <li class="meds-text-info">Start: @medication.StartMedsDateTime.ToShortDateString()</li>
+                <li class="meds-text-info">Finish: @medication.FinishMedsDateTime.ToShortDateString()</li>
             </ul>
             <div class="wrap-circles">
                 <div class="circle per">
@@ -35,6 +37,8 @@
             </div>
         </div>
         <button class="submit-button" type="submit" @onclick="() => OnDeleteMeds(medication)">Delete course</button>
+        <button class="submit-button" type="submit"  @onclick="() => OnTakeMeds(medication)">Take meds!</button>
+        @errorMessage
     }
 
 </div>
@@ -51,6 +55,7 @@
 
     protected IEnumerable<MedsModel> MedsList { get; set; }
     protected ClaimsPrincipal user { get; set; }
+    protected string errorMessage { get; set; } = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -66,5 +71,16 @@
     protected async Task OnDeleteMeds(MedsModel meds)
     {
         await MedsService.DeleteMedsAsync(user, meds);
+    }
+
+    protected async Task OnTakeMeds(MedsModel meds)
+    {
+        if (meds.AmountOfDosesLeft == 0) {
+            errorMessage = "You have finished this course. You can delete it if you don't wanna track it anymore!";
+            return;
+        }
+
+        await MedsService.TakeMeds(user, meds);
+        meds.AmountOfDosesLeft -= 1;
     }
 }

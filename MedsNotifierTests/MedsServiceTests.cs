@@ -27,7 +27,8 @@ namespace MedsNotifierTests
         [Fact]
         public void GetCourseProgressProcentage_ValidAccounting_ValidParameters()
         {
-            MedsModel medication = new MedsModel() {
+            MedsModel medication = new MedsModel() 
+            {
                 SingleDosage = 5,
                 StartMedsDateTime = new DateTime(2022, 6, 10),
                 FinishMedsDateTime = DateTime.Now.AddDays(3),
@@ -40,13 +41,40 @@ namespace MedsNotifierTests
 
             medication.TotalDosage = medsService.CountTotalDosage(medication);
 
-            var totalAmount = medsService.CountTotalAmountOfDoses(medication);
-            medication.AmountOfDosesLeft = totalAmount/2;
+            medication.TotalAmountOfDoses = medsService.CountTotalAmountOfDoses(medication);
+            medication.AmountOfDosesLeft = medication.TotalAmountOfDoses / 2;
 
             int expectedResult = 50;
             int result = medsService.GetCourseProgressProcentage(medication);
 
             Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void GetCourseProgressProcentage_ValidAccounting_ZeroAndHundreedPercent()
+        {
+            MedsModel medication = new MedsModel()
+            {
+                SingleDosage = 5,
+                StartMedsDateTime = new DateTime(2022, 6, 10),
+                FinishMedsDateTime = new DateTime(2022, 6, 20),
+                Description = "",
+                DosesPerDayAmount = 2,
+                Color = "",
+                MedsType = MedsType.Hormonal,
+                Name = "Probio",
+                
+            };
+
+            medication.TotalAmountOfDoses = medsService.CountTotalAmountOfDoses(medication);
+            medication.AmountOfDosesLeft = medication.TotalAmountOfDoses;
+
+            int resultZeroPercent = medsService.GetCourseProgressProcentage(medication);
+            medication.AmountOfDosesLeft = 0;
+            int resultHundreedPercent = medsService.GetCourseProgressProcentage(medication);
+
+            Assert.Equal(0, resultZeroPercent);
+            Assert.Equal(100, resultHundreedPercent);
         }
 
         [Fact]
@@ -156,6 +184,7 @@ namespace MedsNotifierTests
 
             Assert.NotNull(medsChest);
         }
+
         [Fact]
         public async Task DeleteMedsAsync()
         {
@@ -183,15 +212,13 @@ namespace MedsNotifierTests
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword("mYPa$$w0rd", 10),
                 Username = "test",
                 Weight = 70,
-                Meds = expectedMedsChest
+                Meds = MedsChest
             };
 
             accountServiceMock.Setup(x => x.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
             await medsService.DeleteMedsAsync(It.IsAny<ClaimsPrincipal>(), deletedMeds);
 
-            var updatedMedsChest = await medsService.GetUserMedicineChest(It.IsAny<ClaimsPrincipal>());
-
-            Assert.DoesNotContain(deletedMeds, updatedMedsChest);
+            mongoRepoMock.Verify(x => x.DeleteMedsFromUserChestAsync(user, deletedMeds));
         }
     }
            
