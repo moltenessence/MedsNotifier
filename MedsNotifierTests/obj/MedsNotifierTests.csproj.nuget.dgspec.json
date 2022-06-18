@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PC\\source\\repos\\MedsNotifier\\MedsNotifierTests\\MedsNotifierTests.csproj": {}
+    "D:\\MedsNotifier\\MedsNotifierTests\\MedsNotifierTests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PC\\source\\repos\\MedsNotifier\\MedsNotifierTests\\MedsNotifierTests.csproj": {
+    "D:\\MedsNotifier\\MedsNotifierTests\\MedsNotifierTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC\\source\\repos\\MedsNotifier\\MedsNotifierTests\\MedsNotifierTests.csproj",
+        "projectUniqueName": "D:\\MedsNotifier\\MedsNotifierTests\\MedsNotifierTests.csproj",
         "projectName": "MedsNotifierTests",
-        "projectPath": "C:\\Users\\PC\\source\\repos\\MedsNotifier\\MedsNotifierTests\\MedsNotifierTests.csproj",
+        "projectPath": "D:\\MedsNotifier\\MedsNotifierTests\\MedsNotifierTests.csproj",
         "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC\\source\\repos\\MedsNotifier\\MedsNotifierTests\\obj\\",
+        "outputPath": "D:\\MedsNotifier\\MedsNotifierTests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -34,8 +34,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\PC\\source\\repos\\MedsNotifier\\MedsNotifier\\MedsNotifier.csproj": {
-                "projectPath": "C:\\Users\\PC\\source\\repos\\MedsNotifier\\MedsNotifier\\MedsNotifier.csproj"
+              "D:\\MedsNotifier\\MedsNotifier\\MedsNotifier.csproj": {
+                "projectPath": "D:\\MedsNotifier\\MedsNotifier\\MedsNotifier.csproj"
               }
             }
           }
@@ -98,14 +98,14 @@
         }
       }
     },
-    "C:\\Users\\PC\\source\\repos\\MedsNotifier\\MedsNotifier\\MedsNotifier.csproj": {
+    "D:\\MedsNotifier\\MedsNotifier\\MedsNotifier.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC\\source\\repos\\MedsNotifier\\MedsNotifier\\MedsNotifier.csproj",
+        "projectUniqueName": "D:\\MedsNotifier\\MedsNotifier\\MedsNotifier.csproj",
         "projectName": "MedsNotifier",
-        "projectPath": "C:\\Users\\PC\\source\\repos\\MedsNotifier\\MedsNotifier\\MedsNotifier.csproj",
+        "projectPath": "D:\\MedsNotifier\\MedsNotifier\\MedsNotifier.csproj",
         "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC\\source\\repos\\MedsNotifier\\MedsNotifier\\obj\\",
+        "outputPath": "D:\\MedsNotifier\\MedsNotifier\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
