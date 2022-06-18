@@ -24,7 +24,7 @@
 
         <div class="meds-block-info">
             <ul>
-                <li color="@medication.Color" class="meds-name"> Title: @medication.Name</li>
+                <li color="@medication.Color" class="meds-title-@medication.Id.ToString()"> Title: @medication.Name</li>
                 <li class="meds-type">Type: @medication.MedsType</li>
                 <li class="meds-text-info"> Description: @medication.Description</li>
                 <li class="meds-text-info"> Doses Left: @medication.AmountOfDosesLeft</li>
@@ -47,12 +47,19 @@
         </div>
         @infoMessage
 
-        <style>
+<style>
         .circle.per-@GetPercent(medication)
         {
             background-image: conic-gradient(aquamarine @GetPercent(medication)%, #b0b0b0 0);
         }
-        </style>
+        .meds-page-wrapper .meds-info .meds-block-info .meds-title-@medication.Id.ToString() {
+            font-style: italic;
+            font-size: 30px;
+            margin-bottom: 5px;
+            color: @medication.Color;
+        }
+
+</style>
     }
 
 </div>

@@ -232,7 +232,9 @@ ul #account-header {
         justify-content: center;
     }
 
-
+.meds-form-box {
+    padding-left:25px;
+}
 .meds-form-box .input-fields {
     color: darkgray;
     display: flex;
@@ -297,11 +299,6 @@ ul #account-header {
             margin-left: 8px;
         }
 
-        .meds-page-wrapper .meds-info .meds-block-info .meds-name {
-            font-style: italic;
-            font-size: 30px;
-            margin-bottom: 5px;
-        }
 
 
 .wrap-circles {
@@ -372,4 +369,7 @@ ul #account-header {
 }
 .page-title {
     margin: 25px;
+}
+.basic-info {
+    margin-left:20px;
 }
