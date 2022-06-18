@@ -40,5 +40,8 @@ namespace MedsNotifier.Data.Models
 
         [Required]
         public int TotalAmountOfDoses { get; set; }
+
+        public int AmountOfDosesTakenToday { get; set; }
+        public DateTime LastTimeMedsTaken { get; set; }
     }
 }

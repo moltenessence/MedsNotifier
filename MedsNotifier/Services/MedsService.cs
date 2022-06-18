@@ -52,12 +52,21 @@ namespace MedsNotifier.Services
         public async Task TakeMeds(ClaimsPrincipal claimsPrincipal, MedsModel meds)
         {
             var user = await accountService.GetUserAsync(claimsPrincipal);
-
             var currentMeds = user.Meds.FirstOrDefault(m => m.Id == meds.Id);
 
             if (currentMeds != null && currentMeds.AmountOfDosesLeft > 0) currentMeds.AmountOfDosesLeft -=1;
 
+            ++meds.AmountOfDosesTakenToday;
             await mongoRepository.UpdateMedsDataAsync(user, currentMeds);
+        }
+
+       private void CheckDailyDosageTaken(MedsModel meds)
+        {
+
+            if (meds.AmountOfDosesTakenToday == meds.DosesPerDayAmount)
+            { 
+
+            }
         }
 
         private int CountCourseDaysAmount(MedsModel medication) => medication.FinishMedsDateTime.DayOfYear - medication.StartMedsDateTime.DayOfYear;

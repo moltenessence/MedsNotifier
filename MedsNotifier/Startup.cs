@@ -61,6 +61,7 @@ namespace MedsNotifier
             services.AddScoped<LocalStorageService>();
             services.AddScoped<MedsNotifier.Services.IAuthorizationService, AuthorizationService >();
             services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
+            services.AddScoped<IMedsFactory, MedsFactory>();
             services.AddAuthenticationCore();
             services.AddAuthorizationCore();
 
