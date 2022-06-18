@@ -120,7 +120,7 @@ using System.Security.Claims;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 50 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Meds.razor"
+#line 64 "C:\Users\PC\source\repos\MedsNotifier\MedsNotifier\Pages\Meds.razor"
        
     [Inject]
     public IMedsService MedsService { get; set; }
@@ -129,7 +129,8 @@ using System.Security.Claims;
 
     protected IEnumerable<MedsModel> MedsList { get; set; }
     protected ClaimsPrincipal user { get; set; }
-    protected string errorMessage { get; set; } = "";
+    protected string infoMessage { get; set; } = "";
+    protected DateTime lastTimeMedsTaken { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -142,6 +143,9 @@ using System.Security.Claims;
         if (user.Identity.IsAuthenticated) MedsList = await MedsService.GetUserMedicineChest(user);
     }
 
+    protected string GetPercent(MedsModel meds) => MedsService.GetCourseProgressProcentage(meds).ToString();
+
+
     protected async Task OnDeleteMeds(MedsModel meds)
     {
         await MedsService.DeleteMedsAsync(user, meds);
@@ -149,13 +153,15 @@ using System.Security.Claims;
 
     protected async Task OnTakeMeds(MedsModel meds)
     {
-        if (meds.AmountOfDosesLeft == 0) {
-            errorMessage = "You have finished this course. You can delete it if you don't wanna track it anymore!";
+        if (meds.AmountOfDosesLeft == 0)
+        {
+            infoMessage = "You have finished this course. You can delete it if you don't wanna track it anymore!";
             return;
         }
 
         await MedsService.TakeMeds(user, meds);
         meds.AmountOfDosesLeft -= 1;
+        meds.LastTimeMedsTaken = DateTime.Now;
     }
 
 #line default

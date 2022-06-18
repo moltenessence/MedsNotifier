@@ -23,8 +23,8 @@ body {
 
     #main-nav ul li {
         font-size: 32px;
-        max-width: 100%;
-        padding: 10px;
+        min-width: 100%;
+        padding: 12px;
         background-color: rgb(226, 255, 232);
     }
 
@@ -221,11 +221,12 @@ ul #account-header {
 .meds-page-wrapper {
     display: flex;
     flex-direction: column;
-    margin: 20px;
-    background-color: beige;
+    margin: 18px;
+    margin-left:25px;
     margin-bottom: 40px;
 }
-.meds-page-wrapper .empty-list {
+
+    .meds-page-wrapper .empty-list {
         display: flex;
         opacity: 0.5;
         justify-content: center;
@@ -239,7 +240,7 @@ ul #account-header {
     background-color: transparent !important;
 }
 
-.meds-form-box .input-fields .text-field {
+    .meds-form-box .input-fields .text-field {
         border: none !important;
         border-bottom: 1px solid black !important;
         display: flex;
@@ -249,9 +250,9 @@ ul #account-header {
         height: 30px;
     }
 
-.meds-form-box .input-fields label {
-    margin-bottom: 2px;
-}
+    .meds-form-box .input-fields label {
+        margin-bottom: 2px;
+    }
 
 .meds-form-box .submit-button {
     box-sizing: border-box;
@@ -274,29 +275,26 @@ ul #account-header {
 }
 
 .meds-page-wrapper .meds-info {
-    width: 100%;
     display: flex;
     flex-direction: column;
-    background-color: beige;
 }
 
     .meds-page-wrapper .meds-info .meds-block-info {
         display: flex;
         text-align: justify;
         font-size: 25px;
-        padding-left: 0px;
-        margin-left: 0px;
-        margin-top:0px;
-        margin-bottom:10px;
-        padding-right:50px;
-        padding-left: 8px;
-        list-style-type: none;
-        flex-direction:row;
+        margin-bottom: 10px;
+        padding-right: 35px;
+        flex-direction: row;
+        background-color: beige;
     }
 
         .meds-page-wrapper .meds-info .meds-block-info ul {
-            list-style-type:none;
-            min-width:65%;
+            list-style-type: none;
+            width: 45%;
+            border-left: 1px solid black;
+            padding-left: 8px;
+            margin-left: 8px;
         }
 
         .meds-page-wrapper .meds-info .meds-block-info .meds-name {
@@ -307,20 +305,18 @@ ul #account-header {
 
 
 .wrap-circles {
-    margin:5px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin-left: 40px;
+    margin-left: 50px;
+    margin-right: 35px;
 }
 
-.circle.per {
-    background-image: conic-gradient(aquamarine 25%, #b0b0b0 0);
-}
+
 
 .circle {
-    flex-direction:row;
+    flex-direction: row;
     position: relative;
     width: 150px;
     height: 150px;
@@ -329,7 +325,6 @@ ul #account-header {
     background: aquamarine;
     overflow: hidden;
 }
-
     .circle .inner {
         display: flex;
         justify-content: center;
@@ -346,4 +341,35 @@ ul #account-header {
         font-weight: 100;
         color: black;
     }
-   
+
+.meds-page-wrapper .meds-info .meds-block-info .meds-additional-text-info {
+    font-size: 20px;
+}
+.meds-submit-button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    margin: 3px;
+    padding: 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor:pointer;
+}
+
+.meds-delete-button {
+    background-color:#ff0000;
+    border: none;
+    color: white;
+    margin: 3px;
+    padding: 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+}
+.page-title {
+    margin: 25px;
+}

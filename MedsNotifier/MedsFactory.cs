@@ -26,7 +26,6 @@ namespace MedsNotifier
             TotalDosage = medsService.CountTotalDosage(medication),
             TotalAmountOfDoses = medsService.CountTotalAmountOfDoses(medication),
             AmountOfDosesLeft = medsService.CountTotalAmountOfDoses(medication),
-            AmountOfDosesTakenToday = 0,
             FinishMedsDateTime = medication.FinishMedsDateTime,
             StartMedsDateTime = medication.StartMedsDateTime,
             LastTimeMedsTaken = new()

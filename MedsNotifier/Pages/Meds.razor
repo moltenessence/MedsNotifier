@@ -5,13 +5,14 @@
 @layout MainLayout
 @attribute [Authorize]
 
-<h2>Meds</h2>
 
+<h2 class="page-title">Meds</h2>
 <div class="meds-page-wrapper">
+
     @if (MedsList == null)
     {
         <div class="empty-list">
-            <img min-height="400" min-width="380" src="https://sun9-6.userapi.com/s/v1/ig2/Lv_1ccUqPtCfwqFSvYCOLOURQw-pOzUmIZ7kafQGsgu2LScy9ojGuFQjqGvDz1oDUM8W_vAti-dInm0AAnWm74Az.jpg?size=800x600&quality=96&type=album" alt="" >
+            <img min-height="400" min-width="380" src="https://sun9-6.userapi.com/s/v1/ig2/Lv_1ccUqPtCfwqFSvYCOLOURQw-pOzUmIZ7kafQGsgu2LScy9ojGuFQjqGvDz1oDUM8W_vAti-dInm0AAnWm74Az.jpg?size=800x600&quality=96&type=album" alt="">
         </div>
     }
 
@@ -20,30 +21,43 @@
 <div class="meds-info">
     @foreach (var medication in MedsList)
     {
+
         <div class="meds-block-info">
             <ul>
                 <li color="@medication.Color" class="meds-name"> Title: @medication.Name</li>
                 <li class="meds-type">Type: @medication.MedsType</li>
                 <li class="meds-text-info"> Description: @medication.Description</li>
                 <li class="meds-text-info"> Doses Left: @medication.AmountOfDosesLeft</li>
-
                 <li class="meds-text-info">Start: @medication.StartMedsDateTime.ToShortDateString()</li>
                 <li class="meds-text-info">Finish: @medication.FinishMedsDateTime.ToShortDateString()</li>
             </ul>
             <div class="wrap-circles">
-                <div class="circle per">
-                    <div class="inner">@MedsService.GetCourseProgressProcentage(medication).ToString()%</div>
+                <div class="circle per-@GetPercent(medication)">
+                    <div class="inner">@GetPercent(medication)%</div>
                 </div>
             </div>
+            <ul>
+                <li class="meds-additional-text-info"> Last time you took meds: @medication.LastTimeMedsTaken.ToString()</li>
+                <li class="meds-additional-text-info">Daily amount of doses: @medication.DosesPerDayAmount</li>
+                <li class="meds-additional-text-info">Single Dosage: @medication.SingleDosage</li>
+                <li class="meds-additional-text-info">Total Dosage: @medication.TotalDosage</li>
+                <button class="meds-submit-button" type="submit" @onclick="() => OnTakeMeds(medication)">Take meds!</button>
+                <button class="meds-delete-button" type="submit" @onclick="() => OnDeleteMeds(medication)">Delete course</button>
+            </ul>
         </div>
-        <button class="submit-button" type="submit" @onclick="() => OnDeleteMeds(medication)">Delete course</button>
-        <button class="submit-button" type="submit"  @onclick="() => OnTakeMeds(medication)">Take meds!</button>
-        @errorMessage
+        @infoMessage
+
+        <style>
+        .circle.per-@GetPercent(medication)
+        {
+            background-image: conic-gradient(aquamarine @GetPercent(medication)%, #b0b0b0 0);
+        }
+        </style>
     }
 
 </div>
     }
-<NavLink class="submit-button" href="meds/add" Match="NavLinkMatch.All"> Press here to start new course!</NavLink>
+    <NavLink class="submit-button" href="meds/add" Match="NavLinkMatch.All"> Press here to start new course!</NavLink>
 </div>
 
 
@@ -55,7 +69,8 @@
 
     protected IEnumerable<MedsModel> MedsList { get; set; }
     protected ClaimsPrincipal user { get; set; }
-    protected string errorMessage { get; set; } = "";
+    protected string infoMessage { get; set; } = "";
+    protected DateTime lastTimeMedsTaken { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -68,6 +83,9 @@
         if (user.Identity.IsAuthenticated) MedsList = await MedsService.GetUserMedicineChest(user);
     }
 
+    protected string GetPercent(MedsModel meds) => MedsService.GetCourseProgressProcentage(meds).ToString();
+
+
     protected async Task OnDeleteMeds(MedsModel meds)
     {
         await MedsService.DeleteMedsAsync(user, meds);
@@ -75,12 +93,14 @@
 
     protected async Task OnTakeMeds(MedsModel meds)
     {
-        if (meds.AmountOfDosesLeft == 0) {
-            errorMessage = "You have finished this course. You can delete it if you don't wanna track it anymore!";
+        if (meds.AmountOfDosesLeft == 0)
+        {
+            infoMessage = "You have finished this course. You can delete it if you don't wanna track it anymore!";
             return;
         }
 
         await MedsService.TakeMeds(user, meds);
         meds.AmountOfDosesLeft -= 1;
+        meds.LastTimeMedsTaken = DateTime.Now;
     }
 }

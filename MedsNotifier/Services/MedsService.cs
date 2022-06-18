@@ -54,18 +54,13 @@ namespace MedsNotifier.Services
             var user = await accountService.GetUserAsync(claimsPrincipal);
             var currentMeds = user.Meds.FirstOrDefault(m => m.Id == meds.Id);
 
-            if (currentMeds != null && currentMeds.AmountOfDosesLeft > 0) currentMeds.AmountOfDosesLeft -=1;
+            if (currentMeds != null && currentMeds.AmountOfDosesLeft > 0)
+            {
+                currentMeds.AmountOfDosesLeft -= 1;
 
-            ++meds.AmountOfDosesTakenToday;
-            await mongoRepository.UpdateMedsDataAsync(user, currentMeds);
-        }
+                currentMeds.LastTimeMedsTaken = DateTime.Now;
 
-       private void CheckDailyDosageTaken(MedsModel meds)
-        {
-
-            if (meds.AmountOfDosesTakenToday == meds.DosesPerDayAmount)
-            { 
-
+                await mongoRepository.UpdateMedsDataAsync(user, currentMeds);
             }
         }
 
