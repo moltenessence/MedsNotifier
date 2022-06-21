@@ -114,6 +114,36 @@ namespace MedsNotifier.Data.DataAccess
 
             return Task.Run(() => UpdateUserMedsCollectionState(user, userMedsCollection, userCollection));
         }
+
+        public async Task InsertEntryToUserDiaryAsync(User user, DiaryEntry entry)
+        {
+            var userCollection = ConnectToMongo<User>();
+
+            user.Entries.Add(entry);
+            var userEntriesCollection = user.Entries.ToList();
+
+            await Task.Run(() => UpdateUserEntriesCollectionState(user, userEntriesCollection, userCollection));
+        }
+
+        public async Task DeleteEntryFromUserDiaryAsync(User user, DiaryEntry entry)
+        {
+            var userCollection = ConnectToMongo<User>();
+
+            var userEntriesCollection = user.Entries.ToList();
+            var success = userEntriesCollection.RemoveAll(e => e.Id == entry.Id);
+
+            await Task.Run(() => UpdateUserEntriesCollectionState(user, userEntriesCollection, userCollection));
+        }
+
+        //public async Task<IList<DiaryEntry>> GetAllEntriesFromUserDiaryAsync(User user)
+        //{
+        //    var userCollection = ConnectToMongo<User>();
+
+        //    var userFromCollection = await userCollection.FindAsync(u => u.Id == user.Id).Result.FirstOrDefaultAsync();
+
+        //    return userFromCollection.Entries.ToList();
+        //}
+
         public Task UpdateUserDataAsync(User user)
         {
             var collection = ConnectToMongo<User>();
@@ -154,6 +184,15 @@ namespace MedsNotifier.Data.DataAccess
         {
             var filter = Builders<User>.Filter.Where(u => u.Id == user.Id);
             var update = Builders<User>.Update.Set(u => u.Meds, userMedsCollection);
+            var options = new FindOneAndUpdateOptions<User>();
+
+            return Task.Run(() => userCollection.FindOneAndUpdate(filter, update, options));
+        }
+
+        private Task UpdateUserEntriesCollectionState(User user, List<DiaryEntry> userEntriesCollection, IMongoCollection<User> userCollection)
+        {
+            var filter = Builders<User>.Filter.Where(u => u.Id == user.Id);
+            var update = Builders<User>.Update.Set(u => u.Entries, userEntriesCollection);
             var options = new FindOneAndUpdateOptions<User>();
 
             return Task.Run(() => userCollection.FindOneAndUpdate(filter, update, options));

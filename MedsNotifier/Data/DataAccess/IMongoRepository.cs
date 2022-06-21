@@ -22,5 +22,7 @@ namespace MedsNotifier.Data.DataAccess
         Task InsertUserAsync(User user);
         Task UpdateMedsDataAsync(User user, MedsModel meds);
         Task UpdateUserDataAsync(User user);
+        Task InsertEntryToUserDiaryAsync(User user, DiaryEntry entry);
+        Task DeleteEntryFromUserDiaryAsync(User user, DiaryEntry entry);
     }
 }

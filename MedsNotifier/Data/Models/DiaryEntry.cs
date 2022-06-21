@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace MedsNotifier.Data.Models
 {
-    [BsonCollectionAttribute("diary_entries")]
     [BsonIgnoreExtraElements]
     public class DiaryEntry
     {
