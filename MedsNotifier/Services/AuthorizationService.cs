@@ -83,7 +83,8 @@ namespace MedsNotifier.Services
                     Weight = registerViewModel.Weight,
                     Height = registerViewModel.Height,
                     Username = registerViewModel.Username,
-                    Meds= new List<MedsModel>() { }
+                    Meds= new List<MedsModel>() { },
+                    Entries = new List<DiaryEntry> { }
                 };
 
                 var token = jWTService.GenerateJWTToken(user);

@@ -1,12 +1,76 @@
-﻿@page "/diary"
+﻿@using MedsNotifier.Services
+@using MedsNotifier.Data.Models
+@using System.Security.Claims
+@page "/diary"
 @layout MainLayout
 @attribute [Authorize]
 <h2 class="page-title">Diary</h2>
 
 <div class="basic-info">
-    <p>This feature hasn't been realised yet :(</p>
+    @if (EntriesList == null)
+    {
+        <p class="empty-diary">You haven't taken any meds yet</p>
+        <NavLink class="submit-button" href="meds" Match="NavLinkMatch.All"> Click there to check out your courses!</NavLink>
+    }
+    else
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Medicine Name</th>
+                    <th>DateTime</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var entry in EntriesList)
+                {
+                    <tr>
+                        <td>@entry.MedicineName</td>
+                        <td>@entry.DateMedicineTaken.ToString()</td>
+                        <td> <span class="delete-icon"><ion-icon name="trash-outline" @onclick="() => OnDeleteEntry(entry)"></ion-icon></span></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
 </div>
 
 @code {
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+    [Inject]
+    public IDiaryService DiaryService { get; set; }
+    [Inject]
+    public AuthenticationStateProvider AuthProvider { get; set; }
+
+    [Parameter]
+    public IEnumerable<DiaryEntry> EntriesList { get; set; }
+    protected ClaimsPrincipal user { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await AuthProvider.GetAuthenticationStateAsync();
+        user = state.User;
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        ;
+        if (user.Identity.IsAuthenticated) EntriesList = await DiaryService.GetUserDiaryEntriesAsync(user);
+    }
+
+    protected async Task OnDeleteEntry(DiaryEntry entry)
+    {
+        var success = EntriesList.ToList().RemoveAll(e=>e.Id == entry.Id);
+
+        if(success>0)  await DiaryService.DeleteDiaryEntryAsync(user, entry);
+
+        //await InvokeAsync(() => StateHasChanged());
+        //NavigationManager.NavigateTo("/diary", true);
+    }
 
 }

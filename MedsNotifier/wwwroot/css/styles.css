@@ -373,3 +373,70 @@ ul #account-header {
 .basic-info {
     margin-left:20px;
 }
+.basic-info .empty-diary 
+{
+    font-size: 40px;
+    letter-spacing:2px;
+}
+
+.basic-info .empty-meds 
+{
+     font-size: 40px;
+     letter-spacing: 2px;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  border: none;
+}
+
+thead th:nth-child(1) {
+  width: 40%;
+}
+
+thead th:nth-child(2) {
+  width: 45%;
+}
+
+thead th:nth-child(3) {
+  width: 15%;
+}
+
+th {
+    padding: 5px;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+td {
+    letter-spacing: 1px;
+    padding: 5px;
+    font-size: 17px;
+}
+
+tbody td {
+    text-align: center;
+}
+
+tfoot th {
+    text-align: right;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #e3ffe7
+}
+
+tbody tr:nth-child(even) {
+    background-color: #d2ffd4;
+}
+
+.delete-icon {
+    cursor:pointer;
+    color:black;
+    border:none;
+}
+    .delete-icon:hover{
+        color:red;
+    }

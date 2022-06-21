@@ -1,4 +1,5 @@
 ﻿@using MedsNotifier.Services
+@using MedsNotifier.Factories 
 @using MedsNotifier.Data.Models
 @using System.Security.Claims
 @page "/meds"
@@ -11,43 +12,41 @@
 
     @if (MedsList == null)
     {
-        <div class="empty-list">
-            <img min-height="400" min-width="380" src="https://sun9-6.userapi.com/s/v1/ig2/Lv_1ccUqPtCfwqFSvYCOLOURQw-pOzUmIZ7kafQGsgu2LScy9ojGuFQjqGvDz1oDUM8W_vAti-dInm0AAnWm74Az.jpg?size=800x600&quality=96&type=album" alt="">
-        </div>
+        <p class="empty-meds">You haven't started any courses yet.</p>
     }
 
     else
     {
-<div class="meds-info">
-    @foreach (var medication in MedsList)
-    {
+        <div class="meds-info">
+            @foreach (var medication in MedsList)
+            {
 
-        <div class="meds-block-info">
-            <ul>
-                <li color="@medication.Color" class="meds-title-@medication.Id.ToString()"> Title: @medication.Name</li>
-                <li class="meds-type">Type: @medication.MedsType</li>
-                <li class="meds-text-info"> Description: @medication.Description</li>
-                <li class="meds-text-info"> Doses Left: @medication.AmountOfDosesLeft</li>
-                <li class="meds-text-info">Start: @medication.StartMedsDateTime.ToShortDateString()</li>
-                <li class="meds-text-info">Finish: @medication.FinishMedsDateTime.ToShortDateString()</li>
-            </ul>
-            <div class="wrap-circles">
-                <div class="circle per-@GetPercent(medication)">
-                    <div class="inner">@GetPercent(medication)%</div>
+                <div class="meds-block-info">
+                    <ul>
+                        <li color="@medication.Color" class="meds-title-@medication.Id.ToString()"> Title: @medication.Name</li>
+                        <li class="meds-type">Type: @medication.MedsType</li>
+                        <li class="meds-text-info"> Description: @medication.Description</li>
+                        <li class="meds-text-info"> Doses Left: @medication.AmountOfDosesLeft</li>
+                        <li class="meds-text-info">Start: @medication.StartMedsDateTime.ToShortDateString()</li>
+                        <li class="meds-text-info">Finish: @medication.FinishMedsDateTime.ToShortDateString()</li>
+                    </ul>
+                    <div class="wrap-circles">
+                        <div class="circle per-@GetPercent(medication)">
+                            <div class="inner">@GetPercent(medication)%</div>
+                        </div>
+                    </div>
+                    <ul>
+                        <li class="meds-additional-text-info"> Last time you took meds: @medication.LastTimeMedsTaken.ToString()</li>
+                        <li class="meds-additional-text-info">Daily amount of doses: @medication.DosesPerDayAmount</li>
+                        <li class="meds-additional-text-info">Single Dosage: @medication.SingleDosage</li>
+                        <li class="meds-additional-text-info">Total Dosage: @medication.TotalDosage</li>
+                        <button class="meds-submit-button" type="submit" @onclick="() => OnTakeMeds(medication)">Take meds!</button>
+                        <button class="meds-delete-button" type="submit" @onclick="() => OnDeleteMeds(medication)">Delete course</button>
+                    </ul>
                 </div>
-            </div>
-            <ul>
-                <li class="meds-additional-text-info"> Last time you took meds: @medication.LastTimeMedsTaken.ToString()</li>
-                <li class="meds-additional-text-info">Daily amount of doses: @medication.DosesPerDayAmount</li>
-                <li class="meds-additional-text-info">Single Dosage: @medication.SingleDosage</li>
-                <li class="meds-additional-text-info">Total Dosage: @medication.TotalDosage</li>
-                <button class="meds-submit-button" type="submit" @onclick="() => OnTakeMeds(medication)">Take meds!</button>
-                <button class="meds-delete-button" type="submit" @onclick="() => OnDeleteMeds(medication)">Delete course</button>
-            </ul>
-        </div>
-        @infoMessage
+                @infoMessage
 
-<style>
+                <style>
         .circle.per-@GetPercent(medication)
         {
             background-image: conic-gradient(aquamarine @GetPercent(medication)%, #b0b0b0 0);
@@ -59,16 +58,20 @@
             color: @medication.Color;
         }
 
-</style>
-    }
+                </style>
+            }
 
-</div>
+        </div>
     }
     <NavLink class="submit-button" href="meds/add" Match="NavLinkMatch.All"> Press here to start new course!</NavLink>
 </div>
 
 
 @code {
+    [Inject]
+    IEntriesFactory EntriesFactory { get; set; }
+    [Inject]
+    public IDiaryService DiaryService { get; set; }
     [Inject]
     public IMedsService MedsService { get; set; }
     [Inject]
@@ -109,5 +112,9 @@
         await MedsService.TakeMeds(user, meds);
         meds.AmountOfDosesLeft -= 1;
         meds.LastTimeMedsTaken = DateTime.Now;
+
+        await DiaryService.AddDiaryEntryAsync(user,EntriesFactory.CreateDiaryEntry(meds));
+
+
     }
 }

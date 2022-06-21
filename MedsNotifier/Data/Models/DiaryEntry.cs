@@ -12,7 +12,7 @@ namespace MedsNotifier.Data.Models
     public class DiaryEntry
     {
         [BsonId]
-        public Guid Id { get; set; } = new Guid();
+        public Guid Id { get; set; }
         public string MedicineName { get; set; }
         public DateTime DateMedicineTaken { get; set; }
     }
