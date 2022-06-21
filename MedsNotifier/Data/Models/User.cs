@@ -24,6 +24,7 @@ namespace MedsNotifier.Data
         public int? Height { get; set; }
         public Gender Gender { get; set; }
         public IList<MedsModel> Meds { get; set; }
+        public IList<DiaryEntry> Entries { get; set; }
 
     }
 }
