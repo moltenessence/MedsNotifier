@@ -36,6 +36,10 @@ added just for fun.
 
 ![image](https://user-images.githubusercontent.com/75939461/174439352-f7169bfa-cbf5-4e64-995a-9d79ad71dfd9.png)
 
+Also I realized a Diary functionality to track the history of taking pills. Thus, user can see all the chronography of his courses. Also he can delete some of the points. This page looks like that:
+
+![image](https://user-images.githubusercontent.com/75939461/174883910-f57b549c-18f7-45ea-9d92-2b339f348298.png)
+
 Also, when user enters wrong endpoint, NotFound layout works, and you can see such a message:
 
 ![image](https://user-images.githubusercontent.com/75939461/174439470-c73f747d-e649-407a-b7a4-e0431f0d71dc.png)
