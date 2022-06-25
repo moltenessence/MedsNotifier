@@ -29,6 +29,7 @@
                         <li class="meds-text-info"> Doses Left: @medication.AmountOfDosesLeft</li>
                         <li class="meds-text-info">Start: @medication.StartMedsDateTime.ToShortDateString()</li>
                         <li class="meds-text-info">Finish: @medication.FinishMedsDateTime.ToShortDateString()</li>
+                        <li class="info-message"> @medication?.InfoMessage</li>
                     </ul>
                     <div class="wrap-circles">
                         <div class="circle per-@GetPercent(medication)">
@@ -43,8 +44,8 @@
                         <button class="meds-submit-button" type="submit" @onclick="() => OnTakeMeds(medication)">Take meds!</button>
                         <button class="meds-delete-button" type="submit" @onclick="() => OnDeleteMeds(medication)">Delete course</button>
                     </ul>
+                    
                 </div>
-                @infoMessage
 
                 <style>
         .circle.per-@GetPercent(medication)
@@ -79,7 +80,6 @@
 
     protected IEnumerable<MedsModel> MedsList { get; set; }
     protected ClaimsPrincipal user { get; set; }
-    protected string infoMessage { get; set; } = "";
     protected DateTime lastTimeMedsTaken { get; set; }
 
     protected override async Task OnInitializedAsync()
@@ -105,7 +105,7 @@
     {
         if (meds.AmountOfDosesLeft == 0)
         {
-            infoMessage = "You have finished this course. You can delete it if you don't wanna track it anymore!";
+            meds.InfoMessage = "You have finished this course. You can delete it if you don't wanna track it anymore!";
             return;
         }
 

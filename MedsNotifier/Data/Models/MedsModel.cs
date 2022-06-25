@@ -42,5 +42,6 @@ namespace MedsNotifier.Data.Models
         public int TotalAmountOfDoses { get; set; }
 
         public DateTime LastTimeMedsTaken { get; set; }
+        public string InfoMessage { get; set; } = String.Empty;
     }
 }

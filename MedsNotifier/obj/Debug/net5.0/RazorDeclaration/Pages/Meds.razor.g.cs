@@ -127,7 +127,7 @@ using System.Security.Claims;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 70 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
+#line 71 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
        
     [Inject]
     IEntriesFactory EntriesFactory { get; set; }
@@ -140,7 +140,6 @@ using System.Security.Claims;
 
     protected IEnumerable<MedsModel> MedsList { get; set; }
     protected ClaimsPrincipal user { get; set; }
-    protected string infoMessage { get; set; } = "";
     protected DateTime lastTimeMedsTaken { get; set; }
 
     protected override async Task OnInitializedAsync()
@@ -166,7 +165,7 @@ using System.Security.Claims;
     {
         if (meds.AmountOfDosesLeft == 0)
         {
-            infoMessage = "You have finished this course. You can delete it if you don't wanna track it anymore!";
+            meds.InfoMessage = "You have finished this course. You can delete it if you don't wanna track it anymore!";
             return;
         }
 

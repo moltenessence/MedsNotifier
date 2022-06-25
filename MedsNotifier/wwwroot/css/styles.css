@@ -440,3 +440,10 @@ tbody tr:nth-child(even) {
     .delete-icon:hover{
         color:red;
     }
+
+.meds-info .meds-block-info .info-message {
+    flex-direction:column;
+    color:#ff0000;
+    font-size:17px;
+    margin-top:5px;
+}
