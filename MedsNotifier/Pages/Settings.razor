@@ -1,4 +1,10 @@
-﻿@page "/settings"
+﻿@using MedsNotifier.Services
+@using MedsNotifier.Data
+@using System.Security.Claims
+@inject AuthenticationStateProvider AuthProvider
+@inject IIdentityService IdentityService
+@inject IAccountService AccountService
+@page "/settings"
 @layout MainLayout
 @attribute [Authorize]
 <h2 class="page-title">Account Settings</h2>
@@ -8,5 +14,20 @@
 </div>
 
 @code {
+
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+    User user;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await AuthProvider.GetAuthenticationStateAsync();
+        var userClaims = state.User;
+
+        if (userClaims.Identity.IsAuthenticated)
+        {
+            user = await AccountService.GetUserAsync(userClaims);
+        }
+    }
 
 }

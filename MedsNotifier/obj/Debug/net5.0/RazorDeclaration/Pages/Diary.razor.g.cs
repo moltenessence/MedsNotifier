@@ -143,7 +143,7 @@ using System.Security.Claims;
 
     protected override async Task OnParametersSetAsync()
     {
-        ;
+        
         if (user.Identity.IsAuthenticated) EntriesList = await DiaryService.GetUserDiaryEntriesAsync(user);
     }
 
@@ -154,7 +154,7 @@ using System.Security.Claims;
         if(success>0)  await DiaryService.DeleteDiaryEntryAsync(user, entry);
 
         //await InvokeAsync(() => StateHasChanged());
-        //NavigationManager.NavigateTo("/diary", true);
+        NavigationManager.NavigateTo("/diary", true);
     }
 
 

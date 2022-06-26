@@ -83,7 +83,28 @@ using MedsNotifier.Shared;
 #line hidden
 #nullable disable
 #nullable restore
+#line 1 "D:\MedsNotifier\MedsNotifier\Pages\Settings.razor"
+using MedsNotifier.Services;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 2 "D:\MedsNotifier\MedsNotifier\Pages\Settings.razor"
+using MedsNotifier.Data;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 3 "D:\MedsNotifier\MedsNotifier\Pages\Settings.razor"
+using System.Security.Claims;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 9 "D:\MedsNotifier\MedsNotifier\Pages\Settings.razor"
            [Authorize]
 
 #line default
@@ -98,6 +119,32 @@ using MedsNotifier.Shared;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 16 "D:\MedsNotifier\MedsNotifier\Pages\Settings.razor"
+       
+
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+    User user;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await AuthProvider.GetAuthenticationStateAsync();
+        var userClaims = state.User;
+
+        if (userClaims.Identity.IsAuthenticated)
+        {
+            user = await AccountService.GetUserAsync(userClaims);
+        }
+    }
+
+
+#line default
+#line hidden
+#nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IAccountService AccountService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IIdentityService IdentityService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider AuthProvider { get; set; }
     }
 }
 #pragma warning restore 1591

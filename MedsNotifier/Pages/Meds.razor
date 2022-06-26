@@ -70,6 +70,8 @@
 
 @code {
     [Inject]
+    NavigationManager NavigationManager { get; set; }
+    [Inject]
     IEntriesFactory EntriesFactory { get; set; }
     [Inject]
     public IDiaryService DiaryService { get; set; }
@@ -78,7 +80,9 @@
     [Inject]
     public AuthenticationStateProvider AuthProvider { get; set; }
 
-    protected IEnumerable<MedsModel> MedsList { get; set; }
+    [Parameter]
+    public IEnumerable<MedsModel> MedsList { get; set; }
+
     protected ClaimsPrincipal user { get; set; }
     protected DateTime lastTimeMedsTaken { get; set; }
 
@@ -99,6 +103,7 @@
     protected async Task OnDeleteMeds(MedsModel meds)
     {
         await MedsService.DeleteMedsAsync(user, meds);
+        NavigationManager.NavigateTo("/meds", true);
     }
 
     protected async Task OnTakeMeds(MedsModel meds)

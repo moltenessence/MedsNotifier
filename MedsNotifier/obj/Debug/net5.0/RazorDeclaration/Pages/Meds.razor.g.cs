@@ -130,6 +130,8 @@ using System.Security.Claims;
 #line 71 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
        
     [Inject]
+    NavigationManager NavigationManager { get; set; }
+    [Inject]
     IEntriesFactory EntriesFactory { get; set; }
     [Inject]
     public IDiaryService DiaryService { get; set; }
@@ -138,7 +140,9 @@ using System.Security.Claims;
     [Inject]
     public AuthenticationStateProvider AuthProvider { get; set; }
 
-    protected IEnumerable<MedsModel> MedsList { get; set; }
+    [Parameter]
+    public IEnumerable<MedsModel> MedsList { get; set; }
+
     protected ClaimsPrincipal user { get; set; }
     protected DateTime lastTimeMedsTaken { get; set; }
 
@@ -159,6 +163,7 @@ using System.Security.Claims;
     protected async Task OnDeleteMeds(MedsModel meds)
     {
         await MedsService.DeleteMedsAsync(user, meds);
+        NavigationManager.NavigateTo("/meds", true);
     }
 
     protected async Task OnTakeMeds(MedsModel meds)
