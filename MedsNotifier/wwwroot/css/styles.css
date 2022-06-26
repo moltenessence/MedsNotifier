@@ -448,3 +448,20 @@ tbody tr:nth-child(even) {
     font-size:17px;
     margin-top:5px;
 }
+.confirm-box-wrap {
+    margin-left: auto;
+    margin-right: auto;
+    background: #ffffff;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    padding: 20px;
+    overflow: auto;
+    left: 50%;
+    top: 40%;
+    z-index:1000;
+}
+.confirm-box {
+    background-color: #fff;
+    width: 250px;
+}

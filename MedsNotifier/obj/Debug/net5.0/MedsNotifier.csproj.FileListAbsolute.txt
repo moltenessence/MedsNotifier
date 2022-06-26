@@ -226,3 +226,5 @@ D:\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.dll
 D:\MedsNotifier\MedsNotifier\obj\Debug\net5.0\ref\MedsNotifier.dll
 D:\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.pdb
 D:\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.genruntimeconfig.cache
+D:\MedsNotifier\MedsNotifier\obj\Debug\net5.0\RazorDeclaration\Pages\ConfirmRemovalBox.razor.g.cs
+D:\MedsNotifier\MedsNotifier\obj\Debug\net5.0\Razor\Pages\ConfirmRemovalBox.razor.g.cs

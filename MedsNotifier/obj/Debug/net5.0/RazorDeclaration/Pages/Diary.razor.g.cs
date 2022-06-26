@@ -120,7 +120,7 @@ using System.Security.Claims;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 40 "D:\MedsNotifier\MedsNotifier\Pages\Diary.razor"
+#line 43 "D:\MedsNotifier\MedsNotifier\Pages\Diary.razor"
        
 
     [Inject]
@@ -133,7 +133,9 @@ using System.Security.Claims;
     [Parameter]
     public IEnumerable<DiaryEntry> EntriesList { get; set; }
     protected ClaimsPrincipal user { get; set; }
-
+    private bool confirmBoxOpen = false;
+    private bool confirm = false;
+    private DiaryEntry entryToDelete = null;
 
     protected override async Task OnInitializedAsync()
     {
@@ -143,18 +145,26 @@ using System.Security.Claims;
 
     protected override async Task OnParametersSetAsync()
     {
-        
+
         if (user.Identity.IsAuthenticated) EntriesList = await DiaryService.GetUserDiaryEntriesAsync(user);
     }
 
     protected async Task OnDeleteEntry(DiaryEntry entry)
     {
-        var success = EntriesList.ToList().RemoveAll(e=>e.Id == entry.Id);
+        var success = EntriesList.ToList().RemoveAll(e => e.Id == entry.Id);
 
-        if(success>0)  await DiaryService.DeleteDiaryEntryAsync(user, entry);
-
-        //await InvokeAsync(() => StateHasChanged());
+        if (success > 0) await DiaryService.DeleteDiaryEntryAsync(user, entry);
         NavigationManager.NavigateTo("/diary", true);
+    }
+
+    protected async Task OnConfirmRemoval(bool flag)
+    {
+        confirm = flag;
+        StateHasChanged();
+
+        if (confirm )await OnDeleteEntry(entryToDelete);
+
+        confirmBoxOpen = false;
     }
 
 

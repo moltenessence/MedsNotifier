@@ -127,7 +127,7 @@ using System.Security.Claims;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 71 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
+#line 75 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
        
     [Inject]
     NavigationManager NavigationManager { get; set; }
@@ -145,6 +145,9 @@ using System.Security.Claims;
 
     protected ClaimsPrincipal user { get; set; }
     protected DateTime lastTimeMedsTaken { get; set; }
+    private bool confirmBoxOpen = false;
+    private bool confirm = false;
+    protected MedsModel medsToDelete { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -178,9 +181,17 @@ using System.Security.Claims;
         meds.AmountOfDosesLeft -= 1;
         meds.LastTimeMedsTaken = DateTime.Now;
 
-        await DiaryService.AddDiaryEntryAsync(user,EntriesFactory.CreateDiaryEntry(meds));
+        await DiaryService.AddDiaryEntryAsync(user, EntriesFactory.CreateDiaryEntry(meds));
+    }
 
+    protected async Task OnConfirmRemoval(bool flag)
+    {
+        confirm = flag;
+        StateHasChanged();
 
+        if(confirm) await OnDeleteMeds(medsToDelete);
+
+        confirmBoxOpen = false;
     }
 
 #line default

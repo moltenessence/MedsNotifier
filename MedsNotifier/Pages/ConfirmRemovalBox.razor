@@ -1,0 +1,16 @@
+﻿<div class="confirm-box-wrap">
+    <div class="confirm-box">
+        <h2>Do you really want to delete this item?</h2>
+        <button class="meds-submit-button" @onclick="()=>ConfrimCallback(confirmState)">Yes</button>
+        <button class="meds-delete-button" @onclick="()=>ConfrimCallback(cancelState)">Cancel</button>
+    </div>
+</div>
+
+@code {
+
+    [Parameter] 
+    public Func<bool, Task> ConfrimCallback { get; set; }
+
+    bool confirmState = true;
+    bool cancelState = false;
+}

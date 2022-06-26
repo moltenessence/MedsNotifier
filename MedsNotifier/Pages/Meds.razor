@@ -1,5 +1,5 @@
 ﻿@using MedsNotifier.Services
-@using MedsNotifier.Factories 
+@using MedsNotifier.Factories
 @using MedsNotifier.Data.Models
 @using System.Security.Claims
 @page "/meds"
@@ -8,6 +8,10 @@
 
 
 <h2 class="page-title">Meds</h2>
+@if (confirmBoxOpen)
+{
+    <ConfirmRemovalBox ConfrimCallback="async (flag) => await OnConfirmRemoval(flag)" />
+}
 <div class="meds-page-wrapper">
 
     @if (MedsList == null)
@@ -42,9 +46,9 @@
                         <li class="meds-additional-text-info">Single Dosage: @medication.SingleDosage</li>
                         <li class="meds-additional-text-info">Total Dosage: @medication.TotalDosage</li>
                         <button class="meds-submit-button" type="submit" @onclick="() => OnTakeMeds(medication)">Take meds!</button>
-                        <button class="meds-delete-button" type="submit" @onclick="() => OnDeleteMeds(medication)">Delete course</button>
+                        <button class="meds-delete-button" type="submit" @onclick="() => { medsToDelete = medication; confirmBoxOpen = true;}">Delete course</button>
                     </ul>
-                    
+
                 </div>
 
                 <style>
@@ -85,6 +89,9 @@
 
     protected ClaimsPrincipal user { get; set; }
     protected DateTime lastTimeMedsTaken { get; set; }
+    private bool confirmBoxOpen = false;
+    private bool confirm = false;
+    protected MedsModel medsToDelete { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -118,8 +125,16 @@
         meds.AmountOfDosesLeft -= 1;
         meds.LastTimeMedsTaken = DateTime.Now;
 
-        await DiaryService.AddDiaryEntryAsync(user,EntriesFactory.CreateDiaryEntry(meds));
+        await DiaryService.AddDiaryEntryAsync(user, EntriesFactory.CreateDiaryEntry(meds));
+    }
 
+    protected async Task OnConfirmRemoval(bool flag)
+    {
+        confirm = flag;
+        StateHasChanged();
 
+        if(confirm) await OnDeleteMeds(medsToDelete);
+
+        confirmBoxOpen = false;
     }
 }
