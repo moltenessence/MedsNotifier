@@ -7,5 +7,6 @@ namespace MedsNotifier.Services
     public interface IAccountService
     {
         Task<User> GetUserAsync(ClaimsPrincipal claimsPrincipal);
+        public Task UpdateUserDataAsync(User user);
     }
 }

@@ -28,5 +28,10 @@ namespace MedsNotifier.Services
    
             return user;
         }
+
+        public async Task UpdateUserDataAsync(User user)
+        {
+            await mongoRepository.UpdateUserDataAsync(user);
+        }
     }
 }

@@ -3,7 +3,6 @@ using MedsNotifier.Data.DataAccess;
 using MedsNotifier.Data.Models;
 using MedsNotifier.JwtOptions;
 using MedsNotifier.Services;
-using MedsNotifier.Factories;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -62,8 +61,6 @@ namespace MedsNotifier
             services.AddScoped<LocalStorageService>();
             services.AddScoped<MedsNotifier.Services.IAuthorizationService, AuthorizationService >();
             services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
-            services.AddTransient<IMedsFactory, MedsFactory>();
-            services.AddTransient<IEntriesFactory, EntriesFactory>();
             services.AddTransient<IDiaryService, DiaryService>();
             services.AddAuthenticationCore();
             services.AddAuthorizationCore();

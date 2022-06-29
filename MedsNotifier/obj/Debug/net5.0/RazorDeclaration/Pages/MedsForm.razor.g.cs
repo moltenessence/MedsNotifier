@@ -138,14 +138,12 @@ using Smart.Blazor;
     public IMedsService MedsService { get; set; }
     [Inject]
     public AuthenticationStateProvider AuthProvider { get; set; }
-    [Inject]
-    public IMedsFactory MedsFactory { get; set; }
 
     private async Task HandleSubmit()
     {
         medication.StartMedsDateTime = DateTime.Now;
 
-        var createdMeds = MedsFactory.CreateMedicationFromForm(medication);
+        var createdMeds = MedsService.CreateMedicationFromForm(medication);
 
         var state = await AuthProvider.GetAuthenticationStateAsync();
         var user = state.User;

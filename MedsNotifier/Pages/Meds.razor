@@ -1,5 +1,4 @@
 ﻿@using MedsNotifier.Services
-@using MedsNotifier.Factories
 @using MedsNotifier.Data.Models
 @using System.Security.Claims
 @page "/meds"
@@ -62,7 +61,6 @@
             margin-bottom: 5px;
             color: @medication.Color;
         }
-
                 </style>
             }
 
@@ -75,8 +73,6 @@
 @code {
     [Inject]
     NavigationManager NavigationManager { get; set; }
-    [Inject]
-    IEntriesFactory EntriesFactory { get; set; }
     [Inject]
     public IDiaryService DiaryService { get; set; }
     [Inject]
@@ -125,7 +121,7 @@
         meds.AmountOfDosesLeft -= 1;
         meds.LastTimeMedsTaken = DateTime.Now;
 
-        await DiaryService.AddDiaryEntryAsync(user, EntriesFactory.CreateDiaryEntry(meds));
+        await DiaryService.AddDiaryEntryAsync(user, DiaryService.CreateDiaryEntry(meds));
     }
 
     protected async Task OnConfirmRemoval(bool flag)

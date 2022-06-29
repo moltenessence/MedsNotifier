@@ -15,5 +15,6 @@ namespace MedsNotifier.Services
         public int CountAmountOfDosesLeft(MedsModel medication);
         public Task TakeMeds(ClaimsPrincipal claimsPrincipal, MedsModel meds);
         public Task DeleteMedsAsync(ClaimsPrincipal claimsPrincipal, MedsModel meds);
+        public MedsModel CreateMedicationFromForm(MedsModel medication);
     }
 }

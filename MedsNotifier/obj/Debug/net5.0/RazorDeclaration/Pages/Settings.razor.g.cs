@@ -98,6 +98,13 @@ using MedsNotifier.Data;
 #nullable disable
 #nullable restore
 #line 3 "D:\MedsNotifier\MedsNotifier\Pages\Settings.razor"
+using MedsNotifier.Data.Models;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "D:\MedsNotifier\MedsNotifier\Pages\Settings.razor"
 using System.Security.Claims;
 
 #line default
@@ -120,31 +127,41 @@ using System.Security.Claims;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 16 "D:\MedsNotifier\MedsNotifier\Pages\Settings.razor"
+#line 46 "D:\MedsNotifier\MedsNotifier\Pages\Settings.razor"
        
 
-    [CascadingParameter]
-    private Task<AuthenticationState> authenticationStateTask { get; set; }
-    User user;
+    protected ClaimsPrincipal user { get; set; }
+    protected User User { get; set; }
+    private bool showDataUpdateMessage = false;
 
     protected override async Task OnInitializedAsync()
     {
         var state = await AuthProvider.GetAuthenticationStateAsync();
-        var userClaims = state.User;
+        user = state.User;
+    }
 
-        if (userClaims.Identity.IsAuthenticated)
+    protected override async Task OnParametersSetAsync()
+    {
+        if (user.Identity.IsAuthenticated)
         {
-            user = await AccountService.GetUserAsync(userClaims);
+            User = await AccountService.GetUserAsync(user);
         }
+    }
+
+    private async Task HandleSubmit()
+    {
+        await AccountService.UpdateUserDataAsync(User);
+
+        showDataUpdateMessage = true;
     }
 
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider AuthProvider { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IAccountService AccountService { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IIdentityService IdentityService { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider AuthProvider { get; set; }
     }
 }
 #pragma warning restore 1591

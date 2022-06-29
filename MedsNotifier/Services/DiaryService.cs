@@ -46,5 +46,11 @@ namespace MedsNotifier.Services
 
             await mongoRepository.DeleteEntryFromUserDiaryAsync(user, entry);
         }
+        public DiaryEntry CreateDiaryEntry(MedsModel meds) => new DiaryEntry()
+        {
+            Id = Guid.NewGuid(),
+            MedicineName = meds.Name,
+            DateMedicineTaken = meds.LastTimeMedsTaken
+        };
     }
 }

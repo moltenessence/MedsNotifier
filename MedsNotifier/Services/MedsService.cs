@@ -64,6 +64,22 @@ namespace MedsNotifier.Services
             }
         }
 
+        public MedsModel CreateMedicationFromForm(MedsModel medication) => new MedsModel()
+        {
+            Description = medication.Description,
+            DosesPerDayAmount = medication.DosesPerDayAmount,
+            SingleDosage = medication.SingleDosage,
+            Name = medication.Name,
+            MedsType = medication.MedsType,
+            Color = medication.Color,
+            TotalDosage = CountTotalDosage(medication),
+            TotalAmountOfDoses = CountTotalAmountOfDoses(medication),
+            AmountOfDosesLeft = CountTotalAmountOfDoses(medication),
+            FinishMedsDateTime = medication.FinishMedsDateTime,
+            StartMedsDateTime = medication.StartMedsDateTime,
+            LastTimeMedsTaken = new()
+        };
+
         private int CountCourseDaysAmount(MedsModel medication) => medication.FinishMedsDateTime.DayOfYear - medication.StartMedsDateTime.DayOfYear;
         private int CountCourseDaysAmountLeft(MedsModel medication) => medication.FinishMedsDateTime.DayOfYear - DateTime.Now.DayOfYear;
         public int CountTotalDosage(MedsModel medication) => (medication.DosesPerDayAmount * medication.SingleDosage) * CountCourseDaysAmount(medication);

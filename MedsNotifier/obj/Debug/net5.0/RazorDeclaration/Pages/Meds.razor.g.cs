@@ -91,27 +91,20 @@ using MedsNotifier.Services;
 #nullable disable
 #nullable restore
 #line 2 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
-using MedsNotifier.Factories;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 3 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
 using MedsNotifier.Data.Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
+#line 3 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
 using System.Security.Claims;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
+#line 6 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
            [Authorize]
 
 #line default
@@ -127,12 +120,10 @@ using System.Security.Claims;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 75 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
+#line 73 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
        
     [Inject]
     NavigationManager NavigationManager { get; set; }
-    [Inject]
-    IEntriesFactory EntriesFactory { get; set; }
     [Inject]
     public IDiaryService DiaryService { get; set; }
     [Inject]
@@ -181,7 +172,7 @@ using System.Security.Claims;
         meds.AmountOfDosesLeft -= 1;
         meds.LastTimeMedsTaken = DateTime.Now;
 
-        await DiaryService.AddDiaryEntryAsync(user, EntriesFactory.CreateDiaryEntry(meds));
+        await DiaryService.AddDiaryEntryAsync(user, DiaryService.CreateDiaryEntry(meds));
     }
 
     protected async Task OnConfirmRemoval(bool flag)

@@ -12,5 +12,6 @@ namespace MedsNotifier.Services
         Task DeleteDiaryEntryAsync(ClaimsPrincipal claimsPrincipal, DiaryEntry entry);
         Task<IList<DiaryEntry>> GetUserDiaryEntriesAsync(ClaimsPrincipal claimsPrincipal);
         Task<IList<DiaryEntry>> GetDiaryEntriesNotBeforeThisDateAsync(ClaimsPrincipal claimsPrincipal, DateTime notBeforeDate);
+        public DiaryEntry CreateDiaryEntry(MedsModel meds);
     }
 }

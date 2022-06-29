@@ -1,33 +1,73 @@
 ﻿@using MedsNotifier.Services
 @using MedsNotifier.Data
+@using MedsNotifier.Data.Models
 @using System.Security.Claims
-@inject AuthenticationStateProvider AuthProvider
 @inject IIdentityService IdentityService
 @inject IAccountService AccountService
-@page "/settings"
+@inject AuthenticationStateProvider AuthProvider
 @layout MainLayout
 @attribute [Authorize]
+@page "/settings"
+
 <h2 class="page-title">Account Settings</h2>
 
 <div class="basic-info">
-    <p>This feature hasn't been realised yet :(</p>
+    @*<EditForm Model="User" OnValidSubmit="HandleSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="input-fields">
+            <InputText class="text-field" id="email" placeholder="@User.Email" @bind-Value="User.Email" />
+            <InputText class="text-field" id="username" placeholder="@User.Username" @bind-Value="User.Username" />
+            <InputNumber class="text-field" id="age" placeholder="@User.Age" @bind-Value="User.Age" />
+            <InputNumber class="text-field" id="weight" placeholder="@User.Weight" @bind-Value="User.Weight" />
+            <InputNumber class="text-field" id="height" placeholder="@User.Height" @bind-Value="User.Height" />
+            <InputSelect class="text-field" DisplayName="@User.Gender.ToString()" @bind-Value="@User.Gender">
+                @foreach (var gender in Enum.GetValues(typeof(Gender)))
+                {
+                    <option value="@gender">@gender</option>
+                }
+            </InputSelect>
+            <label for="email">Email</label>
+            <label for="username">Username</label>
+            <label for="age">Age</label>
+            <label for="weight">Weight</label>
+            <label for="height">Height</label>
+            <label for="gender">Gender</label>
+        </div>
+        <button class="submit-button" type="submit">Submit Changes</button>
+    </EditForm>*@
+
+    @if (showDataUpdateMessage)
+    { 
+        <p>The data was updated!</p>
+    }
 </div>
 
 @code {
 
-    [CascadingParameter]
-    private Task<AuthenticationState> authenticationStateTask { get; set; }
-    User user;
+    protected ClaimsPrincipal user { get; set; }
+    protected User User { get; set; }
+    private bool showDataUpdateMessage = false;
 
     protected override async Task OnInitializedAsync()
     {
         var state = await AuthProvider.GetAuthenticationStateAsync();
-        var userClaims = state.User;
+        user = state.User;
+    }
 
-        if (userClaims.Identity.IsAuthenticated)
+    protected override async Task OnParametersSetAsync()
+    {
+        if (user.Identity.IsAuthenticated)
         {
-            user = await AccountService.GetUserAsync(userClaims);
+            User = await AccountService.GetUserAsync(user);
         }
+    }
+
+    private async Task HandleSubmit()
+    {
+        await AccountService.UpdateUserDataAsync(User);
+
+        showDataUpdateMessage = true;
     }
 
 }
