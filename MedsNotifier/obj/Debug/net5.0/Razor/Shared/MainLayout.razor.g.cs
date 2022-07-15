@@ -93,15 +93,13 @@ using MedsNotifier.Shared;
             __builder.CloseElement();
             __builder.AddMarkupContent(5, "\r\n    ");
             __builder.OpenElement(6, "div");
-            __builder.AddContent(7, 
 #nullable restore
 #line 8 "D:\MedsNotifier\MedsNotifier\Shared\MainLayout.razor"
-         Body
+__builder.AddContent(7, Body);
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.AddMarkupContent(8, "\r\n        ");
             __builder.OpenComponent<Microsoft.AspNetCore.Components.Authorization.AuthorizeView>(9);
             __builder.AddAttribute(10, "NotAuthorized", (Microsoft.AspNetCore.Components.RenderFragment<Microsoft.AspNetCore.Components.Authorization.AuthenticationState>)((context) => (__builder2) => {

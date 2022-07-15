@@ -125,7 +125,7 @@ using Smart.Blazor;
             __builder.AddAttribute(1, "class", "meds-form-box");
             __builder.AddMarkupContent(2, "<h3>New meds course</h3>\r\n    ");
             __builder.OpenComponent<Microsoft.AspNetCore.Components.Forms.EditForm>(3);
-            __builder.AddAttribute(4, "Model", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Object>(
+            __builder.AddAttribute(4, "Model", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Object>(
 #nullable restore
 #line 12 "D:\MedsNotifier\MedsNotifier\Pages\MedsForm.razor"
                       medication
@@ -134,7 +134,7 @@ using Smart.Blazor;
 #line hidden
 #nullable disable
             ));
-            __builder.AddAttribute(5, "OnValidSubmit", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<Microsoft.AspNetCore.Components.Forms.EditContext>(this, 
+            __builder.AddAttribute(5, "OnValidSubmit", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<Microsoft.AspNetCore.Components.Forms.EditContext>(this, 
 #nullable restore
 #line 12 "D:\MedsNotifier\MedsNotifier\Pages\MedsForm.razor"
                                                   HandleSubmit
@@ -152,15 +152,13 @@ using Smart.Blazor;
                 __builder2.CloseComponent();
                 __builder2.AddMarkupContent(11, "\r\n        ");
                 __builder2.OpenElement(12, "p");
-                __builder2.AddContent(13, 
 #nullable restore
 #line 15 "D:\MedsNotifier\MedsNotifier\Pages\MedsForm.razor"
-            message
+__builder2.AddContent(13, message);
 
 #line default
 #line hidden
 #nullable disable
-                );
                 __builder2.CloseElement();
                 __builder2.AddMarkupContent(14, "\r\n        ");
                 __builder2.OpenElement(15, "div");
@@ -170,7 +168,7 @@ using Smart.Blazor;
                 __builder2.AddAttribute(19, "id", "name");
                 __builder2.AddAttribute(20, "class", "text-field");
                 __builder2.AddAttribute(21, "placeholder", "Name");
-                __builder2.AddAttribute(22, "Value", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.String>(
+                __builder2.AddAttribute(22, "Value", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.String>(
 #nullable restore
 #line 17 "D:\MedsNotifier\MedsNotifier\Pages\MedsForm.razor"
                                                                                          medication.Name
@@ -179,15 +177,15 @@ using Smart.Blazor;
 #line hidden
 #nullable disable
                 ));
-                __builder2.AddAttribute(23, "ValueChanged", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<System.String>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<System.String>(this, Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => medication.Name = __value, medication.Name))));
-                __builder2.AddAttribute(24, "ValueExpression", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Linq.Expressions.Expression<System.Func<System.String>>>(() => medication.Name));
+                __builder2.AddAttribute(23, "ValueChanged", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<System.String>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<System.String>(this, global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => medication.Name = __value, medication.Name))));
+                __builder2.AddAttribute(24, "ValueExpression", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Linq.Expressions.Expression<System.Func<System.String>>>(() => medication.Name));
                 __builder2.CloseComponent();
                 __builder2.AddMarkupContent(25, "\r\n            Description ");
                 __builder2.OpenComponent<Microsoft.AspNetCore.Components.Forms.InputText>(26);
                 __builder2.AddAttribute(27, "id", "description");
                 __builder2.AddAttribute(28, "class", "text-field");
                 __builder2.AddAttribute(29, "placeholder", "Description");
-                __builder2.AddAttribute(30, "Value", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.String>(
+                __builder2.AddAttribute(30, "Value", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.String>(
 #nullable restore
 #line 18 "D:\MedsNotifier\MedsNotifier\Pages\MedsForm.razor"
                                                                                                               medication.Description
@@ -196,8 +194,8 @@ using Smart.Blazor;
 #line hidden
 #nullable disable
                 ));
-                __builder2.AddAttribute(31, "ValueChanged", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<System.String>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<System.String>(this, Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => medication.Description = __value, medication.Description))));
-                __builder2.AddAttribute(32, "ValueExpression", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Linq.Expressions.Expression<System.Func<System.String>>>(() => medication.Description));
+                __builder2.AddAttribute(31, "ValueChanged", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<System.String>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<System.String>(this, global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => medication.Description = __value, medication.Description))));
+                __builder2.AddAttribute(32, "ValueExpression", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Linq.Expressions.Expression<System.Func<System.String>>>(() => medication.Description));
                 __builder2.CloseComponent();
                 __builder2.AddMarkupContent(33, "\r\n            ");
                 __builder2.AddMarkupContent(34, "<label for=\"type\">Type</label>");
@@ -209,7 +207,7 @@ using Smart.Blazor;
 #line default
 #line hidden
 #nullable disable
-                , 38, Microsoft.AspNetCore.Components.EventCallback.Factory.Create(this, Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => medication.MedsType = __value, medication.MedsType)), 39, () => medication.MedsType, 40, (__builder3) => {
+                , 38, Microsoft.AspNetCore.Components.EventCallback.Factory.Create(this, global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => medication.MedsType = __value, medication.MedsType)), 39, () => medication.MedsType, 40, (__builder3) => {
 #nullable restore
 #line 20 "D:\MedsNotifier\MedsNotifier\Pages\MedsForm.razor"
                  foreach (var type in Enum.GetValues(typeof(MedsType)))
@@ -228,15 +226,13 @@ using Smart.Blazor;
 #line hidden
 #nullable disable
                     );
-                    __builder3.AddContent(43, 
 #nullable restore
 #line 22 "D:\MedsNotifier\MedsNotifier\Pages\MedsForm.razor"
-                                           type
+__builder3.AddContent(43, type);
 
 #line default
 #line hidden
 #nullable disable
-                    );
                     __builder3.CloseElement();
 #nullable restore
 #line 23 "D:\MedsNotifier\MedsNotifier\Pages\MedsForm.razor"
@@ -256,7 +252,7 @@ using Smart.Blazor;
 #line default
 #line hidden
 #nullable disable
-                , 50, Microsoft.AspNetCore.Components.EventCallback.Factory.Create(this, Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => medication.SingleDosage = __value, medication.SingleDosage)), 51, () => medication.SingleDosage);
+                , 50, Microsoft.AspNetCore.Components.EventCallback.Factory.Create(this, global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => medication.SingleDosage = __value, medication.SingleDosage)), 51, () => medication.SingleDosage);
                 __builder2.AddMarkupContent(52, "\r\n            Amount Of Doses Per A Day");
                 __Blazor.MedsNotifier.Pages.MedsForm.TypeInference.CreateInputNumber_2(__builder2, 53, 54, "daily-dosage-amount", 55, "text-field", 56, "Amount Of Daily Doses", 57, 
 #nullable restore
@@ -266,10 +262,10 @@ using Smart.Blazor;
 #line default
 #line hidden
 #nullable disable
-                , 58, Microsoft.AspNetCore.Components.EventCallback.Factory.Create(this, Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => medication.DosesPerDayAmount = __value, medication.DosesPerDayAmount)), 59, () => medication.DosesPerDayAmount);
+                , 58, Microsoft.AspNetCore.Components.EventCallback.Factory.Create(this, global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => medication.DosesPerDayAmount = __value, medication.DosesPerDayAmount)), 59, () => medication.DosesPerDayAmount);
                 __builder2.AddMarkupContent(60, "\r\n            Choose the date when your course finishes");
                 __builder2.OpenComponent<Smart.Blazor.Calendar>(61);
-                __builder2.AddAttribute(62, "OnChange", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<Smart.Blazor.Event>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<Smart.Blazor.Event>(this, 
+                __builder2.AddAttribute(62, "OnChange", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<Smart.Blazor.Event>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<Smart.Blazor.Event>(this, 
 #nullable restore
 #line 27 "D:\MedsNotifier\MedsNotifier\Pages\MedsForm.razor"
                                                                                       OnCalendarChange
@@ -281,7 +277,7 @@ using Smart.Blazor;
                 __builder2.CloseComponent();
                 __builder2.AddMarkupContent(63, "\r\n            Medication color");
                 __builder2.OpenComponent<Smart.Blazor.ColorPicker>(64);
-                __builder2.AddAttribute(65, "Editable", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Boolean>(
+                __builder2.AddAttribute(65, "Editable", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Boolean>(
 #nullable restore
 #line 28 "D:\MedsNotifier\MedsNotifier\Pages\MedsForm.razor"
                                                    true
@@ -290,7 +286,7 @@ using Smart.Blazor;
 #line hidden
 #nullable disable
                 ));
-                __builder2.AddAttribute(66, "OnChange", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<Smart.Blazor.Event>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<Smart.Blazor.Event>(this, 
+                __builder2.AddAttribute(66, "OnChange", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<Smart.Blazor.Event>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<Smart.Blazor.Event>(this, 
 #nullable restore
 #line 28 "D:\MedsNotifier\MedsNotifier\Pages\MedsForm.razor"
                                                                    OnColorChange

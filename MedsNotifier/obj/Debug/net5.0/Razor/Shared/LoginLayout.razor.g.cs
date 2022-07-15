@@ -86,15 +86,13 @@ using MedsNotifier.Shared;
         {
             __builder.OpenElement(0, "div");
             __builder.AddAttribute(1, "class", "auth-form-body");
-            __builder.AddContent(2, 
 #nullable restore
 #line 3 "D:\MedsNotifier\MedsNotifier\Shared\LoginLayout.razor"
-     Body
+__builder.AddContent(2, Body);
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.CloseElement();
         }
         #pragma warning restore 1998

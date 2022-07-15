@@ -168,7 +168,6 @@ D:\MedsNotifier\MedsNotifier\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\Sys
 D:\MedsNotifier\MedsNotifier\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.AccessControl.dll
 D:\MedsNotifier\MedsNotifier\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\MedsNotifier\MedsNotifier\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\System.Windows.Extensions.dll
-D:\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.csprojAssemblyReference.cache
 D:\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.GeneratedMSBuildEditorConfig.editorconfig
 D:\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.AssemblyInfoInputs.cache
 D:\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.AssemblyInfo.cs
@@ -228,3 +227,4 @@ D:\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.pdb
 D:\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.genruntimeconfig.cache
 D:\MedsNotifier\MedsNotifier\obj\Debug\net5.0\RazorDeclaration\Pages\ConfirmRemovalBox.razor.g.cs
 D:\MedsNotifier\MedsNotifier\obj\Debug\net5.0\Razor\Pages\ConfirmRemovalBox.razor.g.cs
+D:\MedsNotifier\MedsNotifier\obj\Debug\net5.0\MedsNotifier.csproj.AssemblyReference.cache

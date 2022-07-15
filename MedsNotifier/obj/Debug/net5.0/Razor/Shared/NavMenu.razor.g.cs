@@ -106,7 +106,7 @@ using System.Security.Claims;
             __builder.OpenComponent<Microsoft.AspNetCore.Components.Routing.NavLink>(5);
             __builder.AddAttribute(6, "class", "nav-link");
             __builder.AddAttribute(7, "href", "home");
-            __builder.AddAttribute(8, "Match", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.Routing.NavLinkMatch>(
+            __builder.AddAttribute(8, "Match", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.Routing.NavLinkMatch>(
 #nullable restore
 #line 9 "D:\MedsNotifier\MedsNotifier\Shared\NavMenu.razor"
                                                          NavLinkMatch.All
@@ -117,15 +117,13 @@ using System.Security.Claims;
             ));
             __builder.AddAttribute(9, "ChildContent", (Microsoft.AspNetCore.Components.RenderFragment)((__builder2) => {
                 __builder2.AddMarkupContent(10, "<span class=\"icon\"><ion-icon name=\"home-outline\"></ion-icon></span> ");
-                __builder2.AddContent(11, 
 #nullable restore
 #line 10 "D:\MedsNotifier\MedsNotifier\Shared\NavMenu.razor"
-                                                                                     username
+__builder2.AddContent(11, username);
 
 #line default
 #line hidden
 #nullable disable
-                );
             }
             ));
             __builder.CloseComponent();
@@ -135,7 +133,7 @@ using System.Security.Claims;
             __builder.OpenComponent<Microsoft.AspNetCore.Components.Routing.NavLink>(14);
             __builder.AddAttribute(15, "class", "nav-link");
             __builder.AddAttribute(16, "href", "diary");
-            __builder.AddAttribute(17, "Match", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.Routing.NavLinkMatch>(
+            __builder.AddAttribute(17, "Match", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.Routing.NavLinkMatch>(
 #nullable restore
 #line 14 "D:\MedsNotifier\MedsNotifier\Shared\NavMenu.razor"
                                                           NavLinkMatch.All
@@ -155,7 +153,7 @@ using System.Security.Claims;
             __builder.OpenComponent<Microsoft.AspNetCore.Components.Routing.NavLink>(22);
             __builder.AddAttribute(23, "class", "nav-link");
             __builder.AddAttribute(24, "href", "meds");
-            __builder.AddAttribute(25, "Match", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.Routing.NavLinkMatch>(
+            __builder.AddAttribute(25, "Match", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.Routing.NavLinkMatch>(
 #nullable restore
 #line 19 "D:\MedsNotifier\MedsNotifier\Shared\NavMenu.razor"
                                                          NavLinkMatch.All
@@ -175,7 +173,7 @@ using System.Security.Claims;
             __builder.OpenComponent<Microsoft.AspNetCore.Components.Routing.NavLink>(30);
             __builder.AddAttribute(31, "class", "nav-link");
             __builder.AddAttribute(32, "href", "settings");
-            __builder.AddAttribute(33, "Match", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.Routing.NavLinkMatch>(
+            __builder.AddAttribute(33, "Match", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.Routing.NavLinkMatch>(
 #nullable restore
 #line 24 "D:\MedsNotifier\MedsNotifier\Shared\NavMenu.razor"
                                                              NavLinkMatch.All
@@ -195,7 +193,7 @@ using System.Security.Claims;
             __builder.OpenComponent<Microsoft.AspNetCore.Components.Routing.NavLink>(38);
             __builder.AddAttribute(39, "class", "nav-link");
             __builder.AddAttribute(40, "href", "recommendations");
-            __builder.AddAttribute(41, "Match", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.Routing.NavLinkMatch>(
+            __builder.AddAttribute(41, "Match", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.Routing.NavLinkMatch>(
 #nullable restore
 #line 29 "D:\MedsNotifier\MedsNotifier\Shared\NavMenu.razor"
                                                                     NavLinkMatch.All
@@ -216,7 +214,7 @@ using System.Security.Claims;
             __builder.OpenComponent<Microsoft.AspNetCore.Components.Routing.NavLink>(47);
             __builder.AddAttribute(48, "class", "nav-link");
             __builder.AddAttribute(49, "href", "logout");
-            __builder.AddAttribute(50, "Match", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.Routing.NavLinkMatch>(
+            __builder.AddAttribute(50, "Match", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.Routing.NavLinkMatch>(
 #nullable restore
 #line 34 "D:\MedsNotifier\MedsNotifier\Shared\NavMenu.razor"
                                                            NavLinkMatch.All

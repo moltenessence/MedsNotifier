@@ -124,7 +124,7 @@ using System.Security.Claims;
 #line hidden
 #nullable disable
             __builder.OpenComponent<MedsNotifier.Pages.ConfirmRemovalBox>(1);
-            __builder.AddAttribute(2, "ConfrimCallback", new System.Func<System.Boolean, System.Threading.Tasks.Task>(
+            __builder.AddAttribute(2, "ConfrimCallback", (System.Func<System.Boolean, System.Threading.Tasks.Task>)(
 #nullable restore
 #line 10 "D:\MedsNotifier\MedsNotifier\Pages\Diary.razor"
                                         async (flag) => await OnConfirmRemoval(flag)
@@ -155,7 +155,7 @@ using System.Security.Claims;
             __builder.OpenComponent<Microsoft.AspNetCore.Components.Routing.NavLink>(6);
             __builder.AddAttribute(7, "class", "submit-button");
             __builder.AddAttribute(8, "href", "meds");
-            __builder.AddAttribute(9, "Match", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.Routing.NavLinkMatch>(
+            __builder.AddAttribute(9, "Match", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.Routing.NavLinkMatch>(
 #nullable restore
 #line 16 "D:\MedsNotifier\MedsNotifier\Pages\Diary.razor"
                                                           NavLinkMatch.All
@@ -191,27 +191,23 @@ using System.Security.Claims;
 #nullable disable
             __builder.OpenElement(15, "tr");
             __builder.OpenElement(16, "td");
-            __builder.AddContent(17, 
 #nullable restore
 #line 32 "D:\MedsNotifier\MedsNotifier\Pages\Diary.razor"
-                             entry.MedicineName
+__builder.AddContent(17, entry.MedicineName);
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.CloseElement();
             __builder.AddMarkupContent(18, "\r\n                        ");
             __builder.OpenElement(19, "td");
-            __builder.AddContent(20, 
 #nullable restore
 #line 33 "D:\MedsNotifier\MedsNotifier\Pages\Diary.razor"
-                             entry.DateMedicineTaken.ToString()
+__builder.AddContent(20, entry.DateMedicineTaken.ToString());
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.CloseElement();
             __builder.AddMarkupContent(21, "\r\n                        ");
             __builder.OpenElement(22, "td");

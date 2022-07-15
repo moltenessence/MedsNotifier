@@ -49,14 +49,14 @@ namespace MedsNotifier
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            services.AddSingleton<MongoRepository>();
-            services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
-            services.AddSingleton<ITokenOptions, JwtOptions.TokenOptions>();
+            services.AddTransient<MongoRepository>();
+            services.AddTransient<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
+            services.AddTransient<ITokenOptions, JwtOptions.TokenOptions>();
             services.AddTransient<IIdentityService, IdentityService>();
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IMedsService, MedsService>();
-            services.AddScoped<IJWTService, JWTService>();
-            services.AddScoped<IMongoRepository, MongoRepository>();
+            services.AddTransient<IJWTService, JWTService>();
+            services.AddTransient<IMongoRepository, MongoRepository>();
             services.AddHttpContextAccessor();
             services.AddScoped<LocalStorageService>();
             services.AddScoped<MedsNotifier.Services.IAuthorizationService, AuthorizationService >();

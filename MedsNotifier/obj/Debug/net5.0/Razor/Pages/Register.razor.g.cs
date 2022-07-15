@@ -126,7 +126,7 @@ using MedsNotifier.Data.Models;
             __builder.AddAttribute(3, "class", "login-form-box");
             __builder.AddMarkupContent(4, "<h3 class=\"reg-header\">Register</h3>\r\n        ");
             __builder.OpenComponent<Microsoft.AspNetCore.Components.Forms.EditForm>(5);
-            __builder.AddAttribute(6, "Model", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Object>(
+            __builder.AddAttribute(6, "Model", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Object>(
 #nullable restore
 #line 13 "D:\MedsNotifier\MedsNotifier\Pages\Register.razor"
                          registerModel
@@ -135,7 +135,7 @@ using MedsNotifier.Data.Models;
 #line hidden
 #nullable disable
             ));
-            __builder.AddAttribute(7, "OnValidSubmit", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<Microsoft.AspNetCore.Components.Forms.EditContext>(this, 
+            __builder.AddAttribute(7, "OnValidSubmit", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<Microsoft.AspNetCore.Components.Forms.EditContext>(this, 
 #nullable restore
 #line 13 "D:\MedsNotifier\MedsNotifier\Pages\Register.razor"
                                                         HandleSubmit
@@ -152,15 +152,13 @@ using MedsNotifier.Data.Models;
                 __builder2.CloseComponent();
                 __builder2.AddMarkupContent(12, "\r\n            ");
                 __builder2.OpenElement(13, "p");
-                __builder2.AddContent(14, 
 #nullable restore
 #line 16 "D:\MedsNotifier\MedsNotifier\Pages\Register.razor"
-                message
+__builder2.AddContent(14, message);
 
 #line default
 #line hidden
 #nullable disable
-                );
                 __builder2.CloseElement();
                 __builder2.AddMarkupContent(15, "\r\n            ");
                 __builder2.OpenElement(16, "div");
@@ -170,7 +168,7 @@ using MedsNotifier.Data.Models;
                 __builder2.AddAttribute(20, "class", "text-field");
                 __builder2.AddAttribute(21, "id", "email");
                 __builder2.AddAttribute(22, "placeholder", "Email");
-                __builder2.AddAttribute(23, "Value", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.String>(
+                __builder2.AddAttribute(23, "Value", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.String>(
 #nullable restore
 #line 18 "D:\MedsNotifier\MedsNotifier\Pages\Register.razor"
                                                                                                                           registerModel.Email
@@ -179,8 +177,8 @@ using MedsNotifier.Data.Models;
 #line hidden
 #nullable disable
                 ));
-                __builder2.AddAttribute(24, "ValueChanged", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<System.String>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<System.String>(this, Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => registerModel.Email = __value, registerModel.Email))));
-                __builder2.AddAttribute(25, "ValueExpression", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Linq.Expressions.Expression<System.Func<System.String>>>(() => registerModel.Email));
+                __builder2.AddAttribute(24, "ValueChanged", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<System.String>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<System.String>(this, global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => registerModel.Email = __value, registerModel.Email))));
+                __builder2.AddAttribute(25, "ValueExpression", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Linq.Expressions.Expression<System.Func<System.String>>>(() => registerModel.Email));
                 __builder2.CloseComponent();
                 __builder2.AddMarkupContent(26, "\r\n                ");
                 __builder2.AddMarkupContent(27, "<label for=\"username\">Username</label>");
@@ -188,7 +186,7 @@ using MedsNotifier.Data.Models;
                 __builder2.AddAttribute(29, "class", "text-field");
                 __builder2.AddAttribute(30, "id", "username");
                 __builder2.AddAttribute(31, "placeholder", "Username");
-                __builder2.AddAttribute(32, "Value", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.String>(
+                __builder2.AddAttribute(32, "Value", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.String>(
 #nullable restore
 #line 19 "D:\MedsNotifier\MedsNotifier\Pages\Register.razor"
                                                                                                                                       registerModel.Username
@@ -197,8 +195,8 @@ using MedsNotifier.Data.Models;
 #line hidden
 #nullable disable
                 ));
-                __builder2.AddAttribute(33, "ValueChanged", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<System.String>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<System.String>(this, Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => registerModel.Username = __value, registerModel.Username))));
-                __builder2.AddAttribute(34, "ValueExpression", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Linq.Expressions.Expression<System.Func<System.String>>>(() => registerModel.Username));
+                __builder2.AddAttribute(33, "ValueChanged", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<System.String>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<System.String>(this, global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => registerModel.Username = __value, registerModel.Username))));
+                __builder2.AddAttribute(34, "ValueExpression", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Linq.Expressions.Expression<System.Func<System.String>>>(() => registerModel.Username));
                 __builder2.CloseComponent();
                 __builder2.AddMarkupContent(35, "\r\n                ");
                 __builder2.AddMarkupContent(36, "<label for=\"age\">Age</label> ");
@@ -210,7 +208,7 @@ using MedsNotifier.Data.Models;
 #line default
 #line hidden
 #nullable disable
-                , 42, Microsoft.AspNetCore.Components.EventCallback.Factory.Create(this, Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => registerModel.Age = __value, registerModel.Age)), 43, () => registerModel.Age);
+                , 42, Microsoft.AspNetCore.Components.EventCallback.Factory.Create(this, global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => registerModel.Age = __value, registerModel.Age)), 43, () => registerModel.Age);
                 __builder2.AddMarkupContent(44, "\r\n                ");
                 __builder2.AddMarkupContent(45, "<label for=\"weight\">Weight</label>");
                 __Blazor.MedsNotifier.Pages.Register.TypeInference.CreateInputNumber_1(__builder2, 46, 47, "text-field", 48, "weight", 49, "Weight", 50, 
@@ -221,7 +219,7 @@ using MedsNotifier.Data.Models;
 #line default
 #line hidden
 #nullable disable
-                , 51, Microsoft.AspNetCore.Components.EventCallback.Factory.Create(this, Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => registerModel.Weight = __value, registerModel.Weight)), 52, () => registerModel.Weight);
+                , 51, Microsoft.AspNetCore.Components.EventCallback.Factory.Create(this, global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => registerModel.Weight = __value, registerModel.Weight)), 52, () => registerModel.Weight);
                 __builder2.AddMarkupContent(53, "\r\n                ");
                 __builder2.AddMarkupContent(54, "<label for=\"height\">Height</label>");
                 __Blazor.MedsNotifier.Pages.Register.TypeInference.CreateInputNumber_2(__builder2, 55, 56, "text-field", 57, "height", 58, "Height", 59, 
@@ -232,7 +230,7 @@ using MedsNotifier.Data.Models;
 #line default
 #line hidden
 #nullable disable
-                , 60, Microsoft.AspNetCore.Components.EventCallback.Factory.Create(this, Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => registerModel.Height = __value, registerModel.Height)), 61, () => registerModel.Height);
+                , 60, Microsoft.AspNetCore.Components.EventCallback.Factory.Create(this, global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => registerModel.Height = __value, registerModel.Height)), 61, () => registerModel.Height);
                 __builder2.AddMarkupContent(62, "\r\n                ");
                 __builder2.AddMarkupContent(63, "<label for=\"gender\">Gender</label>");
                 __Blazor.MedsNotifier.Pages.Register.TypeInference.CreateInputSelect_3(__builder2, 64, 65, "text-field", 66, 
@@ -243,7 +241,7 @@ using MedsNotifier.Data.Models;
 #line default
 #line hidden
 #nullable disable
-                , 67, Microsoft.AspNetCore.Components.EventCallback.Factory.Create(this, Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => registerModel.Gender = __value, registerModel.Gender)), 68, () => registerModel.Gender, 69, (__builder3) => {
+                , 67, Microsoft.AspNetCore.Components.EventCallback.Factory.Create(this, global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => registerModel.Gender = __value, registerModel.Gender)), 68, () => registerModel.Gender, 69, (__builder3) => {
 #nullable restore
 #line 24 "D:\MedsNotifier\MedsNotifier\Pages\Register.razor"
                      foreach (var gender in Enum.GetValues(typeof(Gender)))
@@ -262,15 +260,13 @@ using MedsNotifier.Data.Models;
 #line hidden
 #nullable disable
                     );
-                    __builder3.AddContent(72, 
 #nullable restore
 #line 26 "D:\MedsNotifier\MedsNotifier\Pages\Register.razor"
-                                                 gender
+__builder3.AddContent(72, gender);
 
 #line default
 #line hidden
 #nullable disable
-                    );
                     __builder3.CloseElement();
 #nullable restore
 #line 27 "D:\MedsNotifier\MedsNotifier\Pages\Register.razor"
@@ -288,7 +284,7 @@ using MedsNotifier.Data.Models;
                 __builder2.AddAttribute(77, "id", "password");
                 __builder2.AddAttribute(78, "type", "password");
                 __builder2.AddAttribute(79, "placeholder", "Password");
-                __builder2.AddAttribute(80, "Value", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.String>(
+                __builder2.AddAttribute(80, "Value", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.String>(
 #nullable restore
 #line 29 "D:\MedsNotifier\MedsNotifier\Pages\Register.razor"
                                                                                                                                                       registerModel.Password
@@ -297,8 +293,8 @@ using MedsNotifier.Data.Models;
 #line hidden
 #nullable disable
                 ));
-                __builder2.AddAttribute(81, "ValueChanged", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<System.String>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<System.String>(this, Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => registerModel.Password = __value, registerModel.Password))));
-                __builder2.AddAttribute(82, "ValueExpression", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Linq.Expressions.Expression<System.Func<System.String>>>(() => registerModel.Password));
+                __builder2.AddAttribute(81, "ValueChanged", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<System.String>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<System.String>(this, global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => registerModel.Password = __value, registerModel.Password))));
+                __builder2.AddAttribute(82, "ValueExpression", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Linq.Expressions.Expression<System.Func<System.String>>>(() => registerModel.Password));
                 __builder2.CloseComponent();
                 __builder2.CloseElement();
                 __builder2.AddMarkupContent(83, "\r\n\r\n            ");

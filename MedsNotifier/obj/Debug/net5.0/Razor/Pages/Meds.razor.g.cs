@@ -124,7 +124,7 @@ using System.Security.Claims;
 #line hidden
 #nullable disable
             __builder.OpenComponent<MedsNotifier.Pages.ConfirmRemovalBox>(1);
-            __builder.AddAttribute(2, "ConfrimCallback", new System.Func<System.Boolean, System.Threading.Tasks.Task>(
+            __builder.AddAttribute(2, "ConfrimCallback", (System.Func<System.Boolean, System.Threading.Tasks.Task>)(
 #nullable restore
 #line 12 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
                                         async (flag) => await OnConfirmRemoval(flag)
@@ -196,98 +196,84 @@ using System.Security.Claims;
 #nullable disable
             ));
             __builder.AddContent(14, " Title: ");
-            __builder.AddContent(15, 
 #nullable restore
 #line 29 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
-                                                                                                            medication.Name
+__builder.AddContent(15, medication.Name);
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.CloseElement();
             __builder.AddMarkupContent(16, "\r\n                        ");
             __builder.OpenElement(17, "li");
             __builder.AddAttribute(18, "class", "meds-type");
             __builder.AddContent(19, "Type: ");
-            __builder.AddContent(20, 
 #nullable restore
 #line 30 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
-                                                     medication.MedsType
+__builder.AddContent(20, medication.MedsType);
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.CloseElement();
             __builder.AddMarkupContent(21, "\r\n                        ");
             __builder.OpenElement(22, "li");
             __builder.AddAttribute(23, "class", "meds-text-info");
             __builder.AddContent(24, " Description: ");
-            __builder.AddContent(25, 
 #nullable restore
 #line 31 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
-                                                                  medication.Description
+__builder.AddContent(25, medication.Description);
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.CloseElement();
             __builder.AddMarkupContent(26, "\r\n                        ");
             __builder.OpenElement(27, "li");
             __builder.AddAttribute(28, "class", "meds-text-info");
             __builder.AddContent(29, " Doses Left: ");
-            __builder.AddContent(30, 
 #nullable restore
 #line 32 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
-                                                                 medication.AmountOfDosesLeft
+__builder.AddContent(30, medication.AmountOfDosesLeft);
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.CloseElement();
             __builder.AddMarkupContent(31, "\r\n                        ");
             __builder.OpenElement(32, "li");
             __builder.AddAttribute(33, "class", "meds-text-info");
             __builder.AddContent(34, "Start: ");
-            __builder.AddContent(35, 
 #nullable restore
 #line 33 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
-                                                           medication.StartMedsDateTime.ToShortDateString()
+__builder.AddContent(35, medication.StartMedsDateTime.ToShortDateString());
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.CloseElement();
             __builder.AddMarkupContent(36, "\r\n                        ");
             __builder.OpenElement(37, "li");
             __builder.AddAttribute(38, "class", "meds-text-info");
             __builder.AddContent(39, "Finish: ");
-            __builder.AddContent(40, 
 #nullable restore
 #line 34 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
-                                                            medication.FinishMedsDateTime.ToShortDateString()
+__builder.AddContent(40, medication.FinishMedsDateTime.ToShortDateString());
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.CloseElement();
             __builder.AddMarkupContent(41, "\r\n                        ");
             __builder.OpenElement(42, "li");
             __builder.AddAttribute(43, "class", "info-message");
-            __builder.AddContent(44, 
 #nullable restore
 #line 35 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
-                                                   medication?.InfoMessage
+__builder.AddContent(44, medication?.InfoMessage);
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.CloseElement();
             __builder.CloseElement();
             __builder.AddMarkupContent(45, "\r\n                    ");
@@ -305,15 +291,13 @@ using System.Security.Claims;
             ));
             __builder.OpenElement(50, "div");
             __builder.AddAttribute(51, "class", "inner");
-            __builder.AddContent(52, 
 #nullable restore
 #line 39 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
-                                                GetPercent(medication)
+__builder.AddContent(52, GetPercent(medication));
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.AddContent(53, "%");
             __builder.CloseElement();
             __builder.CloseElement();
@@ -323,57 +307,49 @@ using System.Security.Claims;
             __builder.OpenElement(56, "li");
             __builder.AddAttribute(57, "class", "meds-additional-text-info");
             __builder.AddContent(58, " Last time you took meds: ");
-            __builder.AddContent(59, 
 #nullable restore
 #line 43 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
-                                                                                         medication.LastTimeMedsTaken.ToString()
+__builder.AddContent(59, medication.LastTimeMedsTaken.ToString());
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.CloseElement();
             __builder.AddMarkupContent(60, "\r\n                        ");
             __builder.OpenElement(61, "li");
             __builder.AddAttribute(62, "class", "meds-additional-text-info");
             __builder.AddContent(63, "Daily amount of doses: ");
-            __builder.AddContent(64, 
 #nullable restore
 #line 44 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
-                                                                                      medication.DosesPerDayAmount
+__builder.AddContent(64, medication.DosesPerDayAmount);
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.CloseElement();
             __builder.AddMarkupContent(65, "\r\n                        ");
             __builder.OpenElement(66, "li");
             __builder.AddAttribute(67, "class", "meds-additional-text-info");
             __builder.AddContent(68, "Single Dosage: ");
-            __builder.AddContent(69, 
 #nullable restore
 #line 45 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
-                                                                              medication.SingleDosage
+__builder.AddContent(69, medication.SingleDosage);
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.CloseElement();
             __builder.AddMarkupContent(70, "\r\n                        ");
             __builder.OpenElement(71, "li");
             __builder.AddAttribute(72, "class", "meds-additional-text-info");
             __builder.AddContent(73, "Total Dosage: ");
-            __builder.AddContent(74, 
 #nullable restore
 #line 46 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
-                                                                             medication.TotalDosage
+__builder.AddContent(74, medication.TotalDosage);
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.CloseElement();
             __builder.AddMarkupContent(75, "\r\n                        ");
             __builder.OpenElement(76, "button");
@@ -409,45 +385,37 @@ using System.Security.Claims;
             __builder.CloseElement();
             __builder.OpenElement(87, "style");
             __builder.AddMarkupContent(88, "\r\n        .circle.per-");
-            __builder.AddContent(89, 
 #nullable restore
 #line 54 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
-                     GetPercent(medication)
+__builder.AddContent(89, GetPercent(medication));
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.AddMarkupContent(90, "\r\n        {\r\n            background-image: conic-gradient(aquamarine ");
-            __builder.AddContent(91, 
 #nullable restore
 #line 56 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
-                                                         GetPercent(medication)
+__builder.AddContent(91, GetPercent(medication));
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.AddMarkupContent(92, "%, #b0b0b0 0);\r\n        }\r\n        .meds-page-wrapper .meds-info .meds-block-info .meds-title-");
-            __builder.AddContent(93, 
 #nullable restore
 #line 58 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
-                                                                    medication.Id.ToString()
+__builder.AddContent(93, medication.Id.ToString());
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.AddMarkupContent(94, " {\r\n            font-style: italic;\r\n            font-size: 30px;\r\n            margin-bottom: 5px;\r\n            color: ");
-            __builder.AddContent(95, 
 #nullable restore
 #line 62 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
-                    medication.Color
+__builder.AddContent(95, medication.Color);
 
 #line default
 #line hidden
 #nullable disable
-            );
             __builder.AddMarkupContent(96, ";\r\n        }\r\n                ");
             __builder.CloseElement();
 #nullable restore
@@ -468,7 +436,7 @@ using System.Security.Claims;
             __builder.OpenComponent<Microsoft.AspNetCore.Components.Routing.NavLink>(97);
             __builder.AddAttribute(98, "class", "submit-button");
             __builder.AddAttribute(99, "href", "meds/add");
-            __builder.AddAttribute(100, "Match", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.Routing.NavLinkMatch>(
+            __builder.AddAttribute(100, "Match", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.Routing.NavLinkMatch>(
 #nullable restore
 #line 69 "D:\MedsNotifier\MedsNotifier\Pages\Meds.razor"
                                                           NavLinkMatch.All

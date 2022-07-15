@@ -121,7 +121,7 @@ using MedsNotifier.Data.DataAccess;
                 __builder2.AddAttribute(5, "class", "login-form-box");
                 __builder2.AddMarkupContent(6, "<h3>Login</h3>\r\n                ");
                 __builder2.OpenComponent<Microsoft.AspNetCore.Components.Forms.EditForm>(7);
-                __builder2.AddAttribute(8, "Model", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Object>(
+                __builder2.AddAttribute(8, "Model", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Object>(
 #nullable restore
 #line 14 "D:\MedsNotifier\MedsNotifier\Pages\Login.razor"
                                   loginModel
@@ -130,7 +130,7 @@ using MedsNotifier.Data.DataAccess;
 #line hidden
 #nullable disable
                 ));
-                __builder2.AddAttribute(9, "OnValidSubmit", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<Microsoft.AspNetCore.Components.Forms.EditContext>(this, 
+                __builder2.AddAttribute(9, "OnValidSubmit", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<Microsoft.AspNetCore.Components.Forms.EditContext>(this, 
 #nullable restore
 #line 14 "D:\MedsNotifier\MedsNotifier\Pages\Login.razor"
                                                               HandleSubmit
@@ -148,15 +148,13 @@ using MedsNotifier.Data.DataAccess;
                     __builder3.CloseComponent();
                     __builder3.AddMarkupContent(15, "\r\n                    ");
                     __builder3.OpenElement(16, "p");
-                    __builder3.AddContent(17, 
 #nullable restore
 #line 17 "D:\MedsNotifier\MedsNotifier\Pages\Login.razor"
-                        message
+__builder3.AddContent(17, message);
 
 #line default
 #line hidden
 #nullable disable
-                    );
                     __builder3.CloseElement();
                     __builder3.AddMarkupContent(18, "\r\n                    ");
                     __builder3.OpenElement(19, "div");
@@ -165,7 +163,7 @@ using MedsNotifier.Data.DataAccess;
                     __builder3.AddAttribute(22, "id", "email");
                     __builder3.AddAttribute(23, "class", "text-field");
                     __builder3.AddAttribute(24, "placeholder", "Email");
-                    __builder3.AddAttribute(25, "Value", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.String>(
+                    __builder3.AddAttribute(25, "Value", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.String>(
 #nullable restore
 #line 19 "D:\MedsNotifier\MedsNotifier\Pages\Login.razor"
                                                                                                   loginModel.Email
@@ -174,8 +172,8 @@ using MedsNotifier.Data.DataAccess;
 #line hidden
 #nullable disable
                     ));
-                    __builder3.AddAttribute(26, "ValueChanged", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<System.String>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<System.String>(this, Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => loginModel.Email = __value, loginModel.Email))));
-                    __builder3.AddAttribute(27, "ValueExpression", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Linq.Expressions.Expression<System.Func<System.String>>>(() => loginModel.Email));
+                    __builder3.AddAttribute(26, "ValueChanged", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<System.String>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<System.String>(this, global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => loginModel.Email = __value, loginModel.Email))));
+                    __builder3.AddAttribute(27, "ValueExpression", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Linq.Expressions.Expression<System.Func<System.String>>>(() => loginModel.Email));
                     __builder3.CloseComponent();
                     __builder3.AddMarkupContent(28, "\r\n                        ");
                     __builder3.OpenComponent<Microsoft.AspNetCore.Components.Forms.InputText>(29);
@@ -183,7 +181,7 @@ using MedsNotifier.Data.DataAccess;
                     __builder3.AddAttribute(31, "class", "text-field");
                     __builder3.AddAttribute(32, "type", "password");
                     __builder3.AddAttribute(33, "placeholder", "Password");
-                    __builder3.AddAttribute(34, "Value", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.String>(
+                    __builder3.AddAttribute(34, "Value", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.String>(
 #nullable restore
 #line 20 "D:\MedsNotifier\MedsNotifier\Pages\Login.razor"
                                                                                                                         loginModel.Password
@@ -192,8 +190,8 @@ using MedsNotifier.Data.DataAccess;
 #line hidden
 #nullable disable
                     ));
-                    __builder3.AddAttribute(35, "ValueChanged", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<System.String>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<System.String>(this, Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => loginModel.Password = __value, loginModel.Password))));
-                    __builder3.AddAttribute(36, "ValueExpression", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Linq.Expressions.Expression<System.Func<System.String>>>(() => loginModel.Password));
+                    __builder3.AddAttribute(35, "ValueChanged", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.EventCallback<System.String>>(Microsoft.AspNetCore.Components.EventCallback.Factory.Create<System.String>(this, global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback(this, __value => loginModel.Password = __value, loginModel.Password))));
+                    __builder3.AddAttribute(36, "ValueExpression", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Linq.Expressions.Expression<System.Func<System.String>>>(() => loginModel.Password));
                     __builder3.CloseComponent();
                     __builder3.CloseElement();
                     __builder3.AddMarkupContent(37, "\r\n                    ");
@@ -205,7 +203,7 @@ using MedsNotifier.Data.DataAccess;
                 __builder2.OpenComponent<Microsoft.AspNetCore.Components.Routing.NavLink>(40);
                 __builder2.AddAttribute(41, "class", "crt-acc");
                 __builder2.AddAttribute(42, "href", "register");
-                __builder2.AddAttribute(43, "Match", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.Routing.NavLinkMatch>(
+                __builder2.AddAttribute(43, "Match", global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.Routing.NavLinkMatch>(
 #nullable restore
 #line 24 "D:\MedsNotifier\MedsNotifier\Pages\Login.razor"
                                                                 NavLinkMatch.All
